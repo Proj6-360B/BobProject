@@ -3,4 +3,4 @@
 This is the read me for our project <br>
 <br>
 Project6 <br>
-David Huynh, Adbul F, Damien Cruz, Andrew Nguyen
+David Huynh, Abdulmuen Fethi, Damien Cruz, Andrew Nguyen
