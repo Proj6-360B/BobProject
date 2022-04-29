@@ -390,6 +390,7 @@ class Frame implements ActionListener, MenuListener, AncestorListener {
             frab.setLocationRelativeTo(null);
             //todo input your names
             JTextArea aboutUS = new JTextArea("Project6 Team\n Damien Cruz\n");  //insert your name\n
+            aboutUS.setEditable(false);
             aboutUS.setSize(300,300);
             panel1.add(aboutUS);
             panel1.setVisible(true);
