@@ -19,15 +19,32 @@ class Frame implements ActionListener, MenuListener, AncestorListener {
     private JFrame frame;
     private JPanel panel, decCalc, binaryCalc, hexCalc, bigNumCalc, convertor, exitPanel;
     private JLabel label;
-    private JButton button, decButton, bigNumButton, binaryButton, hexButton, convertorButton,exitButton;
+    private JButton decButton;
+    private JButton bigNumButton;
+    private JButton binaryButton;
+    private JButton hexButton;
+    private JButton convertorButton;
+    private JButton exitButton;
     private JTextField textField, bigTextField1, bigTextField2,convertorTextField,
             decTextField1, decTextField2,binaryTextField1, binaryTextField2, hexTextField1, hexTextField2;
     private JMenuBar menuBar;
-    private JMenu menu, calc, conv, help, about;
-    private JMenuItem menuItem, start, exit, binaryConverter, hexConverter, info, instructions;
+    private JMenu calc;
+    private JMenu conv;
+    private JMenu help;
+    private JMenu about;
+    private JMenuItem start;
+    private JMenuItem exit;
+    private JMenuItem binaryConverter;
+    private JMenuItem hexConverter;
+    private JMenuItem info;
+    private JMenuItem instructions;
     private JTabbedPane tabbedPane;
     private JTextArea decAnswerBox, bigAnswerBox, binaryAnswerBox,hexAnswerBox,convertorAnswerBox;
-    private JComboBox<String> combo,decCombo, comboBig, comboBinary, comboHex,convertorCombo;
+    private JComboBox<String> decCombo;
+    private JComboBox<String> comboBig;
+    private JComboBox<String> comboBinary;
+    private JComboBox<String> comboHex;
+    private JComboBox<String> convertorCombo;
 
     //this frame method makes up the main window that holds the three menus on the menu bar.
     public Frame() {
@@ -356,18 +373,6 @@ class Frame implements ActionListener, MenuListener, AncestorListener {
             System.exit(0);
         } else if (e.getSource() == start) {
             innerWindow();
-        } else if (e.getSource() == decButton) {
-
-
-
-        } else if (e.getSource() == bigNumButton) {
-
-        } else if (e.getSource() == binaryButton) {
-
-        } else if (e.getSource() == hexButton) {
-
-        } else if (e.getSource() == convertorButton) {
-
         } else if (e.getSource() == exitButton) {
             System.exit(0);
         } else if(e.getSource()==instructions){
@@ -428,5 +433,13 @@ class Frame implements ActionListener, MenuListener, AncestorListener {
     @Override
     public void ancestorMoved(AncestorEvent event) {
 
+    }
+
+    public JMenu getConv() {
+        return conv;
+    }
+
+    public void setConv(JMenu conv) {
+        this.conv = conv;
     }
 }
