@@ -388,15 +388,16 @@ class Frame implements ActionListener, MenuListener, AncestorListener {
             frab.setVisible(true);
         }else if(e.getSource()==info){
             JPanel panel1 = new JPanel();
+            panel1.setLayout(new BoxLayout(panel1, BoxLayout.PAGE_AXIS));
             JFrame frab = new JFrame();
             frab.add(panel1);
             frab.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-            frab.setSize(new Dimension(400, 400));
+            frab.setSize(new Dimension(400, 110));
             frab.setLocationRelativeTo(null);
-            //todo input your names
-            JTextArea aboutUS = new JTextArea("Project6 Team\n Damien Cruz\n");  //insert your name\n
+            JTextArea aboutUS = new JTextArea(
+                    "Current User: " + "TODO" +  "\n\nProject6 Team:\n Damien Cruz, Abdulmuen Fethi, David Huynh, Andrew Nguyen\n"); //TODO display user's name
             aboutUS.setEditable(false);
-            aboutUS.setSize(300,300);
+//            aboutUS.setSize(300,300);
             panel1.add(aboutUS);
             panel1.setVisible(true);
             frab.setVisible(true);
