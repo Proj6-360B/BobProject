@@ -388,10 +388,10 @@ class Frame implements ActionListener, MenuListener, AncestorListener {
             frab.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             frab.setSize(new Dimension(400, 400));
             frab.setLocationRelativeTo(null);
-            panel1.add(new JTextArea("About \nstaf...." +
-                    "\n" +
-                    "\nby Project6" +
-                    "\n-\n-\n-\n-\n-"));
+            //todo input your names
+            JTextArea aboutUS = new JTextArea("Project6 Team\n Damien Cruz\n");  //insert your name\n
+            aboutUS.setSize(300,300);
+            panel1.add(aboutUS);
             panel1.setVisible(true);
             frab.setVisible(true);
         }
