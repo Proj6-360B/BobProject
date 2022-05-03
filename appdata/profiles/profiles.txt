@@ -1,0 +1,2 @@
+{"Username":"Bob","Privilege":"ADMIN"}
+{"Username":"Billy","Privilege":"NORMAL"}

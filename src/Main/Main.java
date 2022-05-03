@@ -1,9 +1,10 @@
 package Main;
 
+import Profile.Privilege;
+import Profile.ProfileManager;
+
 public class Main {
     public static void main(String[] args){
-        System.out.println("holle world");
-        System.out.println("Abdul change");
         Try a = new Try();
     }
 

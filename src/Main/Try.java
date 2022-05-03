@@ -1,5 +1,7 @@
 package Main;
 
+import Profile.ProfileManager;
+
 import javax.swing.*;
 import javax.swing.event.AncestorEvent;
 import javax.swing.event.AncestorListener;
@@ -46,12 +48,14 @@ class Frame implements ActionListener, MenuListener, AncestorListener {
     private JComboBox<String> comboHex;
     private JComboBox<String> convertorCombo;
 
+    private ProfileManager myProfileManager; //TODO hecka ugly organization
+
     //this frame method makes up the main window that holds the three menus on the menu bar.
     public Frame() {
+        myProfileManager = new ProfileManager();
+        myProfileManager.selectProfileByUsername("Bob");
         outerWindow();
     }
-
-
 
     private void outerWindow() {
         outerFrame();
@@ -370,6 +374,7 @@ class Frame implements ActionListener, MenuListener, AncestorListener {
     public void actionPerformed(ActionEvent e) {
 
         if (e.getSource() == exit) {
+            myProfileManager.writeProfiles();
             System.exit(0);
         } else if (e.getSource() == start) {
             innerWindow();
@@ -395,7 +400,7 @@ class Frame implements ActionListener, MenuListener, AncestorListener {
             frab.setSize(new Dimension(400, 110));
             frab.setLocationRelativeTo(null);
             JTextArea aboutUS = new JTextArea(
-                    "Current User: " + "TODO" +  "\n\nProject6 Team:\n Damien Cruz, Abdulmuen Fethi, David Huynh, Andrew Nguyen\n"); //TODO display user's name
+                    "Current User: " + myProfileManager.getSelectedProfile().getUsername() + " (" + myProfileManager.getSelectedProfile().getPrivilege() + ')' + "\n\nProject6 Team:\n Damien Cruz, Abdulmuen Fethi, David Huynh, Andrew Nguyen\n"); //TODO display user's name
             aboutUS.setEditable(false);
 //            aboutUS.setSize(300,300);
             panel1.add(aboutUS);
