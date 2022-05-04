@@ -12,7 +12,7 @@ import java.util.Scanner;
 /**
  * https://mkyong.com/java/json-simple-example-read-and-write-json/
  */
-public class ProfileManager {
+public class ProfileManager { //TODO Remove repeating code
     public static String PROFILE_PATH = "./appdata/profiles/profiles.txt";
     private ArrayList<Profile> myProfiles;
     private Profile mySelectedProfile;
@@ -34,6 +34,11 @@ public class ProfileManager {
             }
         }
         throw new IllegalArgumentException("There is no Profile with the name" + theUsername + '.');
+    }
+
+    public void deleteProfileByUsername(String theUsername) {
+        System.out.println("Deleting Profile: " + theUsername);
+        myProfiles.remove(getProfileByUsername(theUsername));
     }
 
     public Profile getSelectedProfile() {
@@ -105,12 +110,14 @@ public class ProfileManager {
 
     public void writeProfiles() {
         try {
+            System.out.println("Writing Profiles to " + PROFILE_PATH + ':'); //DEBUG Out
             FileWriter fw = new FileWriter(PROFILE_PATH);
             for (Profile p: myProfiles) {
                 JSONObject json = new JSONObject();
                 json.put("Username", p.getUsername());
                 json.put("Privilege", p.getPrivilege().getPrivilegeInt());
 
+                System.out.println("\t" + json.toJSONString());
                 fw.write(json.toJSONString() + "\n");
             }
             fw.flush();

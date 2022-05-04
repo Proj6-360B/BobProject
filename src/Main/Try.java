@@ -54,6 +54,7 @@ class Frame implements ActionListener, MenuListener, AncestorListener {
     public Frame() {
         myProfileManager = new ProfileManager();
         myProfileManager.selectProfileByUsername("Bob");
+//        myProfileManager.deleteProfileByUsername("Bruh");
         outerWindow();
     }
 
