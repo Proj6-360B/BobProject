@@ -1,42 +1,41 @@
-package Main;
+package ViewMain;
 
-import Main.GUIComponents.*;
+import ViewMain.GUIComponents.*;
 import Profile.*;
 import javax.swing.*;
 import java.awt.*;
 
-public class GUIMain extends JFrame {
+public class ViewMain extends JFrame {
     //Managers
     private ProfileManager myProfileManager;
+    //TODO private ProjectManager myProjectManager;
     //GUI Components
     private JMenuBar myMenuBar;
     private JTabbedPane myTabbedPane;
     //TODO About Tab/Frame
 
-    public GUIMain(ProfileManager thePM) {
+    public ViewMain(ProfileManager thePM) {
+        //Fields Initialize
         myProfileManager = thePM;
-        myProfileManager.selectProfileByUsername("Bob"); //TODO Replace with GUI
-        initializeFrame();
 
+        //Initialize
+        initializeFrame();
+        initializeFrameComponents();
+        setVisible(true);
     }
 
     private void initializeFrame() {
         //Frame Properties
         setTitle("MainGUIFrame");
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(new Dimension(960, 800));
         setLayout(new BorderLayout(10, 10));
         setLocationRelativeTo(null);
-
-        //Components
-        initializeFrameComponents();
-
-        setVisible(true);
     }
 
     private void initializeFrameComponents() {
         //MenuBar
-        myMenuBar = new CompMenuBar();
+        myMenuBar = new CompMenuBar(myProfileManager);
         setJMenuBar(myMenuBar);
 
         //TabbedPane

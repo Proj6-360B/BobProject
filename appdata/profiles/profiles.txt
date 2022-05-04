@@ -1,2 +1,2 @@
-{"Username":"Bob","Privilege":"ADMIN"}
-{"Username":"Billy","Privilege":"NORMAL"}
+{"Email":"bobk41@gmail.com","Username":"Bob","Privilege":"ADMIN"}
+{"Email":null,"Username":"Billy","Privilege":"NORMAL"}

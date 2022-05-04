@@ -2,8 +2,8 @@ package Profile;
 
 public class Profile {
     private String myUsername;
-    private Privilege myPrivilege;
     private String myEmail;
+    private Privilege myPrivilege;
 
     /**
      * Profile object.
@@ -37,7 +37,7 @@ public class Profile {
         return myEmail;
     }
 
-    public void setEmail(String myUsername) {
+    public void setEmail(String myEmail) {
         this.myEmail = myEmail;
     }
 }

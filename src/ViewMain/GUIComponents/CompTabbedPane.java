@@ -1,6 +1,6 @@
-package Main.GUIComponents;
+package ViewMain.GUIComponents;
 
-import Main.GUIComponents.Tabs.*;
+import ViewMain.GUIComponents.Tabs.*;
 
 import javax.swing.*;
 
@@ -10,12 +10,13 @@ public class CompTabbedPane extends JTabbedPane {
     private JPanel myArchivedProjectsTab;
 
     public CompTabbedPane() {
-        //Create Fields
+        //Active Projects Tab
         myActiveProjectsTab = new TabActiveProject();
-        myArchivedProjectsTab = new TabArchivedProject();
-
-        //Add to this
         add("Active Projects", myActiveProjectsTab);
+        //Archived Projects Tab
+        myArchivedProjectsTab = new TabArchivedProject();
         add("Archived Projects", myArchivedProjectsTab);
+
+
     }
 }
