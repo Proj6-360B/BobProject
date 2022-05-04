@@ -1,5 +1,9 @@
 package Profile;
 
+/**
+ * Privilege Enums. <br>
+ * ADMIN, NORMAL, GUEST
+ */
 public enum Privilege {
     ADMIN("ADMIN"),
     NORMAL("NORMAL"),

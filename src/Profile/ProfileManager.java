@@ -10,16 +10,21 @@ import java.util.Iterator;
 import java.util.Scanner;
 
 /**
+ * ProfileManager <br>
+ * Stores a list of Profiles (read from profiles.txt on creation). <br>
+ * Stores an Active/Selected Profile (mySelectedProfile). <br>
+ * Able to create, remove, and search for Profiles. <br>
+ * Call writeProfiles() before System Exit to save Profiles. <br><br>
+ *
  * https://mkyong.com/java/json-simple-example-read-and-write-json/
  */
 public class ProfileManager { //TODO Remove repeating code
     public static String PROFILE_PATH = "./appdata/profiles/profiles.txt";
     private ArrayList<Profile> myProfiles;
     private Profile mySelectedProfile;
-//    private boolean isLoaded;
 
     /**
-     * Constructor. Reads profiles.txt on creation.
+     * Constructor. Read profiles.txt on creation.
      */
     public ProfileManager() {
         myProfiles = readProfiles();

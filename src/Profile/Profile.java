@@ -5,6 +5,12 @@ public class Profile {
     private Privilege myPrivilege;
     private String myEmail;
 
+    /**
+     * Profile object.
+     * @param theUsername The Username
+     * @param theEmail The Email Address
+     * @param thePrivilege The Privilege Enum
+     */
     public Profile(String theUsername, String theEmail, Privilege thePrivilege) {
         setUsername(theUsername);
         setEmail(theEmail);
