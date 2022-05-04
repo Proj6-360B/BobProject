@@ -1,4 +1,4 @@
-package Main;
+package Scratch;
 
 import Profile.ProfileManager;
 
@@ -11,10 +11,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-
-public class Try {
-    Frame a = new Frame();
-}
 
 
 class Frame implements ActionListener, MenuListener, AncestorListener {
@@ -448,5 +444,11 @@ class Frame implements ActionListener, MenuListener, AncestorListener {
 
     public void setConv(JMenu conv) {
         this.conv = conv;
+    }
+}
+
+public class Try {
+    public static void main(String[] args) {
+        Frame a = new Frame();
     }
 }
