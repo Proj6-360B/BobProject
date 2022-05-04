@@ -5,7 +5,8 @@ import Profile.ProfileManager;
 
 public class Main {
     public static void main(String[] args){
-        Try a = new Try();
+        ProfileManager pm = new ProfileManager();
+        GUIMain gui = new GUIMain(pm);
     }
 
 }
