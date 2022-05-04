@@ -3,9 +3,11 @@ package Profile;
 public class Profile {
     private String myUsername;
     private Privilege myPrivilege;
+    private String myEmail;
 
-    public Profile(String theUsername, Privilege thePrivilege) {
+    public Profile(String theUsername, String theEmail, Privilege thePrivilege) {
         setUsername(theUsername);
+        setEmail(theEmail);
         setPrivilege(thePrivilege);
     }
 
@@ -23,6 +25,14 @@ public class Profile {
 
     public void setPrivilege(Privilege myPrivilege) {
         this.myPrivilege = myPrivilege;
+    }
+
+    public String getEmail() {
+        return myEmail;
+    }
+
+    public void setEmail(String myUsername) {
+        this.myEmail = myEmail;
     }
 }
 

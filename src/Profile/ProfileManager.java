@@ -18,10 +18,16 @@ public class ProfileManager { //TODO Remove repeating code
     private Profile mySelectedProfile;
 //    private boolean isLoaded;
 
+    /**
+     * Constructor. Reads profiles.txt on creation.
+     */
     public ProfileManager() {
         myProfiles = readProfiles();
     }
 
+    ////////////////////
+    //   Set & Get    //
+    ////////////////////
     public Profile getProfileByUsername(String theUsername) throws IllegalArgumentException {
         if (myProfiles == null || myProfiles.size() == 0) {
             throw new IllegalArgumentException("There are no Profiles to select from.");
@@ -45,7 +51,7 @@ public class ProfileManager { //TODO Remove repeating code
         return mySelectedProfile;
     }
 
-    public void addNewProfile(String theUsername, Privilege thePrivilege) throws IllegalArgumentException {
+    public void addNewProfile(String theUsername, String theEmail, Privilege thePrivilege) throws IllegalArgumentException {
         if (myProfiles != null || myProfiles.size() != 0) {
             Iterator it = myProfiles.iterator();
             while (it.hasNext()) {
@@ -54,7 +60,7 @@ public class ProfileManager { //TODO Remove repeating code
                 }
             }
         }
-        myProfiles.add(new Profile(theUsername, thePrivilege));
+        myProfiles.add(new Profile(theUsername, theEmail, thePrivilege));
     }
 
     public ArrayList<Profile> getProfileList() {
@@ -88,6 +94,9 @@ public class ProfileManager { //TODO Remove repeating code
     }
 
 
+    ////////////////////
+    //    In & Out    //
+    ////////////////////
     public ArrayList<Profile> readProfiles() {
         System.out.println("Reading Profiles from " + PROFILE_PATH + ':'); //DEBUG Out
         ArrayList<Profile> temp = new ArrayList<Profile>();
@@ -98,6 +107,7 @@ public class ProfileManager { //TODO Remove repeating code
                 System.out.println("\t" + profile.toJSONString()); //DEBUG Out
                 temp.add(new Profile(
                         (String)profile.get("Username"),
+                        (String)profile.get("Email"),
                         Privilege.valueOf((String)profile.get("Privilege"))
                 ));
             }
@@ -116,6 +126,7 @@ public class ProfileManager { //TODO Remove repeating code
                 JSONObject json = new JSONObject();
                 json.put("Username", p.getUsername());
                 json.put("Privilege", p.getPrivilege().getPrivilegeInt());
+                json.put("Email", p.getEmail());
 
                 System.out.println("\t" + json.toJSONString());
                 fw.write(json.toJSONString() + "\n");
