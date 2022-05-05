@@ -7,7 +7,7 @@ import java.awt.*;
 
 public class ViewMain extends JFrame {
     //Managers
-    private ProfileManager myProfileManager;
+    private final ProfileManager myProfileManager;
     //TODO private ProjectManager myProjectManager;
     //GUI Components
     private JMenuBar myMenuBar;
