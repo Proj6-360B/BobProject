@@ -21,6 +21,7 @@ public class CompAboutFrame extends JFrame {
 
         //About Text Area
         myAboutText = initializeAboutText();
+        myAboutText.setEditable(false);
         add(myAboutText);
 
         //Initialize
