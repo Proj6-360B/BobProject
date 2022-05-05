@@ -16,8 +16,13 @@ public class CompMenuBar extends JMenuBar {
         //ProfileManager
         myProfileManager = theProfileManager;
 
-        //About
+        //Properties
+        setBackground(Color.white);
+        setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+
+        //About Button
         myAboutButton = new JButton("About");
+        myAboutButton.setBackground(Color.white);
         myAboutButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -25,8 +30,5 @@ public class CompMenuBar extends JMenuBar {
             }
         });
         add(myAboutButton);
-
-        //Properties
-        setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
     }
 }

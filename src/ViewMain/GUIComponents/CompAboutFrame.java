@@ -6,13 +6,15 @@ import javax.swing.*;
 import java.awt.*;
 
 public class CompAboutFrame extends JFrame {
-    private JTextArea myAboutText;
-    private ProfileManager myProfileManager;
-    //TODO Version Number Handler Class thing
+    private final JTextArea myAboutText;
+    private final ProfileManager myProfileManager;
+    private final VersionHandler myVersionHandler;
 
     public CompAboutFrame(ProfileManager theProfileManager) {
         //ProfileManager
         myProfileManager = theProfileManager;
+        //Version Handler
+        myVersionHandler = new VersionHandler();
 
         //About Text Area
         myAboutText = initializeAboutText();
@@ -40,7 +42,7 @@ public class CompAboutFrame extends JFrame {
         sb.append(myProfileManager.getSelectedProfile().getPrivilege());
         sb.append("\n\nProject6 Team: Damien Cruz, Abdulmuen Fethi, David Huynh, Andrew Nguyen\n");
         sb.append("   Version: ");
-        //TODO sb.append() the version number
+        sb.append(myVersionHandler.VERSION);
 
         return new JTextArea(sb.toString());
     }
