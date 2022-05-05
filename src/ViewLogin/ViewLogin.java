@@ -8,8 +8,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
-public class ViewLogin extends JFrame implements ActionListener {
+public class ViewLogin extends JDialog implements ActionListener {
     //ProfileManager
     private ProfileManager myProfileManager;
 
@@ -29,6 +31,7 @@ public class ViewLogin extends JFrame implements ActionListener {
         initializeFrame();
         initializeComponents();
         setVisible(true);
+
     }
 
     private void initializeComponents() {
@@ -52,6 +55,11 @@ public class ViewLogin extends JFrame implements ActionListener {
         setSize(DIMENSION);
         setLayout(new FlowLayout());
         setLocationRelativeTo(null);
+
+
+        setAlwaysOnTop(true);//so the user cannot bypass login by clicking off of it
+        setResizable(false);//so it doesn't look ugly with a resize
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);//so you can't avoid login
     }
 
     @Override
@@ -66,4 +74,5 @@ public class ViewLogin extends JFrame implements ActionListener {
             dispose();
         }
     }
+
 }
