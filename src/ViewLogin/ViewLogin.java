@@ -49,8 +49,9 @@ public class ViewLogin extends JFrame implements ActionListener {
 
     private void initializeFrame() {
         setTitle("Login");
-        setLayout(new FlowLayout());
         setSize(DIMENSION);
+        setLayout(new FlowLayout());
+        setLocationRelativeTo(null);
     }
 
     @Override
@@ -58,6 +59,7 @@ public class ViewLogin extends JFrame implements ActionListener {
         if (e.getSource() == myCreateNewButton) {
             System.out.println("Create New Event"); //DEBUG
             //TODO start frame to create new Profile
+            //TODO update ComboBox with new list
         } else if (e.getSource() == myLoginButton) {
             System.out.println("Login Event"); //DEBUG
             myProfileManager.setSelectedProfile(((Profile)myProfileComboBox.getSelectedItem()));
