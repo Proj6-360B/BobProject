@@ -83,7 +83,7 @@ public class ProfileManager { //TODO Remove repeating code
         return result;
     }
 
-    public void selectProfileByUsername(String theUsername) {
+    public void setSelectedProfile(String theUsername) {
         if (myProfiles == null || myProfiles.size() == 0) {
             throw new IllegalArgumentException("There are no Profiles to select from.");
         }
@@ -91,11 +91,28 @@ public class ProfileManager { //TODO Remove repeating code
         while (it.hasNext()) {
             Profile temp = (Profile)it.next();
             if (temp.getUsername().equals(theUsername)) {
+                System.out.println("Setting Selected user as: " + temp.getUsername()); //DEBUG
                 mySelectedProfile = temp;
                 return;
             }
         }
         throw new IllegalArgumentException("There is no Profile with the name" + theUsername + '.');
+    }
+
+    public void setSelectedProfile(Profile theProfile) {
+        if (myProfiles == null || myProfiles.size() == 0) {
+            throw new IllegalArgumentException("There are no Profiles to select from.");
+        }
+        Iterator it = myProfiles.iterator();
+        while (it.hasNext()) {
+            Profile temp = (Profile)it.next();
+            if (temp == theProfile) {
+                System.out.println("Setting Selected user as: " + temp.getUsername()); //DEBUG
+                mySelectedProfile = temp;
+                return;
+            }
+        }
+        throw new IllegalArgumentException("There is no Profile with the name" + theProfile.getUsername() + '.');
     }
 
 

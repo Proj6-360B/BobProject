@@ -1,4 +1,5 @@
 import Profile.ProfileManager;
+import ViewLogin.ViewLogin;
 import ViewMain.ViewMain;
 
 public class Main {
@@ -8,11 +9,11 @@ public class Main {
 
     public static void main(String[] args){
         //Login
-        //TODO A Frame or something to make & select the user. A user needs to be selected before moving on
-        myProfileManager.selectProfileByUsername("Bob");
+        ViewLogin login = new ViewLogin(myProfileManager);
+        //myProfileManager.selectProfileByUsername("Bob"); //DEBUG
 
         //Main View
-        ViewMain gui = new ViewMain(myProfileManager);
+        ViewMain gui = new ViewMain(myProfileManager); //TODO This still activates when Login is still happening.
 
         //Exit
         myProfileManager.writeProfiles(); //TODO This still activates when GUI is still on.

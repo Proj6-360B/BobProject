@@ -40,5 +40,15 @@ public class Profile {
     public void setEmail(String myEmail) {
         this.myEmail = myEmail;
     }
+
+    @Override
+    public String toString() {
+        StringBuffer sb = new StringBuffer();
+        sb.append(myUsername);
+        sb.append(" (");
+        sb.append(myEmail);
+        sb.append(')');
+        return sb.toString();
+    }
 }
 

@@ -6,6 +6,9 @@ import javax.swing.*;
 import java.awt.*;
 
 public class CompAboutFrame extends JFrame {
+    //Size
+    private static final Dimension DIMENSION = new Dimension(450, 130);
+    //Components
     private final JTextArea myAboutText;
     private final ProfileManager myProfileManager;
     private final VersionHandler myVersionHandler;
@@ -27,7 +30,7 @@ public class CompAboutFrame extends JFrame {
 
     private void initializeFrame() {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setSize(new Dimension(450, 130));
+        setSize(DIMENSION);
         setLocationRelativeTo(null);
     }
 

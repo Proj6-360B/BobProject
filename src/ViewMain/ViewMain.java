@@ -9,10 +9,12 @@ public class ViewMain extends JFrame {
     //Managers
     private final ProfileManager myProfileManager;
     //TODO private ProjectManager myProjectManager;
+
+    //Size
+    private static final Dimension DIMENSION = new Dimension(960, 800);
     //GUI Components
     private JMenuBar myMenuBar;
     private JTabbedPane myTabbedPane;
-    //TODO About Tab/Frame
 
     public ViewMain(ProfileManager thePM) {
         //Fields Initialize
@@ -28,7 +30,7 @@ public class ViewMain extends JFrame {
         //Frame Properties
         setTitle("MainGUIFrame");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(new Dimension(960, 800));
+        setSize(DIMENSION);
         setLayout(new BorderLayout(10, 10));
         setLocationRelativeTo(null);
     }
