@@ -1,6 +1,6 @@
 package ViewMain;
 
-import ViewMain.GUIComponents.*;
+import ViewMain.Components.*;
 import Profile.*;
 import javax.swing.*;
 import java.awt.*;

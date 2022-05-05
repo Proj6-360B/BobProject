@@ -1,4 +1,4 @@
-package ViewMain.GUIComponents;
+package ViewMain.Components;
 
 import Profile.ProfileManager;
 

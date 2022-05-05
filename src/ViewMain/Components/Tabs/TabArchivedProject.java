@@ -1,4 +1,4 @@
-package ViewMain.GUIComponents.Tabs;
+package ViewMain.Components.Tabs;
 
 import javax.swing.*;
 

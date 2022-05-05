@@ -1,6 +1,6 @@
-package ViewMain.GUIComponents;
+package ViewMain.Components;
 
-import ViewMain.GUIComponents.Tabs.*;
+import ViewMain.Components.Tabs.*;
 
 import javax.swing.*;
 
