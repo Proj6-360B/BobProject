@@ -13,7 +13,6 @@ public class Main {
 
         //Login
         ViewLogin login = new ViewLogin(myProfileManager);
-        //myProfileManager.selectProfileByUsername("Bob"); //DEBUG
 
         //Exit
         myProfileManager.writeProfiles(); //TODO This still activates when GUI is still on.

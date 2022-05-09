@@ -7,7 +7,7 @@ import java.awt.*;
 
 public class CompAboutFrame extends JFrame {
     //Size
-    private static final Dimension DIMENSION = new Dimension(450, 130);
+    private static final Dimension DIMENSION = new Dimension(350, 200);
     //Components
     private final JTextArea myAboutText;
     private final ProfileManager myProfileManager;
@@ -36,16 +36,16 @@ public class CompAboutFrame extends JFrame {
     }
 
     private JTextArea initializeAboutText() {
-        StringBuffer sb = new StringBuffer();
-        sb.append("Current User: ");
+        StringBuffer sb = new StringBuffer(); //TODO Read from txt instead of ugly appending.
+        sb.append("This app is registered to: ");
         sb.append(myProfileManager.getSelectedProfile().getUsername());
         sb.append(" (");
         sb.append(myProfileManager.getSelectedProfile().getEmail());
         sb.append(")\n");
         sb.append("   Privilege: ");
         sb.append(myProfileManager.getSelectedProfile().getPrivilege());
-        sb.append("\n\nProject6 Team: Damien Cruz, Abdulmuen Fethi, David Huynh, Andrew Nguyen\n");
-        sb.append("   Version: ");
+        sb.append("\n\nThis app provided by the Project6 Team:\n   Damien Cruz\n   Abdulmuen Fethi (Abdi)\n   David Huynh\n   Andrew Nguyen\n\n");
+        sb.append("Version: ");
         sb.append(myVersionHandler.VERSION);
 
         return new JTextArea(sb.toString());
