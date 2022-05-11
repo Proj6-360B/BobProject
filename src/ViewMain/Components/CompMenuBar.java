@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 public class CompMenuBar extends JMenuBar {
     //Menus
     private JButton myAboutButton; //TODO JMenuItem breaks button size & JButton is ugly
+    private JButton mySettingsButton;
     private ProfileManager myProfileManager;
 
     public CompMenuBar(ProfileManager theProfileManager) {
@@ -30,5 +31,16 @@ public class CompMenuBar extends JMenuBar {
             }
         });
         add(myAboutButton);
+
+        //Settings Button
+        mySettingsButton = new JButton("Settings");
+        mySettingsButton.setBackground(Color.white);
+        mySettingsButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //TODO Settings Frame or whatever to export/import settings
+            }
+        });
+        add(mySettingsButton);
     }
 }
