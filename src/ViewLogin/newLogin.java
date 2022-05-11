@@ -1,5 +1,8 @@
 package ViewLogin;
 
+import Profile.Privilege;
+import Profile.ProfileManager;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -7,6 +10,8 @@ import java.awt.event.*;
 class newLogin
         extends JFrame
         implements ActionListener {
+
+    private ProfileManager myProjectManager;
 
     // Components of the Form
     private Container c;
@@ -52,8 +57,10 @@ class newLogin
 
     // constructor, to initialize the components
     // with default values.
-    public newLogin()
+    public newLogin(ProfileManager thePM)
     {
+        myProjectManager = thePM;
+
         setTitle("Create New Profile");
         setBounds(300, 90, 450, 450);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -180,28 +187,32 @@ class newLogin
     public void actionPerformed(ActionEvent e)
     {
         if (e.getSource() == submitButton) {
-                String data1;
-                String data
-                        = "Name : "
-                        + tname.getText() + "\n"
-                        + "Mobile : "
-                        + emailText.getText() + "\n";
-                if (adminButton.isSelected())
-                    data1 = "Gender : Male"
-                            + "\n";
-                else
-                    data1 = "Gender : Female"
-                            + "\n";
-                String data2
-                        = "DOB : "
-                        + (String)date.getSelectedItem()
-                        + "/" + (String)month.getSelectedItem()
-                        + "/" + (String)year.getSelectedItem()
-                        + "\n";
-
-               // tout.setText(data + data1 + data2);
-                //tout.setEditable(false);
-                res.setText("Registration Successfully..");
+//                String data1;
+//                String data
+//                        = "Name : "
+//                        + tname.getText() + "\n"
+//                        + "Mobile : "
+//                        + emailText.getText() + "\n";
+//                if (adminButton.isSelected())
+//                    data1 = "Gender : Male"
+//                            + "\n";
+//                else
+//                    data1 = "Gender : Female"
+//                            + "\n";
+//                String data2
+//                        = "DOB : "
+//                        + (String)date.getSelectedItem()
+//                        + "/" + (String)month.getSelectedItem()
+//                        + "/" + (String)year.getSelectedItem()
+//                        + "\n";
+//
+//               // tout.setText(data + data1 + data2);
+//                //tout.setEditable(false);
+//                res.setText("Registration Successfully..");
+            myProjectManager.addNewProfile(tname.getText(), emailText.getText(), Privilege.ADMIN);
+            myProjectManager.writeProfiles();
+            myProjectManager.setSelectedProfile(tname.getText());
+            dispose();
         } else if (e.getSource() == resetButton) {
             String def = "";
             tname.setText(def);

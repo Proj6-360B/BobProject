@@ -1,2 +1,4 @@
 {"Email":"bobk41@gmail.com","Username":"Bob","Privilege":"ADMIN"}
 {"Email":null,"Username":"Billy","Privilege":"NORMAL"}
+{"Email":"wow@gmail.com","Username":"OMG","Privilege":"ADMIN"}
+{"Email":"123","Username":"123","Privilege":"ADMIN"}
