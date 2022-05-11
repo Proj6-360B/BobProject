@@ -17,8 +17,8 @@ import java.util.Scanner;
  *
  * https://mkyong.com/java/json-simple-example-read-and-write-json/
  */
-public class ProfileManager { //TODO Remove repeating code
-    public static String PROFILE_PATH = "appdata/profiles/";
+public class ProfileManager implements java.io.Serializable { //TODO Remove repeating code
+    public static transient String PROFILE_PATH = "appdata/profiles/";
     private ArrayList<Profile> myProfiles;
     private Profile mySelectedProfile;
 
@@ -145,7 +145,7 @@ public class ProfileManager { //TODO Remove repeating code
         System.out.println("Writing Profiles to " + PROFILE_PATH + ':'); //DEBUG Out
         try {
             for (Profile p: myProfiles) {
-                FileOutputStream outFile = new FileOutputStream("appdata/profiles/" + p.getUsername() + ".ser");
+                FileOutputStream outFile = new FileOutputStream(PROFILE_PATH + p.getUsername() + ".ser");
                 ObjectOutputStream outObj = new ObjectOutputStream(outFile);
                 outObj.writeObject(p);
                 System.out.println(p); //DEBUG
