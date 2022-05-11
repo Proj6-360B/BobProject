@@ -187,7 +187,15 @@ class newLogin
     public void actionPerformed(ActionEvent e)
     {
         if (e.getSource() == submitButton) {
-            myProjectManager.addNewProfile(tname.getText(), emailText.getText(), Privilege.ADMIN);
+            Privilege p;
+            if(normalButton.isSelected()){
+                p = Privilege.NORMAL;
+            }else if(adminButton.isSelected()){
+                p = Privilege.ADMIN;
+            }else{
+                p = Privilege.GUEST;
+            }
+            myProjectManager.addNewProfile(tname.getText(), emailText.getText(), p);
             myProjectManager.writeProfiles();
             new ViewLogin(myProjectManager);
             dispose();
