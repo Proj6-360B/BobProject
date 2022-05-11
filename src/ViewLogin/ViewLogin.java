@@ -66,6 +66,12 @@ public class ViewLogin extends JDialog implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == myCreateNewButton) {
             System.out.println("Create New Event"); //DEBUG
+            newLogin l = new newLogin();
+            //get info from newlogin screen
+            //add info to profile combobox
+            //set new profile as the selected profile
+            //myProfileManager.setSelectedProfile(((Profile)myProfileComboBox.getSelectedItem()));
+            dispose();
             //TODO start frame to create new Profile
             //TODO update ComboBox with new list
         } else if (e.getSource() == myLoginButton) {
