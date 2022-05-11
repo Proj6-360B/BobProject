@@ -187,41 +187,13 @@ class newLogin
     public void actionPerformed(ActionEvent e)
     {
         if (e.getSource() == submitButton) {
-//                String data1;
-//                String data
-//                        = "Name : "
-//                        + tname.getText() + "\n"
-//                        + "Mobile : "
-//                        + emailText.getText() + "\n";
-//                if (adminButton.isSelected())
-//                    data1 = "Gender : Male"
-//                            + "\n";
-//                else
-//                    data1 = "Gender : Female"
-//                            + "\n";
-//                String data2
-//                        = "DOB : "
-//                        + (String)date.getSelectedItem()
-//                        + "/" + (String)month.getSelectedItem()
-//                        + "/" + (String)year.getSelectedItem()
-//                        + "\n";
-//
-//               // tout.setText(data + data1 + data2);
-//                //tout.setEditable(false);
-//                res.setText("Registration Successfully..");
             myProjectManager.addNewProfile(tname.getText(), emailText.getText(), Privilege.ADMIN);
             myProjectManager.writeProfiles();
-            myProjectManager.setSelectedProfile(tname.getText());
+            new ViewLogin(myProjectManager);
             dispose();
         } else if (e.getSource() == resetButton) {
-            String def = "";
-            tname.setText(def);
-            emailText.setText(def);
-            res.setText(def);
-            date.setSelectedIndex(0);
-            month.setSelectedIndex(0);
-            year.setSelectedIndex(0);
-            resadd.setText(def);
+            ViewLogin log = new ViewLogin(myProjectManager);
+            dispose();
         }
     }
 }
