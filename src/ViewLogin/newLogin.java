@@ -15,17 +15,17 @@ class newLogin
     private JTextField tname;
     private JLabel email;
     private JTextField emailText;
-    private JLabel gender;
-    private JRadioButton male;
-    private JRadioButton female;
-    private ButtonGroup gengp;
+    private JLabel privilegeLabel;
+    private JRadioButton adminButton;//admin
+    private JRadioButton normalButton;//normal
+    private JRadioButton guestButton;//guest
+    private ButtonGroup privilegeGroup;
     private JLabel dob;
     private JComboBox date;
     private JComboBox month;
     private JComboBox year;
     private JButton submitButton;
     private JButton resetButton;
-    private JTextArea tout;
     private JLabel res;
     private JTextArea resadd;
 
@@ -54,18 +54,18 @@ class newLogin
     // with default values.
     public newLogin()
     {
-        setTitle("Registration Form");
-        setBounds(300, 90, 900, 600);
+        setTitle("Create New Profile");
+        setBounds(300, 90, 450, 450);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);
 
         c = getContentPane();
         c.setLayout(null);
 
-        title = new JLabel("Registration Form");
+        title = new JLabel("Create New Profile");
         title.setFont(new Font("Arial", Font.PLAIN, 30));
         title.setSize(300, 30);
-        title.setLocation(300, 30);
+        title.setLocation(100, 30);
         c.add(title);
 
         name = new JLabel("Name");
@@ -92,29 +92,37 @@ class newLogin
         emailText.setLocation(200, 150);
         c.add(emailText);
 
-        gender = new JLabel("Gender");
-        gender.setFont(new Font("Arial", Font.PLAIN, 20));
-        gender.setSize(100, 20);
-        gender.setLocation(100, 200);
-        c.add(gender);
+        privilegeLabel = new JLabel("Privilege Level");
+        privilegeLabel.setFont(new Font("Arial", Font.PLAIN, 20));
+        privilegeLabel.setSize(100, 20);
+        privilegeLabel.setLocation(100, 200);
+        c.add(privilegeLabel);
 
-        male = new JRadioButton("Male");
-        male.setFont(new Font("Arial", Font.PLAIN, 15));
-        male.setSelected(true);
-        male.setSize(75, 20);
-        male.setLocation(200, 200);
-        c.add(male);
+        adminButton = new JRadioButton("Admin");
+        adminButton.setFont(new Font("Arial", Font.PLAIN, 15));
+        adminButton.setSelected(true);
+        adminButton.setSize(75, 20);
+        adminButton.setLocation(200, 200);
+        c.add(adminButton);
 
-        female = new JRadioButton("Female");
-        female.setFont(new Font("Arial", Font.PLAIN, 15));
-        female.setSelected(false);
-        female.setSize(80, 20);
-        female.setLocation(275, 200);
-        c.add(female);
+        normalButton = new JRadioButton("Normal");
+        normalButton.setFont(new Font("Arial", Font.PLAIN, 15));
+        normalButton.setSelected(false);
+        normalButton.setSize(80, 20);
+        normalButton.setLocation(275, 200);
+        c.add(normalButton);
 
-        gengp = new ButtonGroup();
-        gengp.add(male);
-        gengp.add(female);
+        guestButton = new JRadioButton("Guest");
+        guestButton.setFont(new Font("Arial", Font.PLAIN, 15));
+        guestButton.setSelected(false);
+        guestButton.setSize(80, 20);
+        guestButton.setLocation(350, 200);
+        c.add(guestButton);
+
+        privilegeGroup = new ButtonGroup();
+        privilegeGroup.add(adminButton);
+        privilegeGroup.add(normalButton);
+        privilegeGroup.add(guestButton);
 
         dob = new JLabel("DOB");
         dob.setFont(new Font("Arial", Font.PLAIN, 20));
@@ -144,37 +152,24 @@ class newLogin
         submitButton = new JButton("Submit");
         submitButton.setFont(new Font("Arial", Font.PLAIN, 15));
         submitButton.setSize(100, 20);
-        submitButton.setLocation(150, 450);
+        submitButton.setLocation(150, 300);
         submitButton.addActionListener(this);
         c.add(submitButton);
 
         resetButton = new JButton("Reset");
         resetButton.setFont(new Font("Arial", Font.PLAIN, 15));
         resetButton.setSize(100, 20);
-        resetButton.setLocation(270, 450);
+        resetButton.setLocation(270, 300);
         resetButton.addActionListener(this);
         c.add(resetButton);
 
-        tout = new JTextArea();
-        tout.setFont(new Font("Arial", Font.PLAIN, 15));
-        tout.setSize(300, 400);
-        tout.setLocation(500, 100);
-        tout.setLineWrap(true);
-        tout.setEditable(false);
-        c.add(tout);
+
 
         res = new JLabel("");
         res.setFont(new Font("Arial", Font.PLAIN, 20));
         res.setSize(500, 25);
-        res.setLocation(100, 500);
+        res.setLocation(100, 350);
         c.add(res);
-
-        resadd = new JTextArea();
-        resadd.setFont(new Font("Arial", Font.PLAIN, 15));
-        resadd.setSize(200, 75);
-        resadd.setLocation(580, 175);
-        resadd.setLineWrap(true);
-        c.add(resadd);
 
         setVisible(true);
     }
@@ -191,7 +186,7 @@ class newLogin
                         + tname.getText() + "\n"
                         + "Mobile : "
                         + emailText.getText() + "\n";
-                if (male.isSelected())
+                if (adminButton.isSelected())
                     data1 = "Gender : Male"
                             + "\n";
                 else
@@ -204,15 +199,14 @@ class newLogin
                         + "/" + (String)year.getSelectedItem()
                         + "\n";
 
-                tout.setText(data + data1 + data2);
-                tout.setEditable(false);
+               // tout.setText(data + data1 + data2);
+                //tout.setEditable(false);
                 res.setText("Registration Successfully..");
         } else if (e.getSource() == resetButton) {
             String def = "";
             tname.setText(def);
             emailText.setText(def);
             res.setText(def);
-            tout.setText(def);
             date.setSelectedIndex(0);
             month.setSelectedIndex(0);
             year.setSelectedIndex(0);
