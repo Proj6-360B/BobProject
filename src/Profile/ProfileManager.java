@@ -3,8 +3,7 @@ package Profile;
 import org.json.simple.*;
 import org.json.simple.parser.JSONParser;
 
-import java.io.File;
-import java.io.FileWriter;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
@@ -19,7 +18,7 @@ import java.util.Scanner;
  * https://mkyong.com/java/json-simple-example-read-and-write-json/
  */
 public class ProfileManager { //TODO Remove repeating code
-    public static String PROFILE_PATH = "./appdata/profiles/profiles.txt";
+    public static String PROFILE_PATH = "appdata/profiles/";
     private ArrayList<Profile> myProfiles;
     private Profile mySelectedProfile;
 
@@ -123,40 +122,44 @@ public class ProfileManager { //TODO Remove repeating code
         System.out.println("Reading Profiles from " + PROFILE_PATH + ':'); //DEBUG Out
         ArrayList<Profile> temp = new ArrayList<Profile>();
         try {
-            Scanner scanner = new Scanner(new File(PROFILE_PATH));
-            while (scanner.hasNextLine()) {
-                JSONObject profile = (JSONObject) new JSONParser().parse(scanner.nextLine());
-                System.out.println("\t" + profile.toJSONString()); //DEBUG Out
-                temp.add(new Profile(
-                        (String)profile.get("Username"),
-                        (String)profile.get("Email"),
-                        Privilege.valueOf((String)profile.get("Privilege"))
-                ));
+            for (File f: new File(PROFILE_PATH).listFiles()) {
+                if (!f.getName().endsWith(".ser")) continue; //Check file
+
+                FileInputStream inFile = new FileInputStream(f);
+                ObjectInputStream inObj = new ObjectInputStream(inFile);
+                Profile p = (Profile) inObj.readObject();
+                temp.add(p);
+                System.out.println(p); //DEBUG
+
+                inFile.close();
+                inObj.close();
             }
-            scanner.close();
         } catch (Exception e) {
+            e.printStackTrace();
             return temp;
         }
         return temp;
     }
 
     public void writeProfiles() {
+        System.out.println("Writing Profiles to " + PROFILE_PATH + ':'); //DEBUG Out
         try {
-            System.out.println("Writing Profiles to " + PROFILE_PATH + ':'); //DEBUG Out
-            FileWriter fw = new FileWriter(PROFILE_PATH);
             for (Profile p: myProfiles) {
-                JSONObject json = new JSONObject();
-                json.put("Username", p.getUsername());
-                json.put("Privilege", p.getPrivilege().getPrivilegeInt());
-                json.put("Email", p.getEmail());
+                FileOutputStream outFile = new FileOutputStream("appdata/profiles/" + p.getUsername() + ".ser");
+                ObjectOutputStream outObj = new ObjectOutputStream(outFile);
+                outObj.writeObject(p);
+                System.out.println(p); //DEBUG
 
-                System.out.println("\t" + json.toJSONString());
-                fw.write(json.toJSONString() + "\n");
+                outObj.close();
+                outFile.close();
             }
-            fw.flush();
-            fw.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public static void main(String[] args) {
+        ProfileManager pm = new ProfileManager();
+
     }
 }
