@@ -7,7 +7,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class CompMenuBar extends JMenuBar {
+public class CompMenuBar extends JMenuBar implements ActionListener {
     //Menus
     private JButton myAboutButton; //TODO JMenuItem breaks button size & JButton is ugly
     private JButton mySettingsButton;
@@ -24,23 +24,25 @@ public class CompMenuBar extends JMenuBar {
         //About Button
         myAboutButton = new JButton("About");
         myAboutButton.setBackground(Color.white);
+        myAboutButton.addActionListener(this);
         add(myAboutButton);
 
         //Settings Button
         mySettingsButton = new JButton("Settings");
         mySettingsButton.setBackground(Color.white);
-        mySettingsButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (e.getSource() == myAboutButton){
-                    JFrame temp = new CompAboutFrame(myProfileManager);
-                }else if (e.getSource() == mySettingsButton){
-                    //todo open settings frame
-                    JFrame temp2 = new CompSettingsFrame(myProfileManager);
-                }
-                //TODO Settings Frame or whatever to export/import settings
-            }
-        });
+        mySettingsButton.addActionListener(this);
         add(mySettingsButton);
+
+    }
+
+
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == myAboutButton) {
+            JFrame temp = new CompAboutFrame(myProfileManager);
+        } else if (e.getSource() == mySettingsButton) {
+            //todo open settings frame
+            JFrame temp2 = new CompSettingsFrame(myProfileManager);
+        }
+        //TODO Settings Frame or whatever to export/import settings
     }
 }
