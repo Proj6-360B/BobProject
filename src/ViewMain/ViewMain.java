@@ -28,7 +28,7 @@ public class ViewMain extends JFrame {
 
     private void initializeFrame() {
         //Frame Properties
-        setTitle("MainGUIFrame");
+        setTitle("Project6 MainGUIFrame");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(DIMENSION);
         setLayout(new BorderLayout(10, 10));

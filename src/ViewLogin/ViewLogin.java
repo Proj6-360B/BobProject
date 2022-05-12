@@ -8,8 +8,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 
 public class ViewLogin extends JDialog implements ActionListener {
     //ProfileManager
@@ -70,10 +68,7 @@ public class ViewLogin extends JDialog implements ActionListener {
             //get info from newlogin screen
             //add info to profile combobox
             //set new profile as the selected profile
-            //myProfileManager.setSelectedProfile(((Profile)myProfileComboBox.getSelectedItem()));
             dispose();
-            //TODO start frame to create new Profile
-            //TODO update ComboBox with new list
         } else if (e.getSource() == myLoginButton) {
             System.out.println("Login Event"); //DEBUG
             myProfileManager.setSelectedProfile(((Profile)myProfileComboBox.getSelectedItem()));
