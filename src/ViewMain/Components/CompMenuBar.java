@@ -24,12 +24,6 @@ public class CompMenuBar extends JMenuBar {
         //About Button
         myAboutButton = new JButton("About");
         myAboutButton.setBackground(Color.white);
-        myAboutButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JFrame temp = new CompAboutFrame(myProfileManager);
-            }
-        });
         add(myAboutButton);
 
         //Settings Button
@@ -38,6 +32,12 @@ public class CompMenuBar extends JMenuBar {
         mySettingsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                if (e.getSource() == myAboutButton){
+                    JFrame temp = new CompAboutFrame(myProfileManager);
+                }else if (e.getSource() == mySettingsButton){
+                    //todo open settings frame
+                    JFrame temp2 = new CompSettingsFrame(myProfileManager);
+                }
                 //TODO Settings Frame or whatever to export/import settings
             }
         });

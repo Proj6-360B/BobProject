@@ -139,6 +139,7 @@ class newLogin
     public void actionPerformed(ActionEvent e)
     {
         if (e.getSource() == submitButton) {
+            //todo add inout verification so it wont take empty strings
             Privilege p;
             if(normalButton.isSelected()){
                 p = Privilege.NORMAL;
@@ -150,6 +151,7 @@ class newLogin
             myProjectManager.addNewProfile(tname.getText(), emailText.getText(), p);
             myProjectManager.writeProfiles();
             new ViewLogin(myProjectManager);//reopen login screen
+            dispose();
         } else if (e.getSource() == resetButton) {
             new ViewLogin(myProjectManager);//reopen login screen
             dispose();
