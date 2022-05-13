@@ -5,6 +5,9 @@ import Profile.ProfileManager;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * @author Damien Cruz
+ */
 public class CompSettingsFrame extends JFrame {
     private static final Dimension DIMENSION = new Dimension(350, 200) ;
     private final ProfileManager myProfileManager;

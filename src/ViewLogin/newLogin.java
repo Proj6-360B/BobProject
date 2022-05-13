@@ -6,7 +6,10 @@ import Profile.ProfileManager;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-//credit = "https://www.geeksforgeeks.org/java-swing-simple-user-registration-form/"
+/**
+ * @author Damien Cruz
+ * 5/12/22
+ */
 class newLogin
         extends JDialog
         implements ActionListener {
@@ -33,6 +36,12 @@ class newLogin
 
     // constructor, to initialize the components
     // with default values.
+
+    /**
+     * @Damien Cruz
+     * constructor, to initialize the components with default values.
+     * @param thePM
+     */
     public newLogin(ProfileManager thePM)
     {
         myProjectManager = thePM;
@@ -136,6 +145,12 @@ class newLogin
     // method actionPerformed()
     // to get the action performed
     // by the user and act accordingly
+
+    /**
+     * @author Damien Cruz
+     * 5/10/22
+     * @param e
+     */
     public void actionPerformed(ActionEvent e)
     {
         if (e.getSource() == submitButton) {
