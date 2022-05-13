@@ -35,7 +35,10 @@ public class CompMenuBar extends JMenuBar implements ActionListener {
 
     }
 
-
+    /**
+     * @author Damien Cruz
+     * handles all button pushes for this frame
+     */
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == myAboutButton) {
             JFrame temp = new CompAboutFrame(myProfileManager);
