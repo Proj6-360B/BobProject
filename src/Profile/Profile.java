@@ -81,7 +81,7 @@ public class Profile {
     /**
      * toString(). <br>
      * [myUsername] ([thePrivilege])
-     * @return
+     * @return String representation.
      */
     @Override
     public String toString() {
