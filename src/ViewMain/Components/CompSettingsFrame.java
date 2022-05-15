@@ -11,10 +11,13 @@ import java.awt.*;
 public class CompSettingsFrame extends JFrame {
     private static final Dimension DIMENSION = new Dimension(350, 200) ;
     private final ProfileManager myProfileManager;
+
+
     public CompSettingsFrame(ProfileManager theProfileManager) {
         myProfileManager = theProfileManager;
         initializeFrame();
         //todo setup the look/controls of settings frame
+
 
 
 
