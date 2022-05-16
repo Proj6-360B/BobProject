@@ -51,8 +51,6 @@ public class TabActiveProject extends JPanel implements ActionListener {
     public void addProjectButton(String name){
         JButton addProjectButton = new JButton(name);
         addProjectButton.setSize(250,25);
-
-
         projectsPanel.add(addProjectButton);
 
 

@@ -36,4 +36,13 @@ public class Projects {
     public void setProjectStatus(Status projectStatus) {
         this.projectStatus = projectStatus;
     }
+
+    public String toString() {
+        StringBuffer sb = new StringBuffer();
+        sb.append(projectName);
+        sb.append(" (");
+        sb.append(projectType);
+        sb.append(')');
+        return sb.toString();
+    }
 }
