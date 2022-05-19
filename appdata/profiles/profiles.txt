@@ -1,2 +1,2 @@
-{"Email":"bobk41@gmail.com","Username":"Bob","Privilege":"ADMIN"}
-{"Email":"dcruz99@uw.edu","Username":"Damien","Privilege":"NORMAL"}
+{"Email":"bobk41@gmail.com","Username":"Bob","Privilege":"ADMIN","Font":"Dialogue"}
+{"Email":"dcruz99@uw.edu","Username":"Damien","Privilege":"NORMAL","Font":"Dialogue"}

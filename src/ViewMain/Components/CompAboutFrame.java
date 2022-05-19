@@ -23,6 +23,7 @@ public class CompAboutFrame extends JFrame {
         myAboutText = initializeAboutText();
         myAboutText.setEditable(false);
         add(myAboutText);
+        System.out.println(myAboutText.getFont()); //DEBUG
 
         //Initialize
         initializeFrame();

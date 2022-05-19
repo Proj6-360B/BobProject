@@ -1,7 +1,7 @@
 package Profile;
 
 /**
- * Profile. Stores a username, email, and the level of privilege.
+ * Profile. Stores a username, email, the level of privilege, and preferred font.
  * @author David Huynh
  */
 public class Profile {
@@ -17,6 +17,10 @@ public class Profile {
      * The privilege level.
      */
     private Privilege myPrivilege;
+    /**
+     * The preferred font.
+     */
+    private String myFont;
 
     /**
      * Profile object.
@@ -28,6 +32,21 @@ public class Profile {
         setUsername(theUsername);
         setEmail(theEmail);
         setPrivilege(thePrivilege);
+        setFont("Dialogue");
+    }
+
+    /**
+     * Profile object.
+     * @param theUsername The Username
+     * @param theEmail The Email Address
+     * @param thePrivilege The Privilege Enum
+     * @param theFont The Preferred Font.
+     */
+    public Profile(String theUsername, String theEmail, Privilege thePrivilege, String theFont) {
+        setUsername(theUsername);
+        setEmail(theEmail);
+        setPrivilege(thePrivilege);
+        setFont(theFont);
     }
 
     /**
@@ -76,6 +95,23 @@ public class Profile {
      */
     public void setEmail(String myEmail) {
         this.myEmail = myEmail;
+    }
+
+    /**
+     * Get the preferred font. (null returns "Dialogue").
+     * @return myFont.
+     */
+    public String getFont() {
+        if (myFont == null) return "Dialogue";
+        return myFont;
+    }
+
+    /**
+     * Set the preferred font.
+     * @param theFont The font to set.
+     */
+    public void setFont(String theFont) {
+        myFont = theFont;
     }
 
     /**
