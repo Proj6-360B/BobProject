@@ -32,6 +32,7 @@ public class CompSettingsFrame extends JFrame implements ActionListener {
         c.add(fontLabel);
 
         JComboBox fontComboBox = new JComboBox<String>(fonts);
+        fontComboBox.setSelectedItem(myProfileManager.getSelectedProfile().getFont()); //TODO It's not showing currently saved.
         fontComboBox.setSize(190, 20);
         fontComboBox.setLocation(130, 50);
         c.add(fontComboBox);
