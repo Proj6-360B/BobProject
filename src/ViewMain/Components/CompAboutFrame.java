@@ -5,9 +5,9 @@ import Profile.ProfileManager;
 import javax.swing.*;
 import java.awt.*;
 
-public class CompAboutFrame extends JFrame {
+public class CompAboutFrame extends JDialog {
     //Size
-    private static final Dimension DIMENSION = new Dimension(350, 200);
+    private static final Dimension DIMENSION = new Dimension(370, 250);
     //Components
     private final JTextArea myAboutText;
     private final ProfileManager myProfileManager;

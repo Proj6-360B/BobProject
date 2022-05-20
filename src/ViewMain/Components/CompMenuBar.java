@@ -41,11 +41,11 @@ public class CompMenuBar extends JMenuBar implements ActionListener {
      */
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == myAboutButton) {
-            JFrame temp = new CompAboutFrame(myProfileManager);
+            //open about window
+             new CompAboutFrame(myProfileManager);
         } else if (e.getSource() == mySettingsButton) {
-            //todo open settings frame
-            JFrame temp2 = new CompSettingsFrame(myProfileManager);
+            //open settings menu
+             new CompSettingsFrame(myProfileManager);
         }
-        //TODO Settings Frame or whatever to export/import settings
     }
 }
