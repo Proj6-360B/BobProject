@@ -1,5 +1,6 @@
 package ViewMain.Components;
 
+import AppData.AppDataIO;
 import Profile.ProfileManager;
 
 import javax.swing.*;
@@ -13,7 +14,7 @@ import java.awt.event.ActionListener;
 public class CompSettingsFrame extends JFrame implements ActionListener {
     private final ProfileManager myProfileManager;
     private final String[] fonts = GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames();
-    private JButton submitButton, cancelButton, defaultButton;
+    private JButton submitButton, cancelButton, defaultButton, exportButton, importButton;
     private JLabel fontLabel, emailLabel;
     JComboBox fontComboBox;
     JTextField emailText;
@@ -63,6 +64,22 @@ public class CompSettingsFrame extends JFrame implements ActionListener {
 
 
         //buttons
+        importButton = new JButton("Import");
+        importButton.setFont(new Font(profileFont, Font.PLAIN, 15));
+        importButton.setSize(100,20);
+        importButton.setLocation(50, 280);
+        importButton.addActionListener(this);
+        c.add(importButton);
+
+        exportButton = new JButton("Export");
+        exportButton.setFont(new Font(profileFont, Font.PLAIN, 15));
+        exportButton.setSize(100,20);
+        exportButton.setLocation(170, 280);
+        exportButton.addActionListener(this);
+        c.add(exportButton);
+
+
+
         submitButton = new JButton("Apply");
         submitButton.setFont(new Font(profileFont, Font.PLAIN, 15));
         submitButton.setSize(100, 20);
@@ -121,6 +138,11 @@ public class CompSettingsFrame extends JFrame implements ActionListener {
             dispose();
         }else if(e.getSource() ==  defaultButton){
             defaultSettings();
+        }else if (e.getSource() == importButton){
+            new AppDataIO().importAllFromZipByFileChooser();
+            //unsure if anything else needs to be done to make it work
+        }else if(e.getSource() == exportButton){
+            new AppDataIO().exportAllToZipByFileChooser();
         }
     }
 }
