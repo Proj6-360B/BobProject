@@ -13,18 +13,14 @@ public class AppDataIO {
      * Path where the appdata folder is stored.
      */
     private static String PATH_APPDATA = "./appdata/";
-    /**
-     * Name of the appdata zip file.
-     */
-    private static String FILENAME_APPDATA = "appdata.zip";
 
     /**
      * Test import and export.
      * @param args
      */
     public static void main(String[] args) {
-        importAllFromZip("./");
-        exportAllToZip("./");
+        importAllFromZip("./appdata.zip");
+        exportAllToZip("./appdata.zip");
     }
 
     /**
@@ -33,7 +29,7 @@ public class AppDataIO {
      */
     public static void exportAllToZip(String theExportPath) {
         try {
-            new ZipFile(theExportPath + FILENAME_APPDATA).addFolder(new File(PATH_APPDATA));
+            new ZipFile(theExportPath).addFolder(new File(PATH_APPDATA));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -45,7 +41,7 @@ public class AppDataIO {
      */
     public static void importAllFromZip(String theZipPath) {
         try {
-            new ZipFile(theZipPath + FILENAME_APPDATA).extractAll("./");
+            new ZipFile(theZipPath).extractAll("./");
         } catch (ZipException e) {
             e.printStackTrace();
         }
