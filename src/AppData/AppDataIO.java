@@ -8,6 +8,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  * Export/Import a zip file this program appdata folder. <br>
+ * Best is construct, then import/export, and let garbage collect. <br>
  * https://github.com/srikanth-lingala/zip4j
  * @author David Huynh
  */
@@ -16,9 +17,18 @@ public class AppDataIO {
      * Path where the appdata folder is stored.
      */
     private static String PATH_APPDATA = "./appdata/";
+    /**
+     * File name to export as.
+     */
     private static String FILENAME_APPDATA = "appdata.zip";
+    /**
+     * File Chooser's starting path.
+     */
     private static String PATH_FILECHOOSER_START = System.getProperty("user.home") + "/Downloads/";
 
+    /**
+     * Call to init, then import/export and let garbage collect.
+     */
     public AppDataIO() {
         //
     }
@@ -107,12 +117,12 @@ public class AppDataIO {
         return true;
     }
 
-    public static void main(String[] args) { //DEBUG
-        var ad = new AppDataIO();
-//        ad.importAllFromZip("./appdata.zip");
-//        ad.exportAllToZip("./appdata.zip");
-        ad.exportAllToZipByFileChooser();
-        ad.importAllFromZipByFileChooser();
-    }
+//    public static void main(String[] args) { //DEBUG
+//        var ad = new AppDataIO();
+////        ad.importAllFromZip("./appdata.zip");
+////        ad.exportAllToZip("./appdata.zip");
+//        ad.exportAllToZipByFileChooser();
+//        ad.importAllFromZipByFileChooser();
+//    }
 }
 
