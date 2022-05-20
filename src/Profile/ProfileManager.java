@@ -19,7 +19,7 @@ import java.util.Scanner;
  * https://mkyong.com/java/json-simple-example-read-and-write-json/
  */
 public class ProfileManager { //TODO Remove repeating code
-    public static String PROFILE_PATH = "./appdata/profiles/profiles.txt";
+    public final static String PROFILE_PATH = "./appdata/profiles/profiles.txt";
     private ArrayList<Profile> myProfiles;
     private Profile mySelectedProfile;
 
