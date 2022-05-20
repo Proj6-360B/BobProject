@@ -66,6 +66,7 @@ public class ProfileManager { //TODO Remove repeating code
             }
         }
         myProfiles.add(new Profile(theUsername, theEmail, thePrivilege));
+        writeProfiles();
     }
 
     public ArrayList<Profile> getProfileList() {
