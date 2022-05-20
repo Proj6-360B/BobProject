@@ -1,2 +1,3 @@
-{"Email":"bobk41@gmail.com","Username":"Bob","Privilege":"ADMIN","Font":"Comic Sans MS"}
+{"Email":"bob@gmail.com","Username":"Bob","Privilege":"ADMIN","Font":"Haettenschweiler"}
 {"Email":"dcruz99@uw.edu","Username":"Damien","Privilege":"NORMAL","Font":"Dialogue"}
+{"Email":"test@gmail.com","Username":"test","Privilege":"ADMIN","Font":"Dialogue"}

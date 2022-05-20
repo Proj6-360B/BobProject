@@ -14,8 +14,9 @@ public class CompSettingsFrame extends JFrame implements ActionListener {
     private final ProfileManager myProfileManager;
     private final String[] fonts = GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames();
     private JButton submitButton, cancelButton, defaultButton;
-    private JLabel fontLabel;
+    private JLabel fontLabel, emailLabel;
     JComboBox fontComboBox;
+    JTextField emailText;
     private Container c;
     String defaultFont = "Arial";
     String profileFont;
@@ -31,7 +32,7 @@ public class CompSettingsFrame extends JFrame implements ActionListener {
         fontLabel = new JLabel("Font");
         fontLabel.setFont(new Font(profileFont, Font.PLAIN, 20));
         fontLabel.setSize(100, 20);
-        fontLabel.setLocation(50, 50);
+        fontLabel.setLocation(35, 50);
         c.add(fontLabel);
 
         fontComboBox = new JComboBox<String>(fonts);
@@ -39,6 +40,19 @@ public class CompSettingsFrame extends JFrame implements ActionListener {
         fontComboBox.setSize(190, 20);
         fontComboBox.setLocation(130, 50);
         c.add(fontComboBox);
+
+
+        emailLabel = new JLabel("Update Email");
+        emailLabel.setFont(new Font(profileFont,Font.PLAIN,20));
+        emailLabel.setSize(140,20);
+        emailLabel.setLocation(35, 100);
+        c.add(emailLabel);
+
+        emailText = new JTextField();
+        emailText.setFont(new Font(profileFont, Font.PLAIN, 15));
+        emailText.setSize(190, 20);
+        emailText.setLocation(150, 100);
+        c.add(emailText);
 
         /*
         ideas
@@ -81,6 +95,9 @@ public class CompSettingsFrame extends JFrame implements ActionListener {
     }
     private void confirmSettings(){
         //saving setting selection to the current profile in profile manager
+        if(!emailText.getText().equals("")){
+            myProfileManager.getSelectedProfile().setEmail(emailText.getText());
+        }
         myProfileManager.getSelectedProfile().setFont(fontComboBox.getSelectedItem().toString());
         myProfileManager.writeProfiles();
         dispose();
