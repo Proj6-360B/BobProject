@@ -1,7 +1,6 @@
 package ViewMain.Components.Tabs;
 
 import ViewMain.Components.NewProject;
-import projectManager.ProjectManager;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;

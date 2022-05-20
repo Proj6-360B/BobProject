@@ -1,4 +1,4 @@
-package projectManager;
+package Project;
 
 public enum Status {
     ACTIVE("ACTIVE"),FUTURE("FUTURE"),COMPLETE("COMPLETE");

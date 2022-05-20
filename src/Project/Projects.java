@@ -1,6 +1,4 @@
-package projectManager;
-
-import Profile.Privilege;
+package Project;
 
 public class Projects {
     private String projectName;

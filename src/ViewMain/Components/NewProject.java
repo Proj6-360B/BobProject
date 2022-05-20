@@ -1,8 +1,8 @@
 package ViewMain.Components;
 
 import ViewMain.Components.Tabs.TabActiveProject;
-import projectManager.ProjectManager;
-import projectManager.Status;
+import Project.ProjectManager;
+import Project.Status;
 
 import javax.swing.*;
 import java.awt.*;

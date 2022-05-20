@@ -44,7 +44,7 @@ public class ProfileManager { //TODO Remove repeating code
                 return temp;
             }
         }
-        throw new IllegalArgumentException("There is no Profile with the name" + theUsername + '.');
+        throw new IllegalArgumentException("There is no Profile with the name " + theUsername + '.');
     }
 
     public void deleteProfileByUsername(String theUsername) {
@@ -96,7 +96,7 @@ public class ProfileManager { //TODO Remove repeating code
                 return;
             }
         }
-        throw new IllegalArgumentException("There is no Profile with the name" + theUsername + '.');
+        throw new IllegalArgumentException("There is no Profile with the name " + theUsername + '.');
     }
 
     public void setSelectedProfile(Profile theProfile) {

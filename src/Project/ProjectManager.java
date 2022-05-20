@@ -1,4 +1,4 @@
-package projectManager;
+package Project;
 
 import Profile.Profile;
 import org.json.simple.JSONObject;
