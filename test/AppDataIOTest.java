@@ -12,7 +12,8 @@ import static org.junit.Assert.*;
 public class AppDataIOTest {
     @Test
     public void versionExportTest_CheckProfiles() throws ZipException, FileNotFoundException {
-        AppDataIO.exportAllToZip("./test/appdata.zip");
+        var ad = new AppDataIO();
+        ad.exportAllToZip("./test/appdata.zip");
         new ZipFile("./test/appdata.zip").extractAll("./test/");
 
         var exScanner = new Scanner(new File("./test/appdata/profiles/profiles.txt"));
@@ -25,14 +26,15 @@ public class AppDataIOTest {
     }
 
     @Test
-    public void versionImportTest_CheckProfiles() {
-        AppDataIO.exportAllToZip("./test/appdata.zip"); //Save current
+    public void versionImportTest_CheckProfiles() throws ZipException {
+        var ad = new AppDataIO();
+        ad.exportAllToZip("./test/appdata.zip"); //Save current
 
         //Check
-        AppDataIO.importAllFromZip("./test/appdataImport.zip");
+        ad.importAllFromZip("./test/appdataImport.zip");
         var pm = new ProfileManager();
         assertEquals("test", pm.getProfileByUsername("test").getUsername());
 
-        AppDataIO.importAllFromZip("./test/appdata.zip"); //Put back current
+        ad.importAllFromZip("./test/appdata.zip"); //Put back current
     }
 }
