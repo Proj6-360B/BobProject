@@ -22,6 +22,7 @@ public class CompAboutFrame extends JFrame {
         //About Text Area
         myAboutText = initializeAboutText();
         myAboutText.setEditable(false);
+        myAboutText.setFont(new Font(myProfileManager.getSelectedProfile().getFont().toString(), Font.PLAIN,15));
         add(myAboutText);
         System.out.println(myAboutText.getFont()); //DEBUG
 
