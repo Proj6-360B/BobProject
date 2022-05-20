@@ -66,6 +66,7 @@ public class ProfileManager { //TODO Remove repeating code
             }
         }
         myProfiles.add(new Profile(theUsername, theEmail, thePrivilege));
+        writeProfiles();
     }
 
     public ArrayList<Profile> getProfileList() {
@@ -114,7 +115,6 @@ public class ProfileManager { //TODO Remove repeating code
         }
         throw new IllegalArgumentException("There is no Profile with the name" + theProfile.getUsername() + '.');
     }
-
 
     ////////////////////
     //    In & Out    //

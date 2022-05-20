@@ -10,7 +10,7 @@ import java.awt.event.*;
  * @author Damien Cruz
  * 5/12/22
  */
-class newLogin
+class NewLogin
         extends JDialog
         implements ActionListener {
 
@@ -42,7 +42,7 @@ class newLogin
      * constructor, to initialize the components with default values.
      * @param thePM
      */
-    public newLogin(ProfileManager thePM)
+    public NewLogin(ProfileManager thePM)
     {
         myProjectManager = thePM;
 
@@ -164,7 +164,6 @@ class newLogin
                 p = Privilege.GUEST;
             }
             myProjectManager.addNewProfile(tname.getText(), emailText.getText(), p);
-            myProjectManager.writeProfiles();
             new ViewLogin(myProjectManager);//reopen login screen
             dispose();
         } else if (e.getSource() == resetButton) {
