@@ -1,3 +1,4 @@
-{"Email":"bob@gmail.com","Username":"Bob","Privilege":"ADMIN","Font":"Lucida Sans"}
-{"Email":"dcruz99@uw.edu","Username":"Damien","Privilege":"NORMAL","Font":"Dialogue"}
-{"Email":"test@gmail.com","Username":"test","Privilege":"ADMIN","Font":"Dialogue"}
+{"password":null,"Email":"bob@gmail.com","Username":"Bob","Privilege":"ADMIN","Font":"Lucida Sans"}
+{"password":null,"Email":"dcruz99@uw.edu","Username":"Damien","Privilege":"NORMAL","Font":"Dialogue"}
+{"password":null,"Email":"test@gmail.com","Username":"test","Privilege":"ADMIN","Font":"Dialogue"}
+{"password":"9f9d51bc70ef21ca5c14f307980a29d8","Email":"dod@gmail.com","Username":"dod","Privilege":"ADMIN","Font":"Dialogue"}

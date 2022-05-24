@@ -21,6 +21,10 @@ public class Profile {
      * The preferred font.
      */
     private String myFont;
+    /**
+     * the encrypted password
+     */
+    private String ePassword;
 
     /**
      * Profile object.
@@ -48,6 +52,24 @@ public class Profile {
         setPrivilege(thePrivilege);
         setFont(theFont);
     }
+    /**
+     * @author Damien Cruz
+     * Profile object.
+     * @param theUsername The Username
+     * @param theEmail The Email Address
+     * @param thePrivilege The Privilege Enum
+     * @param theFont The Preferred Font.
+     * @param ePassword the password that should be encrypted BEFORE being sent to profile
+     */
+    public Profile(String theUsername, String theEmail, Privilege thePrivilege,String theFont, String ePassword) {
+        setUsername(theUsername);
+        setEmail(theEmail);
+        setPrivilege(thePrivilege);
+        setFont(theFont);
+        setePassword(ePassword);
+    }
+
+
 
     /**
      * Gets the username.
@@ -112,6 +134,15 @@ public class Profile {
      */
     public void setFont(String theFont) {
         myFont = theFont;
+    }
+
+
+    public String getePassword() {
+        return ePassword;
+    }
+
+    public void setePassword(String ePassword) {
+        this.ePassword = ePassword;
     }
 
     /**

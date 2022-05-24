@@ -41,6 +41,7 @@ public class ViewLogin extends JDialog implements ActionListener {
         myCreateNewButton = new JButton("Create New");
         myCreateNewButton.addActionListener(this);
         add(myCreateNewButton);
+        //todo #1 add Jpassword field
 
         //Login Button
         myLoginButton = new JButton("Login");
@@ -71,6 +72,7 @@ public class ViewLogin extends JDialog implements ActionListener {
             dispose();
         } else if (e.getSource() == myLoginButton) {
             System.out.println("Login Event"); //DEBUG
+            //todo #2 encrypt String from password field and compare to stored encrypted password
             myProfileManager.setSelectedProfile(((Profile)myProfileComboBox.getSelectedItem()));
             dispose();
         }

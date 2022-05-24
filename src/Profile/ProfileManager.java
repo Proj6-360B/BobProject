@@ -56,7 +56,7 @@ public class ProfileManager { //TODO Remove repeating code
         return mySelectedProfile;
     }
 
-    public void addNewProfile(String theUsername, String theEmail, Privilege thePrivilege) throws IllegalArgumentException {
+    public void addNewProfile(String theUsername, String theEmail, Privilege thePrivilege, String password) throws IllegalArgumentException {
         if (myProfiles != null || myProfiles.size() != 0) {
             Iterator it = myProfiles.iterator();
             while (it.hasNext()) {
@@ -65,7 +65,7 @@ public class ProfileManager { //TODO Remove repeating code
                 }
             }
         }
-        myProfiles.add(new Profile(theUsername, theEmail, thePrivilege));
+        myProfiles.add(new Profile(theUsername, theEmail, thePrivilege, "Dialogue", password));
         writeProfiles();
     }
 
@@ -131,7 +131,8 @@ public class ProfileManager { //TODO Remove repeating code
                         (String)profile.get("Username"),
                         (String)profile.get("Email"),
                         Privilege.valueOf((String)profile.get("Privilege")),
-                        (String)profile.get("Font")
+                        (String)profile.get("Font"),
+                        (String) profile.get("password")
                 ));
             }
             scanner.close();
@@ -151,6 +152,7 @@ public class ProfileManager { //TODO Remove repeating code
                 json.put("Privilege", p.getPrivilege().getPrivilegeInt());
                 json.put("Email", p.getEmail());
                 json.put("Font", p.getFont());
+                json.put("password", p.getePassword());
 
                 System.out.println("\t" + json.toJSONString());
                 fw.write(json.toJSONString() + "\n");

@@ -1,5 +1,6 @@
 package ViewLogin;
 
+import Authintication.Passtech;
 import Profile.Privilege;
 import Profile.ProfileManager;
 
@@ -191,18 +192,26 @@ class NewLogin
             }else{
                 p = Privilege.GUEST;
             }
+            //todo put password related stuff in a method called passwordVerification() that returns void
+            String pass1String = new String(pass1Text.getPassword());
+            String pass2String = new String(pass2Text.getPassword());
+
             if(pass1Text.getPassword().length == 0){
-                //todo please enter a password error
-                //todo write password class
+                //todo please enter a password error message
                 // https://www.javatpoint.com/how-to-encrypt-password-in-java
                 System.out.println("enter a password error");
                 return;
-            } else if(!pass1Text.getPassword().equals(pass2Text.getPassword())){
-                //todo passwords must equal error
+            }
+            else if(!pass1String.equals(pass2String)){
+                //todo passwords must equal error message
+                System.out.println(pass1String + " != " + pass2String);
                 System.out.println("not matching error");
                 return;
             }
-            myProjectManager.addNewProfile(tname.getText(), emailText.getText(), p);
+
+            String passToStore = Passtech.encrypt(pass1String);
+            //the passToStore variable has an encrypted version of the password;
+            myProjectManager.addNewProfile(tname.getText(), emailText.getText(), p, passToStore);
             new ViewLogin(myProjectManager);//reopen login screen
             dispose();
         } else if (e.getSource() == resetButton) {
