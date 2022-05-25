@@ -183,7 +183,6 @@ class NewLogin
     public void actionPerformed(ActionEvent e)
     {
         if (e.getSource() == submitButton) {
-            //todo add inout verification so it wont take empty strings
             Privilege p;
             if(normalButton.isSelected()){
                 p = Privilege.NORMAL;
@@ -192,20 +191,34 @@ class NewLogin
             }else{
                 p = Privilege.GUEST;
             }
-            //todo put password related stuff in a method called passwordVerification() that returns void
+            if(tname.getText().length() == 0){
+                JOptionPane.showMessageDialog(c,
+                        "Please enter your Name",
+                        "Unable To Create New Profile",
+                        JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            if(emailText.getText().length() == 0 || ! emailText.getText().contains("@")){
+                JOptionPane.showMessageDialog(c,
+                        "Please Enter a valid E-Mail Address",
+                        "Unable To Create New Profile",
+                        JOptionPane.WARNING_MESSAGE);
+                return;
+            }
             String pass1String = new String(pass1Text.getPassword());
             String pass2String = new String(pass2Text.getPassword());
-
             if(pass1Text.getPassword().length == 0){
-                //todo please enter a password error message
-                // https://www.javatpoint.com/how-to-encrypt-password-in-java
-                System.out.println("enter a password error");
+                JOptionPane.showMessageDialog(c,
+                        "You Must Enter a Password to create a new profile",
+                        "Unable To Create New Profile",
+                        JOptionPane.WARNING_MESSAGE);
                 return;
             }
             else if(!pass1String.equals(pass2String)){
-                //todo passwords must equal error message
-                System.out.println(pass1String + " != " + pass2String);
-                System.out.println("not matching error");
+                JOptionPane.showMessageDialog(c,
+                        "Passwords Do Not Match",
+                        "Unable To Create New Profile",
+                        JOptionPane.ERROR_MESSAGE);
                 return;
             }
 

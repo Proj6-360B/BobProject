@@ -9,7 +9,7 @@ public class Main {
 
     public static void main(String[] args){
         //Main View
-        ViewMain gui = new ViewMain(myProfileManager); //TODO This still activates when Login is still happening.
+        //ViewMain gui = new ViewMain(myProfileManager); //TODO This still activates when Login is still happening.
 
         //Login
         ViewLogin login = new ViewLogin(myProfileManager);

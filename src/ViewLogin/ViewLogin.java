@@ -1,8 +1,10 @@
 package ViewLogin;
 
+import Authintication.Passtech;
 import Profile.Profile;
 import Profile.ProfileManager;
 import ViewLogin.Components.ProfileComboBox;
+import ViewMain.ViewMain;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,11 +16,13 @@ public class ViewLogin extends JDialog implements ActionListener {
     private ProfileManager myProfileManager;
 
     //Size
-    private static final Dimension DIMENSION = new Dimension(220, 110);
+    private static final Dimension DIMENSION = new Dimension(220, 140);
     //Components
     ProfileComboBox myProfileComboBox;
     JButton myCreateNewButton;
     JButton myLoginButton;
+    JPasswordField passf;
+    private Container c;
 
     //Constructor
     public ViewLogin(ProfileManager theProfileManager) {
@@ -33,20 +37,35 @@ public class ViewLogin extends JDialog implements ActionListener {
     }
 
     private void initializeComponents() {
+        c = getContentPane();
+        c.setLayout(null);
         //ProfileComboBox
+
         myProfileComboBox = new ProfileComboBox(myProfileManager.getProfileList());
-        add(myProfileComboBox);
+        myProfileComboBox.setSize(180,30);
+        System.out.println(myProfileComboBox.getSize().getHeight());
+        myProfileComboBox.setLocation(15,10);
+        c.add(myProfileComboBox);
+
+
+        passf = new JPasswordField();
+        passf.setSize(180,20);
+        passf.setLocation(15,45);
+        c.add(passf);
 
         //Create New Profile Button
         myCreateNewButton = new JButton("Create New");
+        myCreateNewButton.setLocation(15,70);
+        myCreateNewButton.setSize(105,30);
         myCreateNewButton.addActionListener(this);
-        add(myCreateNewButton);
-        //todo #1 add Jpassword field
+        c.add(myCreateNewButton);
 
         //Login Button
         myLoginButton = new JButton("Login");
+        myLoginButton.setLocation(120,70);
+        myLoginButton.setSize(80,30);
         myLoginButton.addActionListener(this);
-        add(myLoginButton);
+        c.add(myLoginButton);
     }
 
     private void initializeFrame() {
@@ -72,9 +91,23 @@ public class ViewLogin extends JDialog implements ActionListener {
             dispose();
         } else if (e.getSource() == myLoginButton) {
             System.out.println("Login Event"); //DEBUG
-            //todo #2 encrypt String from password field and compare to stored encrypted password
-            myProfileManager.setSelectedProfile(((Profile)myProfileComboBox.getSelectedItem()));
-            dispose();
+            String passString = new String(passf.getPassword());
+            Profile selected = (Profile)myProfileComboBox.getSelectedItem();
+            if(Passtech.encrypt(passString).equals(selected.getePassword())) {
+                System.out.println("passwords match");
+                myProfileManager.setSelectedProfile(selected);
+                ViewMain gui = new ViewMain(myProfileManager);
+                dispose();
+            }else{
+                System.out.println("passwords dont match");
+                JOptionPane.showMessageDialog(c,
+                        "Password and Selected Profile Do not match",
+                        "Unable To Login",
+                        JOptionPane.ERROR_MESSAGE);
+                passf.cut();
+
+            }
+
         }
     }
 
