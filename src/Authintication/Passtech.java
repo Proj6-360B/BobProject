@@ -3,6 +3,7 @@ package Authintication;
 import java.security.NoSuchAlgorithmException;
 import java.security.MessageDigest;
 
+//TODO Add credit?
 public class Passtech
 {
     public static String encrypt(String password){

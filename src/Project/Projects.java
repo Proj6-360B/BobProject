@@ -1,7 +1,13 @@
 package Project;
 
+import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.File;
 import java.util.LinkedList;
+
+import static AppData.AppDataIO.FILENAME_APPDATA;
+import static FileChooserHelper.FileChooserHelper.PATH_FILECHOOSER_START;
+import static FileChooserHelper.FileChooserHelper.showErrorMessageInOptionPane;
 
 public class Projects {
     private String projectName;
@@ -58,9 +64,9 @@ public class Projects {
     /**
      * Add File and return reference to this File list.
      * @param theFile File to add.
-     * @return Reference to this File list.
+     * @return Reference to this attachedFile list.
      */
-    public LinkedList<File> addFile(File theFile) {
+    public LinkedList<File> addFile(File theFile) throws IllegalArgumentException {
         if (theFile == null || !theFile.exists()) {
             throw new IllegalArgumentException(theFile + " is not a valid file.");
         }
@@ -69,7 +75,31 @@ public class Projects {
     }
 
     /**
-     * Delete File from this list.
+     * Prompts user, add the File, and return reference to this File list.
+     * @return Reference to this attachedFile list.
+     */
+    public LinkedList<File> addFileByFileChooser() {
+        JFileChooser fc = new JFileChooser(PATH_FILECHOOSER_START);
+        fc.setDialogTitle("Select any file to attach...");
+        fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
+
+        int fcReturn = fc.showOpenDialog(null);
+        while (fcReturn != JFileChooser.APPROVE_OPTION) { //Try again
+            if (fcReturn == JFileChooser.CANCEL_OPTION) return attachedFiles; //Cancels
+            fcReturn = fc.showOpenDialog(null);
+        }
+
+        //After user chose file
+        try {
+            return addFile(fc.getSelectedFile());
+        } catch (Exception e) {
+            showErrorMessageInOptionPane(e.getMessage());
+        }
+        return attachedFiles;
+    }
+
+    /**
+     * Delete File from this attachedFile list.
      * @param theFile File find and delete.
      * @return If delete was successful.
      */

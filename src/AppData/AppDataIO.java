@@ -6,6 +6,9 @@ import net.lingala.zip4j.exception.ZipException;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import static FileChooserHelper.FileChooserHelper.PATH_FILECHOOSER_START;
+import static FileChooserHelper.FileChooserHelper.showErrorMessageInOptionPane;
+
 /**
  * Export/Import a zip file this program appdata folder. <br>
  * Best is construct, then import/export, and let garbage collect. <br>
@@ -21,10 +24,6 @@ public class AppDataIO {
      * File name to export as.
      */
     private static String FILENAME_APPDATA = "appdata.zip";
-    /**
-     * File Chooser's starting path.
-     */
-    private static String PATH_FILECHOOSER_START = System.getProperty("user.home") + "/Downloads/";
 
     /**
      * Call to init, then import/export and let garbage collect.
@@ -79,7 +78,6 @@ public class AppDataIO {
         } catch (Exception e) {
             showErrorMessageInOptionPane(e.getMessage());
         }
-
     }
 
     /**
@@ -102,19 +100,6 @@ public class AppDataIO {
         } catch (Exception e) {
             showErrorMessageInOptionPane(e.getMessage());
         }
-    }
-
-    private void showErrorMessageInOptionPane(String theMessage) {
-        JFrame tempFrame = new JFrame();
-        tempFrame.setVisible(false);
-        if (showErrorMessageInOptionPane(tempFrame, theMessage)) {
-            tempFrame.dispose();
-        }
-    }
-
-    private boolean showErrorMessageInOptionPane(JFrame tempFrame, String theMessage) { //TODO ugly, replace with lambda
-        JOptionPane.showMessageDialog(tempFrame, "Please Retry:\n" + theMessage);
-        return true;
     }
 
 //    public static void main(String[] args) { //DEBUG
