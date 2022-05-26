@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.Scanner;
 
 public class ProjectManager {
@@ -70,6 +71,10 @@ public class ProjectManager {
             }
         }
         myProjects.add(new Projects(theUsername, theEmail, theStatus));
+    }
+
+    public void addNewProject(String theUsername, String theEmail, Status theStatus, LinkedList<File> theAttachedFiles) throws IllegalArgumentException {
+        //TODO
     }
 
     public ArrayList<Projects> getProjectList() {
