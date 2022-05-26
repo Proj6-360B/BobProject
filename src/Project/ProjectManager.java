@@ -101,6 +101,7 @@ public class ProjectManager {
                 json.put("ProjectName", p.getProjectName());
                 json.put("ProjectStatus", p.getProjectStatus());
                 json.put("ProjectType", p.getProjectType());
+                json.put("AttachedFiles", p.getAttachedFiles()); //TODO Test
 
                 System.out.println("\t" + json.toJSONString());
                 fw.write(json.toJSONString() + "\n");
@@ -111,7 +112,6 @@ public class ProjectManager {
             e.printStackTrace();
         }
     }
-
 
     public ArrayList<Projects> readProjects() {
         System.out.println("Reading Projects from " + PROJECT_PATH + ':'); //DEBUG Out
@@ -124,7 +124,8 @@ public class ProjectManager {
                 temp.add(new Projects(
                         (String)projects.get("theProjectName"),
                         (String)projects.get("theProjectType"),
-                        Status.valueOf((String)projects.get("theStatus"))
+                        Status.valueOf((String)projects.get("theStatus")),
+                        (LinkedList<File>)projects.get("AttachedFiles") //TODO Test
                 ));
             }
             scanner.close();
