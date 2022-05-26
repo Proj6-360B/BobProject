@@ -5,7 +5,6 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.File;
 import java.util.LinkedList;
 
-import static AppData.AppDataIO.FILENAME_APPDATA;
 import static FileChooserHelper.FileChooserHelper.PATH_FILECHOOSER_START;
 import static FileChooserHelper.FileChooserHelper.showErrorMessageInOptionPane;
 
