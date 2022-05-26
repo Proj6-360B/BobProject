@@ -12,6 +12,7 @@ public class Projects {
     private String projectName;
     private String projectType;
     private Status projectStatus;
+    private File myWarranty;
     private LinkedList<File> attachedFiles;
 
     public Projects(String theProjectName, String theProjectType, Status theStatus) {
@@ -65,36 +66,27 @@ public class Projects {
      * @param theFile File to add.
      * @return Reference to this attachedFile list.
      */
-    public LinkedList<File> addFile(File theFile) throws IllegalArgumentException {
+    public void addFile(File theFile) throws IllegalArgumentException {
         if (theFile == null || !theFile.exists()) {
             throw new IllegalArgumentException(theFile + " is not a valid file.");
         }
         attachedFiles.add(theFile);
-        return attachedFiles;
     }
 
     /**
      * Prompts user, add the File, and return reference to this File list.
      * @return Reference to this attachedFile list.
      */
-    public LinkedList<File> addFileByFileChooser() {
+    public void addFileByFileChooser() {
         JFileChooser fc = new JFileChooser(PATH_FILECHOOSER_START);
         fc.setDialogTitle("Select any file to attach...");
         fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
 
         int fcReturn = fc.showOpenDialog(null);
         while (fcReturn != JFileChooser.APPROVE_OPTION) { //Try again
-            if (fcReturn == JFileChooser.CANCEL_OPTION) return attachedFiles; //Cancels
+            if (fcReturn == JFileChooser.CANCEL_OPTION) return;
             fcReturn = fc.showOpenDialog(null);
         }
-
-        //After user chose file
-        try {
-            return addFile(fc.getSelectedFile());
-        } catch (Exception e) {
-            showErrorMessageInOptionPane(e.getMessage());
-        }
-        return attachedFiles;
     }
 
     /**

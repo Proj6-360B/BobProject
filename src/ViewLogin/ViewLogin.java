@@ -14,6 +14,8 @@ import java.awt.event.ActionListener;
 public class ViewLogin extends JFrame implements ActionListener {
     //ProfileManager
     private ProfileManager myProfileManager;
+    Toolkit t = Toolkit.getDefaultToolkit();
+
 
     //Size
     private static final Dimension DIMENSION = new Dimension(220, 140);
@@ -37,6 +39,7 @@ public class ViewLogin extends JFrame implements ActionListener {
     }
 
     private void initializeComponents() {
+
         c = getContentPane();
         c.setLayout(null);
         //ProfileComboBox
@@ -51,6 +54,9 @@ public class ViewLogin extends JFrame implements ActionListener {
         passf = new JPasswordField();
         passf.setSize(180,20);
         passf.setLocation(15,45);
+        passf.createToolTip();
+        passf.setToolTipText("Enter Your Password");
+
         c.add(passf);
 
         //Create New Profile Button
@@ -102,7 +108,7 @@ public class ViewLogin extends JFrame implements ActionListener {
                         "Password and Selected Profile Do not match",
                         "Unable To Login",
                         JOptionPane.ERROR_MESSAGE);
-                passf.cut();
+
 
             }
 

@@ -5,9 +5,13 @@ import Project.ProjectManager;
 import Project.Status;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 
 public class NewProject extends TabActiveProject implements ActionListener {
 
@@ -33,11 +37,11 @@ public class NewProject extends TabActiveProject implements ActionListener {
         private JLabel res;
         private JDialog dialog;
         private JTextArea tArea;
+        private JFileChooser fileChooser = new JFileChooser();
 
 
 
         public void addProject() {
-
             dialog = new JDialog();
 
             dialog.setTitle("Create New Project");
@@ -168,7 +172,26 @@ public class NewProject extends TabActiveProject implements ActionListener {
                 dialog.dispose();
             } else if (e.getSource() == resetButton) {
                 //new NewProject(myProjectManager);//reopen login screen
-                dialog.dispose();
+
+                //dialog.dispose();
             }
         }
+   /* public void openFolder(){
+        try {
+
+            FileNameExtensionFilter filter = new FileNameExtensionFilter(
+                    "JPG, GIF or PNG Images", "jpg", "gif", "png");
+
+            fileChooser.setFileFilter(filter);
+            int returnVal = fileChooser.showOpenDialog(c);
+            if(returnVal == JFileChooser.APPROVE_OPTION) {
+                File f = new File((fileChooser.getSelectedFile().getPath()));
+                Desktop.getDesktop().open(f);
+                //todo needs to be connected to button
+                //other than opening a file this code doesnt do anything useful yet
+            }
+        }catch(IOException e) {
+            JOptionPane.showMessageDialog(null, "The Selected file did not contain an image");
+        }
+    }*/
     }
