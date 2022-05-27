@@ -1,4 +1,4 @@
-package ViewMain.Components;
+package ViewMain.Components.Tabs;
 
 import ViewMain.Components.Tabs.TabActiveProject;
 import Project.ProjectManager;
@@ -13,10 +13,13 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 
-public class NewProject extends TabActiveProject implements ActionListener {
+public class NewProject extends JFrame implements ActionListener {
+        private ProjectManager myProjectManager;
 
-
-        private ProjectManager myProjectManager = new ProjectManager();
+        public NewProject(ProjectManager theProjectManager) {
+            myProjectManager = theProjectManager;
+            addProject();
+        }
 
         // Components of the Form
         private final String font = "Arial";
@@ -170,9 +173,7 @@ public class NewProject extends TabActiveProject implements ActionListener {
                 //new NewProject(myProjectManager);//reopen login screen
                 dialog.dispose();
             } else if (e.getSource() == resetButton) {
-                //new NewProject(myProjectManager);//reopen login screen
-
-                //dialog.dispose();
+                dialog.dispose();
             }
         }
    /* public void openFolder(){

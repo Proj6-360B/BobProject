@@ -5,11 +5,11 @@ import ViewMain.ViewMain;
 public class Main {
     //Managers
     private static final ProfileManager myProfileManager = new ProfileManager();
-    //TODO Project Manager (and Project Object/Entries)
+//    private static final ProfileManager myProjectManger = new ProfileManager();
 
     public static void main(String[] args){
         //Main View
-        //ViewMain gui = new ViewMain(myProfileManager); //TODO This still activates when Login is still happening.
+//        ViewMain gui = new ViewMain(myProfileManager); //TODO This still activates when Login is still happening.
 
         //Login
         ViewLogin login = new ViewLogin(myProfileManager);
