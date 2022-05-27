@@ -4,6 +4,7 @@ import Profile.Profile;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
+import javax.sound.sampled.Line;
 import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ import java.util.Scanner;
 
 public class ProjectManager {
     public static String PROJECT_PATH = "./appdata/projects/projects.txt";
-    private ArrayList<Projects> myProjects;
+    private LinkedList<Projects> myProjects;
     private Projects mySelectedProjects;
 
     public ProjectManager() {
@@ -77,7 +78,7 @@ public class ProjectManager {
         //TODO
     }
 
-    public ArrayList<Projects> getProjectList() {
+    public LinkedList<Projects> getProjectList() {
         return myProjects;
     }
 
@@ -113,9 +114,9 @@ public class ProjectManager {
         }
     }
 
-    public ArrayList<Projects> readProjects() {
+    public LinkedList<Projects> readProjects() {
         System.out.println("Reading Projects from " + PROJECT_PATH + ':'); //DEBUG Out
-        ArrayList<Projects> temp = new ArrayList<Projects>();
+        LinkedList<Projects> temp = new LinkedList<Projects>();
         try {
             Scanner scanner = new Scanner(new File(PROJECT_PATH));
             while (scanner.hasNextLine()) {
