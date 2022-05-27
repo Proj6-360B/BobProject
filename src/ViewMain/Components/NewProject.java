@@ -163,10 +163,9 @@ public class NewProject extends TabActiveProject implements ActionListener {
                     s = Status.COMPLETE;
                 }
 
-
                 myProjectManager.addNewProject(tname.getText(), emailText.getText(), s);
                 myProjectManager.writeProjects();
-                addProjectButton(tname.getText());
+//                addProjectButton(tname.getText());
 
                 //new NewProject(myProjectManager);//reopen login screen
                 dialog.dispose();
