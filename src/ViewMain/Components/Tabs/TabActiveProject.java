@@ -33,6 +33,8 @@ public class TabActiveProject extends JPanel implements ActionListener {
             }
         });
 
+        add(new ScrollTableProjects());
+
 
 
 
