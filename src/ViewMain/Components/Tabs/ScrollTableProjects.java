@@ -11,14 +11,14 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 /**
- * https://www.tutorialspoint.com/how-can-we-detect-the-double-click-events-of-a-jtable-row-in-java#:~:text=We%20can%20detect%20the%20double,click%20events%20of%20a%20JTable.
+ * https://www.tutorialspoint.com/how-can-we-detect-the-double-click-events-of-a-jtable-row-in-java#:~:text=We%20can%20detect%20the%20double,click%20events%20of%20a%20JTable. <br>
  * https://github.com/hrehfeld/QuakeInjector
  */
 public class ScrollTableProjects extends JPanel {
     JTable myTable;
     JScrollPane myScrollPane;
     String[] columnNames = {"Status", "Name", "Date", "Reminders"};
-    Object[][] data = {
+    Object[][] data = { //TODO ProjectManger pass its List, and this will parse it to table.
             {Status.ACTIVE, "Garage Lights", "2021/10/11", "-Eat the booty like groceries"},
             {Status.ACTIVE, "Bruh Project", "2021/10/12", "-Eat the booty like groceries"},
             {Status.COMPLETE, "Aids", "2020/10/12", "-Eat the booty like groceries"}
@@ -26,10 +26,10 @@ public class ScrollTableProjects extends JPanel {
 
     public ScrollTableProjects() {
 //        setLayout(new GridBagLayout()); //TODO BoxLayout wont let column width work
-        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 
         myTable = new JTable(data, columnNames) {
-            public boolean editCellAt(int row, int column, java.util.EventObject e) {
+            public boolean editCellAt(int row, int column, java.util.EventObject e) { //TODO column 1 is tied to Name, cant reorder header
                 return false;
             }
         };
@@ -38,7 +38,7 @@ public class ScrollTableProjects extends JPanel {
             public void mouseClicked(MouseEvent me) {
                 if (me.getClickCount() == 2) {     // to detect double click events
                     JTable target = (JTable)me.getSource(); //TODO column 1 is tied to Name, cant reorder header
-                    JOptionPane.showMessageDialog(null, myTable.getValueAt(target.getSelectedRow(), 1)); //TODO Change to display Project. Search via name (because it gives you String)?
+                    JOptionPane.showMessageDialog(null, myTable.getValueAt(target.getSelectedRow(), 1)); //TODO Display Project from this event. Search via name (because it gives you String)?
                 }
             }
         });
