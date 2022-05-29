@@ -12,21 +12,20 @@ public class Projects {
     private String projectName;
     private String projectType;
     private Status projectStatus;
-    private File myWarranty;
+//    private File myWarranty;
+    private Date date;
     private LinkedList<File> attachedFiles;
 
-    public Projects(String theProjectName, String theProjectType, Status theStatus) {
+    public Projects(String theProjectName, String theProjectType, Status theStatus, Date theDate, LinkedList<File> theAttachedFiles) {
         setProjectName(theProjectName);
         setProjectType(theProjectType);
         setProjectStatus(theStatus);
-        setAttachedFiles(new LinkedList<File>());
+        setDate(theDate);
+        setAttachedFiles(theAttachedFiles);
     }
 
-    public Projects(String theProjectName, String theProjectType, Status theStatus, LinkedList<File> theAttachedFiles) {
-        setProjectName(theProjectName);
-        setProjectType(theProjectType);
-        setProjectStatus(theStatus);
-        setAttachedFiles(theAttachedFiles);
+    public Projects(String theProjectName, String theProjectType, Status theStatus, Date theDate) {
+        new Projects(theProjectName, theProjectType, theStatus, theDate, new LinkedList<File>());
     }
 
     public String getProjectName() {
@@ -51,6 +50,14 @@ public class Projects {
 
     public void setProjectStatus(Status projectStatus) {
         this.projectStatus = projectStatus;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public LinkedList<File> getAttachedFiles() {

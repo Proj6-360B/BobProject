@@ -71,7 +71,7 @@ public class ProjectManager {
                 }
             }
         }
-        myProjects.add(new Projects(theUsername, theEmail, theStatus));
+        myProjects.add(new Projects(theUsername, theEmail, theStatus, new Date(2022, 1, 1))); //TODO Let user pick Date
     }
 
     public void addNewProject(String theUsername, String theEmail, Status theStatus, LinkedList<File> theAttachedFiles) throws IllegalArgumentException {
@@ -102,6 +102,7 @@ public class ProjectManager {
                 json.put("ProjectName", p.getProjectName());
                 json.put("ProjectStatus", p.getProjectStatus());
                 json.put("ProjectType", p.getProjectType());
+                //TODO Save Date
                 json.put("AttachedFiles", p.getAttachedFiles()); //TODO Test
 
                 System.out.println("\t" + json.toJSONString());
@@ -126,6 +127,7 @@ public class ProjectManager {
                         (String)projects.get("theProjectName"),
                         (String)projects.get("theProjectType"),
                         Status.valueOf((String)projects.get("theStatus")),
+                        new Date(2022, 1, 1), //TODO Load Date
                         (LinkedList<File>)projects.get("AttachedFiles") //TODO Test
                 ));
             }
