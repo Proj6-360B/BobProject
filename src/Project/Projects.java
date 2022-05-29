@@ -5,7 +5,7 @@ import java.io.File;
 import java.util.LinkedList;
 
 import static FileChooserHelper.FileChooserHelper.PATH_FILECHOOSER_START;
-import static FileChooserHelper.FileChooserHelper.showErrorMessageInOptionPane;
+import static FileChooserHelper.FileChooserHelper.showErrorMessage;
 
 public class Projects {
     private String projectName;

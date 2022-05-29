@@ -1,5 +1,7 @@
 package AppData;
 import java.io.File;
+
+import FileChooserHelper.FileChooserHelper;
 import net.lingala.zip4j.ZipFile;
 import net.lingala.zip4j.exception.ZipException;
 
@@ -7,7 +9,7 @@ import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import static FileChooserHelper.FileChooserHelper.PATH_FILECHOOSER_START;
-import static FileChooserHelper.FileChooserHelper.showErrorMessageInOptionPane;
+import static FileChooserHelper.FileChooserHelper.showErrorMessage;
 
 /**
  * Export/Import a zip file this program appdata folder. <br>
@@ -76,7 +78,7 @@ public class AppDataIO {
         try {
             importAllFromZip(fc.getSelectedFile().getAbsolutePath());
         } catch (Exception e) {
-            showErrorMessageInOptionPane(e.getMessage());
+            FileChooserHelper.showErrorMessage(e.getMessage());
         }
     }
 
@@ -98,7 +100,7 @@ public class AppDataIO {
         try {
             exportAllToZip(fc.getSelectedFile().getAbsolutePath());
         } catch (Exception e) {
-            showErrorMessageInOptionPane(e.getMessage());
+            FileChooserHelper.showErrorMessage(e.getMessage());
         }
     }
 

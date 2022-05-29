@@ -8,15 +8,15 @@ public class FileChooserHelper {
      */
     public static String PATH_FILECHOOSER_START = System.getProperty("user.home") + "/Downloads/";
 
-    public static void showErrorMessageInOptionPane(String theMessage) {
+    public static void showErrorMessage(String theMessage) {
         JFrame tempFrame = new JFrame();
         tempFrame.setVisible(false);
-        if (showErrorMessageInOptionPane(tempFrame, theMessage)) {
+        if (showErrorMessage(tempFrame, theMessage)) {
             tempFrame.dispose();
         }
     }
 
-    public static boolean showErrorMessageInOptionPane(JFrame tempFrame, String theMessage) { //TODO ugly, replace with lambda
+    public static boolean showErrorMessage(JFrame tempFrame, String theMessage) {
         JOptionPane.showMessageDialog(tempFrame, "Please Retry:\n" + theMessage);
         return true;
     }
