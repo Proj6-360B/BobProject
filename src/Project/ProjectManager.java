@@ -4,7 +4,6 @@ import Profile.Profile;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-import javax.sound.sampled.Line;
 import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
@@ -103,7 +102,7 @@ public class ProjectManager {
                 json.put("ProjectStatus", p.getProjectStatus());
                 json.put("ProjectType", p.getProjectType());
                 //TODO Save Date
-                json.put("AttachedFiles", p.getAttachedFiles()); //TODO Test
+                json.put("AttachedFiles", p.getAttachedFilesList()); //TODO Test
 
                 System.out.println("\t" + json.toJSONString());
                 fw.write(json.toJSONString() + "\n");
@@ -128,7 +127,7 @@ public class ProjectManager {
                         (String)projects.get("theProjectType"),
                         Status.valueOf((String)projects.get("theStatus")),
                         new Date(2022, 1, 1), //TODO Load Date
-                        (LinkedList<File>)projects.get("AttachedFiles") //TODO Test
+                        (LinkedList<AttachedFile>)projects.get("AttachedFiles") //TODO Test
                 ));
             }
             scanner.close();

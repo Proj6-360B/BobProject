@@ -1,7 +1,6 @@
 package Project;
 
 import javax.swing.*;
-import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.File;
 import java.util.LinkedList;
 
@@ -14,18 +13,18 @@ public class Projects {
     private Status projectStatus;
 //    private File myWarranty;
     private Date date;
-    private LinkedList<File> attachedFiles;
+    private LinkedList<AttachedFile> attachedFilesList;
 
-    public Projects(String theProjectName, String theProjectType, Status theStatus, Date theDate, LinkedList<File> theAttachedFiles) {
+    public Projects(String theProjectName, String theProjectType, Status theStatus, Date theDate, LinkedList<AttachedFile> theAttachedFiles) {
         setProjectName(theProjectName);
         setProjectType(theProjectType);
         setProjectStatus(theStatus);
         setDate(theDate);
-        setAttachedFiles(theAttachedFiles);
+        setAttachedFilesList(theAttachedFiles);
     }
 
     public Projects(String theProjectName, String theProjectType, Status theStatus, Date theDate) {
-        new Projects(theProjectName, theProjectType, theStatus, theDate, new LinkedList<File>());
+        new Projects(theProjectName, theProjectType, theStatus, theDate, new LinkedList<AttachedFile>());
     }
 
     public String getProjectName() {
@@ -60,12 +59,12 @@ public class Projects {
         this.date = date;
     }
 
-    public LinkedList<File> getAttachedFiles() {
-        return attachedFiles;
+    public LinkedList<AttachedFile> getAttachedFilesList() {
+        return attachedFilesList;
     }
 
-    public void setAttachedFiles(LinkedList<File> attachedFiles) {
-        this.attachedFiles = attachedFiles;
+    public void setAttachedFilesList(LinkedList<AttachedFile> attachedFilesList) {
+        this.attachedFilesList = attachedFilesList;
     }
 
     /**
@@ -73,11 +72,8 @@ public class Projects {
      * @param theFile File to add.
      * @return Reference to this attachedFile list.
      */
-    public void addFile(File theFile) throws IllegalArgumentException {
-        if (theFile == null || !theFile.exists()) {
-            throw new IllegalArgumentException(theFile + " is not a valid file.");
-        }
-        attachedFiles.add(theFile);
+    public void addFile(File theFile, String theString) throws IllegalArgumentException {
+        attachedFilesList.add(new AttachedFile(theFile, theString));
     }
 
     /**
@@ -105,7 +101,7 @@ public class Projects {
         if (theFile == null || !theFile.exists()) {
             throw new IllegalArgumentException(theFile + " is not a valid file.");
         }
-        return attachedFiles.remove(theFile);
+        return attachedFilesList.remove(theFile);
     }
 
     public String toString() {
