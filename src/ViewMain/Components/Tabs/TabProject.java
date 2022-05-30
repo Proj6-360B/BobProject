@@ -8,8 +8,6 @@ import javax.swing.event.DocumentListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
 public class TabProject extends JPanel {
     private ProjectManager myProjectManager;
@@ -21,7 +19,7 @@ public class TabProject extends JPanel {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         //Scroll Pane & Table
-        TableProjectsPanel tableProj = new TableProjectsPanel(myProjectManager);
+        ProjectsTablePanel tableProj = new ProjectsTablePanel(myProjectManager);
 
         //Create New, Separator, Search
         JPanel searchPanel = new JPanel();
@@ -43,12 +41,12 @@ public class TabProject extends JPanel {
         searchText.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
-                ((TableProjectsPanel) tableProj).setNameSearch("(?i)" + searchText.getText());
+                ((ProjectsTablePanel) tableProj).setNameSearch("(?i)" + searchText.getText());
             }
 
             @Override
             public void removeUpdate(DocumentEvent e) {
-                ((TableProjectsPanel) tableProj).setNameSearch("(?i)" + searchText.getText());
+                ((ProjectsTablePanel) tableProj).setNameSearch("(?i)" + searchText.getText());
             }
 
             @Override

@@ -12,11 +12,11 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
 
-public abstract class AbstractTableTab extends JPanel {
+public abstract class AbstractTablePanel extends JPanel {
     private JTable myTable;
     private JScrollPane myScrollPane;
 
-    public AbstractTableTab() {
+    public AbstractTablePanel() {
         //Nothing Call initPanel() right after!
     }
 

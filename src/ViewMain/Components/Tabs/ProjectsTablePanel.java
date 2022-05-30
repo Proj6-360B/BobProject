@@ -11,11 +11,11 @@ import java.util.LinkedList;
  * https://www.tutorialspoint.com/how-can-we-detect-the-double-click-events-of-a-jtable-row-in-java#:~:text=We%20can%20detect%20the%20double,click%20events%20of%20a%20JTable. <br>
  * https://github.com/hrehfeld/QuakeInjector
  */
-public class TableProjectsPanel extends AbstractTableTab {
+public class ProjectsTablePanel extends AbstractTablePanel {
     private ProjectManager myProjectManager;
     private final static String[] columnNames = {"Status", "Type", "Name", "Date", "Description"};
 
-    public TableProjectsPanel(ProjectManager thePM) {
+    public ProjectsTablePanel(ProjectManager thePM) {
         super();
         myProjectManager = thePM;
         initPanel(parseProjectList(myProjectManager.getProjectList()), columnNames);
@@ -89,7 +89,7 @@ public class TableProjectsPanel extends AbstractTableTab {
 
 //    public static void main(String[] args) {
 //        JFrame frame = new JFrame();
-//        frame.add(new TableProjectsPanel(new ProjectManager()));
+//        frame.add(new ProjectsTablePanel(new ProjectManager()));
 //        frame.setVisible(true);
 //    }
 }
