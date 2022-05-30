@@ -31,7 +31,7 @@ public class ProjectManager {
                 return temp;
             }
         }
-        throw new IllegalArgumentException("There is no Project with the name" + theProjectName + '.');
+        throw new IllegalArgumentException("There is no Project with the name " + theProjectName + '.');
     }
 
     public void deleteProject(String theProjectName) {

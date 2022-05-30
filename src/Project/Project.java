@@ -118,7 +118,21 @@ public class Project implements Serializable {
     }
 
     public void renameProject(String theName) throws IOException {
-        //TODO
+        String oldFName = getFormattedName();
+        String newFName = getFormattedName(theName);
+        //Rename Serialize
+        File oldDir = new File(PATH + '/' + oldFName + "/" + oldFName + ".pser");
+        File newDir = new File(PATH + '/' + oldFName + "/" + newFName + ".pser");
+        oldDir.renameTo(newDir);
+
+        //Rename folder
+        oldDir = new File(PATH + '/' + oldFName);
+        newDir = new File(PATH + '/' + newFName);
+        oldDir.renameTo(newDir);
+
+        //Set
+        setProjectName(theName);
+        writeProject();
     }
 
     /**
@@ -210,7 +224,11 @@ public class Project implements Serializable {
      * @return folder & serialized file name of this project.
      */
     private String getFormattedName() {
-        return projectName.trim().replaceAll(" ", "_");
+        return getFormattedName(projectName);
+    }
+
+    public static String getFormattedName(String theName) {
+        return theName.trim().replaceAll(" ", "_");
     }
 
     /**

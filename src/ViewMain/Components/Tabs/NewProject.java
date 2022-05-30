@@ -10,6 +10,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.time.LocalDate;
 
 public class NewProject extends JFrame implements ActionListener {
@@ -158,7 +159,7 @@ public class NewProject extends JFrame implements ActionListener {
         completeButton.setLocation(450, 200);
         c.add(completeButton);
 
-        projectDateLabel = new JLabel("Project Date"); //TODO Date
+        projectDateLabel = new JLabel("Project Date");
         projectDateLabel.setFont(new Font(font, Font.PLAIN, 20));
         projectDateLabel.setSize(200, 20);
         projectDateLabel.setLocation(50, 250);
@@ -198,12 +199,16 @@ public class NewProject extends JFrame implements ActionListener {
         projectDateDayText.setToolTipText("DD");
         c.add(projectDateDayText);
 
-        setToCurrentDate();
-
         statusGroup = new ButtonGroup();
         statusGroup.add(activeButton);
         statusGroup.add(futureButton);
         statusGroup.add(completeButton);
+
+        if (isCreateNew) {
+            setToCurrentDate();
+        } else {
+            setTextFromProject();
+        }
 
         saveButton = new JButton("Save");
         saveButton.setFont(new Font(font, Font.PLAIN, 15));
@@ -244,7 +249,6 @@ public class NewProject extends JFrame implements ActionListener {
         dialog.setVisible(true);
     }
 
-
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == saveButton) {
             if (nameText.getText().isEmpty()) {
@@ -268,12 +272,25 @@ public class NewProject extends JFrame implements ActionListener {
                 selectedStatus = Status.COMPLETE;
             }
 
-            try { //try create. if fail, send them back bruv
-                myProjectManager.addNewProject(nameText.getText(), descTArea.getText(), typeText.getText(), selectedStatus, new Date(projectDateYearText.getText(), projectDateMonthText.getText(), projectDateDayText.getText()));
-                myProjectManager.writeProjects();
-            } catch (Exception e1) {
-                InstaDialogue.showErrorMessage("Something went wrong while saving:\n" + e1.getMessage());
-                return;
+            if (isCreateNew) {
+                try { //try create. if fail, send them back bruv
+                    myProjectManager.addNewProject(nameText.getText(), descTArea.getText(), typeText.getText(), selectedStatus, new Date(projectDateYearText.getText(), projectDateMonthText.getText(), projectDateDayText.getText()));
+                    myProjectManager.writeProjects();
+                } catch (Exception ex) {
+                    InstaDialogue.showErrorMessage("Something went wrong while saving:\n" + ex.getMessage());
+                    return;
+                }
+            } else {
+                selectedProject.setProjectType(typeText.getText());
+                selectedProject.setProjectDate(new Date(projectDateYearText.getText(), projectDateMonthText.getText(), projectDateDayText.getText()));
+                selectedProject.setProjectDescription(descTArea.getText());
+                selectedProject.setProjectStatus(selectedStatus);
+                try {
+                    selectedProject.renameProject(nameText.getText());
+                } catch (IOException ex) {
+                    InstaDialogue.showErrorMessage("Something went wrong while saving:\n" + ex.getMessage());
+                    return;
+                }
             }
             //Success!
             dialog.dispose();
@@ -293,24 +310,21 @@ public class NewProject extends JFrame implements ActionListener {
         projectDateDayText.setText(tempDate.substring(8, 10));
     }
 
-   /* public void openFolder(){
-        try {
-
-            FileNameExtensionFilter filter = new FileNameExtensionFilter(
-                    "JPG, GIF or PNG Images", "jpg", "gif", "png");
-
-            fileChooser.setFileFilter(filter);
-            int returnVal = fileChooser.showOpenDialog(c);
-            if(returnVal == JFileChooser.APPROVE_OPTION) {
-                File f = new File((fileChooser.getSelectedFile().getPath()));
-                Desktop.getDesktop().open(f);
-                //todo needs to be connected to button
-                //other than opening a file this code doesnt do anything useful yet
-            }
-        }catch(IOException e) {
-            JOptionPane.showMessageDialog(null, "The Selected file did not contain an image");
+    private void setTextFromProject() {
+        nameText.setText(selectedProject.getProjectName());
+        typeText.setText(selectedProject.getProjectType());
+        String tempDate = selectedProject.getProjectDate().toString();
+        projectDateYearText.setText(tempDate.substring(0, 4));
+        projectDateMonthText.setText(tempDate.substring(5, 7));
+        projectDateDayText.setText(tempDate.substring(8, 10));
+        descTArea.setText(selectedProject.getProjectDescription());
+        switch (selectedProject.getProjectStatus()) {
+            case ACTIVE -> statusGroup.setSelected(activeButton.getModel(), true);
+            case FUTURE -> statusGroup.setSelected(futureButton.getModel(), true);
+            case COMPLETE -> statusGroup.setSelected(completeButton.getModel(), true);
         }
-    }*/
+    }
+
 
     public static void main(String[] args) {
         ProjectManager pm = new ProjectManager();
