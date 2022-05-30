@@ -15,7 +15,7 @@ public class CompTabbedPane extends JTabbedPane {
         myProjectsTab = new TabProjects(theProjectManager);
         add("Project", myProjectsTab);
         //Documents
-        myDocumentsTab = new DocumentsTablePanel(theProjectManager);
+        myDocumentsTab = new TabDocuments(theProjectManager);
         add("Documents", myDocumentsTab);
 
     }

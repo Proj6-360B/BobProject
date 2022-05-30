@@ -25,18 +25,18 @@ public class TabDocuments extends JPanel {
         searchPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 20)); //Clamp vertical size
         searchPanel.setLayout(new BoxLayout(searchPanel, BoxLayout.LINE_AXIS));
 
-        JLabel searchLabel = new JLabel("      Search: ", SwingConstants.TRAILING);
+        JLabel searchLabel = new JLabel("Search: ", SwingConstants.TRAILING);
 
         JTextField searchText = new JTextField();
         searchText.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
-                ((DocumentsTablePanel) tableProj).search("(?i)" + searchText.getText());
+                tableProj.search("(?i)" + searchText.getText());
             }
 
             @Override
             public void removeUpdate(DocumentEvent e) {
-                ((DocumentsTablePanel) tableProj).search("(?i)" + searchText.getText());
+                tableProj.search("(?i)" + searchText.getText());
             }
 
             @Override

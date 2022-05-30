@@ -37,12 +37,12 @@ public class TabProjects extends JPanel {
         searchText.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
-                ((ProjectsTablePanel) tableProj).search("(?i)" + searchText.getText());
+                tableProj.search("(?i)" + searchText.getText());
             }
 
             @Override
             public void removeUpdate(DocumentEvent e) {
-                ((ProjectsTablePanel) tableProj).search("(?i)" + searchText.getText());
+                tableProj.search("(?i)" + searchText.getText());
             }
 
             @Override
