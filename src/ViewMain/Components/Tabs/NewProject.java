@@ -12,7 +12,7 @@ import java.awt.event.ActionListener;
 import java.time.LocalDate;
 
 public class NewProject extends JFrame implements ActionListener {
-    private JTable myProjectsTab;
+//    private JTable myProjectsTab;
     private ProjectManager myProjectManager;
 
     public NewProject(ProjectManager theProjectManager) {
@@ -95,7 +95,7 @@ public class NewProject extends JFrame implements ActionListener {
 
         projectDescription = new JLabel("Description"); //Description Label
         projectDescription.setFont(new Font(font, Font.PLAIN, 30));
-        projectDescription.setSize(60, 30);
+        projectDescription.setSize(150, 30);
         projectDescription.setLocation(50, 300);
         projectDescription.setToolTipText("Enter a description or reminders for the project.");
         c.add(projectDescription);

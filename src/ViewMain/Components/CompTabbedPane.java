@@ -7,16 +7,14 @@ import javax.swing.*;
 
 public class CompTabbedPane extends JTabbedPane {
     //Tabs
-    private JPanel myActiveProjectsTab;
-    private JPanel myArchivedProjectsTab;
+    private JPanel myProjectsTab;
+    private JPanel myDocumentsTab;
 
     public CompTabbedPane(ProjectManager theProjectManager) {
-        //Active Project Tab
-        myActiveProjectsTab = new TabProject(theProjectManager);
-        add("Active Project", myActiveProjectsTab);
+        //Project Tab
+        myProjectsTab = new TabProject(theProjectManager);
+        add("Active Project", myProjectsTab);
         //Archived Project Tab
-        myArchivedProjectsTab = new TabArchivedProject();
-        add("Archived Project", myArchivedProjectsTab);
 
 
     }
