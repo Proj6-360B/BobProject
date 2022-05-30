@@ -9,11 +9,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class TabProject extends JPanel {
+public class TabProjects extends JPanel {
     private ProjectManager myProjectManager;
-    //TODO components to fields if other classes need to access.
 
-    public TabProject(ProjectManager theProjectManager) {
+    public TabProjects(ProjectManager theProjectManager) {
         myProjectManager = theProjectManager;
 
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -27,12 +26,9 @@ public class TabProject extends JPanel {
         searchPanel.setLayout(new BoxLayout(searchPanel, BoxLayout.LINE_AXIS));
 
         JButton createNew = new JButton("Create New Project");
-        createNew.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new NewProject(myProjectManager);
-                tableProj.updateTable();
-            }
+        createNew.addActionListener(e -> {
+            new NewProject(myProjectManager);
+            tableProj.updateTable();
         });
 
         JLabel searchLabel = new JLabel("      Search: ", SwingConstants.TRAILING);
@@ -41,17 +37,17 @@ public class TabProject extends JPanel {
         searchText.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
-                ((ProjectsTablePanel) tableProj).setNameSearch("(?i)" + searchText.getText());
+                ((ProjectsTablePanel) tableProj).search("(?i)" + searchText.getText());
             }
 
             @Override
             public void removeUpdate(DocumentEvent e) {
-                ((ProjectsTablePanel) tableProj).setNameSearch("(?i)" + searchText.getText());
+                ((ProjectsTablePanel) tableProj).search("(?i)" + searchText.getText());
             }
 
             @Override
             public void changedUpdate(DocumentEvent e) {
-
+                //Nothing
             }
         });
 

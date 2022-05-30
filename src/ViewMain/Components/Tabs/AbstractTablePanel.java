@@ -20,7 +20,7 @@ public abstract class AbstractTablePanel extends JPanel {
         //Nothing Call initPanel() right after!
     }
 
-    public void initPanel(Object[][] theRows, String[] theColumnNames) {
+    public void initPanel(Object[][] theRows, String[] theColumnNames, MouseAdapter theMouseAdapter) {
         setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 
         myTable = new JTable(new DefaultTableModel(theRows, theColumnNames)) {
@@ -29,14 +29,7 @@ public abstract class AbstractTablePanel extends JPanel {
             }
         };
         myTable.getTableHeader().setReorderingAllowed(false); //TODO column 1 is tied to Name, cant reorder header
-        myTable.addMouseListener(new MouseAdapter() {
-            public void mouseClicked(MouseEvent me) {
-                if (me.getClickCount() == 2) {     // to detect double click events
-                    JTable target = (JTable)me.getSource(); //TODO column 1 is tied to Name, cant reorder header
-                    JOptionPane.showMessageDialog(null, myTable.getValueAt(target.getSelectedRow(), 1)); //TODO Display Project from this event.
-                }
-            }
-        });
+        myTable.addMouseListener(theMouseAdapter);
         myTable.setPreferredScrollableViewportSize(new Dimension(500, 500));
         myTable.setColumnSelectionAllowed(false);
         myTable.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);

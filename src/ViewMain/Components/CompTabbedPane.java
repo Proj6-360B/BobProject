@@ -12,10 +12,11 @@ public class CompTabbedPane extends JTabbedPane {
 
     public CompTabbedPane(ProjectManager theProjectManager) {
         //Project Tab
-        myProjectsTab = new TabProject(theProjectManager);
-        add("Active Project", myProjectsTab);
-        //Archived Project Tab
-
+        myProjectsTab = new TabProjects(theProjectManager);
+        add("Project", myProjectsTab);
+        //Documents
+        myDocumentsTab = new DocumentsTablePanel(theProjectManager);
+        add("Documents", myDocumentsTab);
 
     }
 }

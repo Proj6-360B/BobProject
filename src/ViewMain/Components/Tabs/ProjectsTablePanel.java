@@ -3,8 +3,11 @@ package ViewMain.Components.Tabs;
 import Project.ProjectManager;
 import Project.Project;
 
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.LinkedList;
 
 /**
@@ -18,7 +21,18 @@ public class ProjectsTablePanel extends AbstractTablePanel {
     public ProjectsTablePanel(ProjectManager thePM) {
         super();
         myProjectManager = thePM;
-        initPanel(parseProjectList(myProjectManager.getProjectList()), columnNames);
+        initPanel(parseProjectList(myProjectManager.getProjectList()), columnNames, new MouseAdapter() {
+            public void mouseClicked(MouseEvent me) {
+                if (me.getClickCount() == 2) {
+                    try {
+                        JTable target = (JTable)me.getSource(); //TODO column 1 is tied to Name, cant reorder header
+                        JOptionPane.showMessageDialog(null, getMyTable().getValueAt(target.getSelectedRow(), 1)); //TODO Display Project from this event.
+                    } catch (IndexOutOfBoundsException e) {
+                        System.out.println("Double Click Failed. (Probably because it didn't select anything)");
+                    } //other catches for opening Project
+                }
+            }
+        });
     }
 
     private Object[][] parseProjectList(LinkedList<Project> theProjectList) { //"Status", "Type", "Name", "Date", "Description"
@@ -49,6 +63,11 @@ public class ProjectsTablePanel extends AbstractTablePanel {
         return result;
     }
 
+    public void search(String theName) {
+        search(theName, 2); //TODO rn, it searches every column. Limit or advance search?
+    }
+
+    @Override
     public void formatTableColumnsWidth() {
         for (int i = 0; i < columnNames.length; i++) {
             TableColumn column = getMyTable().getColumnModel().getColumn(i);
@@ -72,10 +91,7 @@ public class ProjectsTablePanel extends AbstractTablePanel {
         }
     }
 
-    public void setNameSearch(String theName) {
-        search(theName, 2); //TODO rn, it searches every column. Limit or advance search?
-    }
-
+    @Override
     public void updateTable() { //https://stackoverflow.com/questions/3549206/how-to-add-row-in-jtable
         System.out.println("Updating Table...");
         DefaultTableModel model = (DefaultTableModel) getMyTable().getModel();
