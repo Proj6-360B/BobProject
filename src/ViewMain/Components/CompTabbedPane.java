@@ -12,7 +12,7 @@ public class CompTabbedPane extends JTabbedPane {
 
     public CompTabbedPane(ProjectManager theProjectManager) {
         //Active Project Tab
-        myActiveProjectsTab = new TabActiveProject(theProjectManager);
+        myActiveProjectsTab = new TabProject(theProjectManager);
         add("Active Project", myActiveProjectsTab);
         //Archived Project Tab
         myArchivedProjectsTab = new TabArchivedProject();

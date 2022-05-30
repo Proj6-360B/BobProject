@@ -2,9 +2,10 @@ package ViewMain.Components.Tabs;
 
 import Project.ProjectManager;
 import Project.Project;
-import Project.Status;
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
@@ -12,7 +13,6 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.LinkedList;
-import java.util.Locale;
 
 /**
  * https://www.tutorialspoint.com/how-can-we-detect-the-double-click-events-of-a-jtable-row-in-java#:~:text=We%20can%20detect%20the%20double,click%20events%20of%20a%20JTable. <br>
@@ -125,4 +125,9 @@ public class TableProjectsPanel extends JPanel {
     public void setNameSearch(String theName) {
         ((TableRowSorter) myTable.getRowSorter()).setRowFilter(RowFilter.regexFilter(theName)); //TODO rn, it searches every column. Limit or advance search?
     }
+
+//    @Override
+//    public void stateChanged(ChangeEvent e) {
+//        myProjectManager
+//    }
 }

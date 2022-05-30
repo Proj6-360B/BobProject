@@ -11,11 +11,11 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-public class TabActiveProject extends JPanel {
+public class TabProject extends JPanel {
     private ProjectManager myProjectManager;
     //TODO components to fields if other classes need to access.
 
-    public TabActiveProject(ProjectManager theProjectManager) {
+    public TabProject(ProjectManager theProjectManager) {
         myProjectManager = theProjectManager;
 
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));

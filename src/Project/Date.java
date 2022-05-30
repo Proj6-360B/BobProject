@@ -9,12 +9,18 @@ public class Date implements Serializable  {
     private static final long serialVersionUID = 91021L;
     private int year;
     private int month;
-    private int date;
+    private int day;
+
+    public Date(String year, String month, String date) {
+        this.year = Integer.valueOf(year);
+        this.month = Integer.valueOf(month);
+        this.day = Integer.valueOf(date);
+    }
 
     public Date(int year, int month, int date) {
         this.year = year;
         this.month = month;
-        this.date = date;
+        this.day = date;
     }
 
     public int getYear() {
@@ -34,13 +40,13 @@ public class Date implements Serializable  {
         this.month = month;
     }
 
-    public int getDate() {
-        return date;
+    public int getDay() {
+        return day;
     }
 
-    public void setDate(int date) {
-        if (month < 1 || month > 31) throw new IllegalArgumentException(date + " is out of bounds.");
-        this.date = date;
+    public void setDay(int day) {
+        if (month < 1 || month > 31) throw new IllegalArgumentException(day + " is out of bounds.");
+        this.day = day;
     }
 
     @Override
@@ -50,7 +56,7 @@ public class Date implements Serializable  {
         sb.append('/');
         sb.append(month < 10 ? "0" + month : month);
         sb.append('/');
-        sb.append(date < 10 ? "0" + month : month);
+        sb.append(day < 10 ? "0" + day : day);
         return sb.toString();
     }
 }
