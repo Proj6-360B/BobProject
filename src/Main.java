@@ -25,7 +25,7 @@ public class Main {
 
     private static void initFolderSetup() {
         //appdata
-        File dir[] = {new File("./appdata"), new File("./appdata/profiles"), new File("./appdata/projects")};
+        File dir[] = {new File("./appdata"), new File("./appdata/profiles"), new File("./appdata/projects")}; //TODO Some crap breaks with "./", only use if necessary
         for (File f: dir) {
             if (!f.exists()) {
                 f.mkdir();

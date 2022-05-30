@@ -1,5 +1,6 @@
 package ViewMain.Components.Tabs;
 
+import Project.Project;
 import Project.Status;
 
 import javax.swing.*;
@@ -9,6 +10,7 @@ import javax.swing.table.TableRowSorter;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.LinkedList;
 import java.util.Locale;
 
 /**
@@ -18,11 +20,9 @@ import java.util.Locale;
 public class TableProjectsPanel extends JPanel {
     JTable myTable;
     JScrollPane myScrollPane;
-    String[] columnNames = {"Status", "Name", "Date", "Reminders"};
+    String[] columnNames = {"Status", "Type", "Name", "Date", "Description"};
     Object[][] data = { //TODO ProjectManger pass its List, and this will parse it to table.
-            {Status.ACTIVE, "Garage Lights", "2021/10/11", "-Eat the booty like groceries"},
-            {Status.ACTIVE, "Bruh Project", "2021/10/12", "-Eat the booty like groceries"},
-            {Status.COMPLETE, "Aids", "2020/10/12", "-Eat the booty like groceries"}
+            {Status.ACTIVE, "Repair", "Garage Lights", "2021/10/11", "Eat the booty like groceries"},
     };
 
     public TableProjectsPanel() {
@@ -58,6 +58,32 @@ public class TableProjectsPanel extends JPanel {
         add(myScrollPane);
     }
 
+    public void updateProjectList(Object[][] data) {
+        //TODO
+    }
+
+    private Object[][] parseProjectList(LinkedList<Project> theProjectList) { //"Status", "Type", "Name", "Date", "Description"
+        Object result[][] = new Object[theProjectList.size()][columnNames.length];
+        int i = 0;
+        for (Project p: theProjectList) {
+            for (int j = 0; j < columnNames.length; j++) {
+                switch (j) {
+                    case 0: //Status
+                        result[i][j] = p.getProjectStatus();
+                    case 1: //Type
+                        result[i][j] = p.getProjectType();
+                    case 2: //Name
+                        result[i][j] = p.getProjectName();
+                    case 3: //Date
+                        result[i][j] = p.getProjectDate();
+                    case 4: //Description
+                        result[i][j] = p.getProjectDescription();
+                }
+            }
+        }
+        return result;
+    }
+
     private void formatTableColumnsWidth() {
         for (int i = 0; i < columnNames.length; i++) {
             TableColumn column = myTable.getColumnModel().getColumn(i);
@@ -67,13 +93,16 @@ public class TableProjectsPanel extends JPanel {
                     column.setMaxWidth(70);
                     column.setResizable(false);
                     break;
-//                case 1: //Name
-                case 2: //Date
+                case 1: //Type
+                    column.setMinWidth(50);
+                    column.setMaxWidth(50);
+                    column.setResizable(false);
+                    break;
+                case 3: //Date
                     column.setMinWidth(75);
                     column.setMaxWidth(75);
                     column.setResizable(false);
                     break;
-//                case 3: //Reminders
             }
         }
     }
