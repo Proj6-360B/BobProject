@@ -14,7 +14,7 @@ public class AttachedFile implements Serializable {
      */
     private File file;
     /**
-     * The name of the File on disk.
+     * The name of the File on disk. (includes extension)
      */
     private String name;
     /**
@@ -87,5 +87,10 @@ public class AttachedFile implements Serializable {
         SerializeIO.serializeObjectToHere(this, theProjectFolderPath + '\\' + getName() + ".fser");
         //cloneFileToAppdata
         cloneFileToAppdata(theProjectFolderPath);
+    }
+
+    public void delete(String theProjectFolderPath) throws IOException { //TODO test
+        file.delete(); //delete clone
+        new File(theProjectFolderPath + "/files/" + getName()); //delete serialize
     }
 }

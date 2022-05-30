@@ -20,7 +20,7 @@ public class ProjectManager {
     }
 
 
-    public Project getProjectsByName(String theProjectName) throws IllegalArgumentException {
+    public Project getProject(String theProjectName) throws IllegalArgumentException {
         if (myProjects == null || myProjects.size() == 0) {
             throw new IllegalArgumentException("There are no Project to select from.");
         }
@@ -35,7 +35,7 @@ public class ProjectManager {
     }
 
     public void deleteProjects(String theProjectName) {
-        deleteProjects(getProjectsByName(theProjectName));
+        deleteProjects(getProject(theProjectName));
     }
 
     public void deleteProjects(Project theProject) {

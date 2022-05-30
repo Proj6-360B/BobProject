@@ -5,10 +5,14 @@ import FileChooserHelper.FileChooserHelper;
 
 import javax.swing.*;
 import java.io.*;
+import java.util.Iterator;
 import java.util.LinkedList;
 
 import static FileChooserHelper.FileChooserHelper.PATH_FILECHOOSER_START;
 
+/**
+ * Send this "PATH + '/' + getFormattedName()" to AttachedFile because it doesn't know where it is saved in.
+ */
 public class Project implements Serializable {
     private static String PATH = "appdata/projects";
     private String projectName;
@@ -16,7 +20,7 @@ public class Project implements Serializable {
     private String projectType;
     private Status projectStatus;
 //    private File myWarranty;
-    private Date date;
+    private Date projectDate;
     private LinkedList<AttachedFile> attachedFilesList;
 
     /**
@@ -27,7 +31,7 @@ public class Project implements Serializable {
         setProjectDescription(theProjectDescription);
         setProjectType(theProjectType);
         setProjectStatus(theStatus);
-        setDate(theDate);
+        setProjectDate(theDate);
         setAttachedFilesList(theAttachedFiles);
     }
 
@@ -39,7 +43,7 @@ public class Project implements Serializable {
         setProjectDescription(theProjectDescription);
         setProjectType(theProjectType);
         setProjectStatus(theStatus);
-        setDate(theDate);
+        setProjectDate(theDate);
         setAttachedFilesList(new LinkedList<AttachedFile>());
     }
 
@@ -75,12 +79,12 @@ public class Project implements Serializable {
         this.projectStatus = projectStatus;
     }
 
-    public Date getDate() {
-        return date;
+    public Date getProjectDate() {
+        return projectDate;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setProjectDate(Date projectDate) {
+        this.projectDate = projectDate;
     }
 
     public LinkedList<AttachedFile> getAttachedFilesList() {
@@ -186,8 +190,30 @@ public class Project implements Serializable {
         directoryToBeDeleted.delete();
     }
 
-    public void deleteAttachedFile(AttachedFile theAF) {
-        //TODO
+
+
+    public AttachedFile getAttachedFile(String theName) throws IllegalArgumentException {
+        if (attachedFilesList == null || attachedFilesList.isEmpty()) throw new IllegalArgumentException("There are no Attached Files");
+        Iterator it = attachedFilesList.iterator();
+        while (it.hasNext()) {
+            AttachedFile temp = (AttachedFile) it.next();
+            if (temp.getName().equals(theName)) return temp; //found
+        }
+        throw new IllegalArgumentException("There is no Attached File with the name" + theName + '.');
+    }
+
+    public void deleteAttachedFile(String theName) { //TODO test
+        deleteAttachedFile(getAttachedFile(theName));
+    }
+
+    public void deleteAttachedFile(AttachedFile theAF) { //TODO test
+        try {
+            theAF.delete(PATH + '/' + getFormattedName());
+            attachedFilesList.remove(theAF);
+        } catch (IOException e) {
+            FileChooserHelper.showErrorMessage("Couldn't delete the attached file.\n" + e.getMessage());
+        }
+
     }
 
     public void cleanUpLooseAttachedFiles() {
