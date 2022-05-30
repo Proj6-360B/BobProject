@@ -45,6 +45,12 @@ public class Date implements Serializable  {
 
     @Override
     public String toString() {
-        return year + "/" + month + "/" + date;
+        StringBuffer sb = new StringBuffer();
+        sb.append(year);
+        sb.append('/');
+        sb.append(month < 10 ? "0" + month : month);
+        sb.append('/');
+        sb.append(date < 10 ? "0" + month : month);
+        return sb.toString();
     }
 }
