@@ -25,8 +25,10 @@ public class ProjectsTablePanel extends AbstractTablePanel {
             public void mouseClicked(MouseEvent me) {
                 if (me.getClickCount() == 2) {
                     try {
-                        JTable target = (JTable)me.getSource(); //TODO column 1 is tied to Name, cant reorder header
-                        JOptionPane.showMessageDialog(null, getMyTable().getValueAt(target.getSelectedRow(), 1)); //TODO Display Project from this event.
+                        JTable target = (JTable)me.getSource();
+                        String projectName = (String) getMyTable().getValueAt(target.getSelectedRow(), 2);
+                        new NewProject(myProjectManager, myProjectManager.getProject(projectName));
+                        //TODO update table
                     } catch (IndexOutOfBoundsException e) {
                         System.out.println("Double Click Failed. (Probably because it didn't select anything)");
                     } //other catches for opening Project

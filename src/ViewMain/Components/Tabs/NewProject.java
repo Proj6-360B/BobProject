@@ -61,10 +61,11 @@ public class NewProject extends JFrame implements ActionListener {
     public void addProject() {
         dialog = new JDialog();
 
-        dialog.setTitle("Create New Project");
         if (isCreateNew) {
+            dialog.setTitle("Create New Project");
             dialog.setBounds(300, 90, 700, 650);
         } else {
+            dialog.setTitle("Edit Project");
             dialog.setBounds(300, 90, 1100, 650);
         }
         dialog.setLocationRelativeTo(null);
@@ -75,10 +76,17 @@ public class NewProject extends JFrame implements ActionListener {
         c = dialog.getContentPane();
         c.setLayout(null);
 
-        title = new JLabel("Create New Project");
-        title.setFont(new Font(font, Font.PLAIN, 30));
-        title.setSize(300, 30);
-        title.setLocation(250, 30);
+        if (isCreateNew) {
+            title = new JLabel("Create New Project");
+            title.setFont(new Font(font, Font.PLAIN, 30));
+            title.setSize(300, 30);
+            title.setLocation(250, 30);
+        } else {
+            title = new JLabel(selectedProject.getProjectName());
+            title.setFont(new Font(font, Font.PLAIN, 30));
+            title.setSize(700, 30);
+            title.setLocation(50, 30);
+        }
         c.add(title);
 
         name = new JLabel("Project Name");
