@@ -18,7 +18,7 @@ public class TabProjects extends JPanel {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         //Scroll Pane & Table
-        ProjectsTablePanel tableProj = new ProjectsTablePanel(myProjectManager);
+        ProjectsTablePanel table = new ProjectsTablePanel(myProjectManager);
 
         //Create New, Separator, Search
         JPanel searchPanel = new JPanel();
@@ -28,7 +28,7 @@ public class TabProjects extends JPanel {
         JButton createNew = new JButton("Create New Project");
         createNew.addActionListener(e -> {
             new NewProject(myProjectManager);
-            tableProj.updateTable();
+            table.updateTable();
         });
 
         JLabel searchLabel = new JLabel("      Search: ", SwingConstants.TRAILING);
@@ -37,12 +37,12 @@ public class TabProjects extends JPanel {
         searchText.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
-                tableProj.search("(?i)" + searchText.getText());
+                table.search("(?i)" + searchText.getText());
             }
 
             @Override
             public void removeUpdate(DocumentEvent e) {
-                tableProj.search("(?i)" + searchText.getText());
+                table.search("(?i)" + searchText.getText());
             }
 
             @Override
@@ -57,6 +57,6 @@ public class TabProjects extends JPanel {
 
         //Add
         add(searchPanel);
-        add(tableProj);
+        add(table);
     }
 }

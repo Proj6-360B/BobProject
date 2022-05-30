@@ -1,5 +1,6 @@
 package ViewMain.Components.Tabs;
 
+import InstaDialogue.InstaDialogue;
 import Project.Project;
 import Project.AttachedFile;
 import Project.ProjectManager;
@@ -7,9 +8,11 @@ import Project.ProjectManager;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.LinkedList;
+import java.util.List;
 
 public class DocumentsTablePanel extends AbstractTablePanel {
     private ProjectManager myProjectManager;
@@ -22,11 +25,13 @@ public class DocumentsTablePanel extends AbstractTablePanel {
             public void mouseClicked(MouseEvent me) {
                 if (me.getClickCount() == 2) {
                     try {
-                        JTable target = (JTable)me.getSource(); //TODO column 1 is tied to Name, cant reorder header
-                        JOptionPane.showMessageDialog(null, getMyTable().getValueAt(target.getSelectedRow(), 3)); //TODO Display File from this event.
+                        JTable target = (JTable)me.getSource(); //TODO column is tied, cant reorder header
+                        Desktop.getDesktop().open(myProjectManager.getProject((String) getMyTable().getValueAt(target.getSelectedRow(), 0)).getAttachedFile((String) getMyTable().getValueAt(target.getSelectedRow(), 2)).getFile());
                     } catch (IndexOutOfBoundsException e) {
                         System.out.println("Double Click Failed. (Probably because it didn't select anything)");
-                    } //other catches for opening Project
+                    } catch (Exception e) {
+                        InstaDialogue.showErrorMessage("Something went wrong when opening the file:\n" + e.getMessage());
+                    }
                 }
             }
         });
@@ -63,7 +68,7 @@ public class DocumentsTablePanel extends AbstractTablePanel {
     }
 
     public void search(String theString) {
-        super.search(theString, 2);
+        search(theString, 2);
     }
 
     @Override

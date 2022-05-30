@@ -118,7 +118,7 @@ public class Project implements Serializable {
     }
 
     public void renameProject(String theName) throws IOException {
-
+        //TODO
     }
 
     /**
@@ -139,7 +139,7 @@ public class Project implements Serializable {
      * Prompts user, add the File, and return reference to this File list.
      * @return Reference to this attachedFile list.
      */
-    public void addAttachedFileByFileChooser() {
+    public boolean addAttachedFileByFileChooser() {
         //Get file
         JFileChooser fc = new JFileChooser(PATH_FILECHOOSER_START);
         fc.setDialogTitle("Select any file to attach...");
@@ -147,11 +147,40 @@ public class Project implements Serializable {
 
         int fcReturn = fc.showOpenDialog(null);
         while (fcReturn != JFileChooser.APPROVE_OPTION) { //Try again
-            if (fcReturn == JFileChooser.CANCEL_OPTION) return;
+            if (fcReturn == JFileChooser.CANCEL_OPTION) return true;
             fcReturn = fc.showOpenDialog(null);
         }
 
         addAttachedFile(fc.getSelectedFile(), InstaDialogue.showInputDialog("Enter the File's Type (ie Manual, Receipt, etc.)"));
+        return false;
+    }
+
+    //https://stackoverflow.com/questions/6555040/multiple-input-in-joptionpane-showinputdialog
+    public boolean editAttachedFileByOptionPane(AttachedFile theAF) throws IOException {
+        JPanel panel = new JPanel();
+
+        JTextField nameText = new JTextField();
+        nameText.setText(theAF.getName());
+        nameText.setToolTipText("The File name.");
+        JTextField typeText = new JTextField();
+        typeText.setText(theAF.getType());
+        typeText.setToolTipText("The File type. (ie Manual, Receipt, etc.");
+
+        panel.add(new JLabel("Name:"));
+        panel.add(nameText);
+        panel.add(Box.createHorizontalStrut(20));
+        panel.add(new JLabel("Type:"));
+        panel.add(typeText);
+
+        if (JOptionPane.showConfirmDialog(null, panel, "Edit " + theAF.getName(), JOptionPane.OK_CANCEL_OPTION) == 0) {
+            theAF.setType(typeText.getText());
+            theAF.rename(PATH + '\\' + getFormattedName(), nameText.getText());
+        }
+        return false;
+    }
+
+    public boolean editAttachedFileByOptionPane(String theAF) throws IOException {
+        return editAttachedFileByOptionPane(getAttachedFile(theAF));
     }
 
     public String toString() {

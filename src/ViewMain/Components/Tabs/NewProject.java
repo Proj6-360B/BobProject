@@ -2,6 +2,7 @@ package ViewMain.Components.Tabs;
 
 import InstaDialogue.InstaDialogue;
 import Project.Date;
+import Project.Project;
 import Project.ProjectManager;
 import Project.Status;
 
@@ -12,11 +13,20 @@ import java.awt.event.ActionListener;
 import java.time.LocalDate;
 
 public class NewProject extends JFrame implements ActionListener {
-//    private JTable myProjectsTab;
     private ProjectManager myProjectManager;
+    private Project selectedProject;
+    private boolean isCreateNew;
 
     public NewProject(ProjectManager theProjectManager) {
         myProjectManager = theProjectManager;
+        isCreateNew = true;
+        addProject();
+    }
+
+    public NewProject(ProjectManager theProjectManager, Project theSelectedProject) {
+        myProjectManager = theProjectManager;
+        selectedProject = theSelectedProject;
+        isCreateNew = false;
         addProject();
     }
 
@@ -39,10 +49,12 @@ public class NewProject extends JFrame implements ActionListener {
     private JTextField projectDateDayText;
     private ButtonGroup statusGroup;
     private JButton saveButton;
-    private JButton resetButton;
+    private JButton cancelButton;
+    private JButton deleteButton;
     private JLabel res;
     private JDialog dialog;
     private JTextArea descTArea;
+    private TabDocumentsEditableProjectSpecific filesPanel;
 //    private JFileChooser fileChooser = new JFileChooser();
 
 
@@ -50,11 +62,15 @@ public class NewProject extends JFrame implements ActionListener {
         dialog = new JDialog();
 
         dialog.setTitle("Create New Project");
-        dialog.setBounds(300, 90, 750, 650);
+        if (isCreateNew) {
+            dialog.setBounds(300, 90, 700, 650);
+        } else {
+            dialog.setBounds(300, 90, 1100, 650);
+        }
         dialog.setLocationRelativeTo(null);
 //        dialog.setAlwaysOnTop(true);//so the user cannot bypass login by clicking off of it
         dialog.setResizable(false);//so it doesn't look ugly with a resize
-        dialog.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);//so you can't avoid login
+        dialog.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); //Cancels
 
         c = dialog.getContentPane();
         c.setLayout(null);
@@ -184,17 +200,32 @@ public class NewProject extends JFrame implements ActionListener {
         saveButton = new JButton("Save");
         saveButton.setFont(new Font(font, Font.PLAIN, 15));
         saveButton.setSize(100, 20);
-        saveButton.setLocation(250, 550);
+        saveButton.setLocation(265, 550);
         saveButton.addActionListener(this);
         c.add(saveButton);
 
-        resetButton = new JButton("Cancel");
-        resetButton.setFont(new Font(font, Font.PLAIN, 15));
-        resetButton.setSize(100, 20);
-        resetButton.setLocation(450, 550);
-        resetButton.addActionListener(this);
-        c.add(resetButton);
+        cancelButton = new JButton("Cancel");
+        cancelButton.setFont(new Font(font, Font.PLAIN, 15));
+        cancelButton.setSize(100, 20);
+        cancelButton.setLocation(425, 550);
+        cancelButton.addActionListener(this);
+        c.add(cancelButton);
 
+        if (!isCreateNew) {
+            deleteButton = new JButton("Delete");
+            deleteButton.setFont(new Font(font, Font.PLAIN, 15));
+            deleteButton.setSize(100, 20);
+            deleteButton.setLocation(100, 550);
+            deleteButton.addActionListener(this);
+            c.add(deleteButton);
+        }
+
+        if (!isCreateNew) {
+            filesPanel = new TabDocumentsEditableProjectSpecific(selectedProject);
+            filesPanel.setSize(400, 300);
+            filesPanel.setLocation(0, 20);
+            add(filesPanel);
+        }
 
         res = new JLabel("");
         res.setFont(new Font(font, Font.PLAIN, 20));
@@ -238,16 +269,20 @@ public class NewProject extends JFrame implements ActionListener {
             }
             //Success!
             dialog.dispose();
-        } else if (e.getSource() == resetButton) {
-            dialog.dispose(); //TODO reset I guess?
+        } else if (e.getSource() == cancelButton) {
+            dialog.dispose();
+        } else if (e.getSource() == deleteButton) {
+            if (InstaDialogue.showYesNoConfirmation("This will permanently delete the project!") == 1) return; //cancels
+            myProjectManager.deleteProject(selectedProject);
+            dialog.dispose();
         }
     }
 
     private void setToCurrentDate() {
         String tempDate = LocalDate.now().toString();
-        projectDateYearText.setText(tempDate.substring(0,4));
-        projectDateMonthText.setText(tempDate.substring(5,7));
-        projectDateDayText.setText(tempDate.substring(8,10));
+        projectDateYearText.setText(tempDate.substring(0, 4));
+        projectDateMonthText.setText(tempDate.substring(5, 7));
+        projectDateDayText.setText(tempDate.substring(8, 10));
     }
 
    /* public void openFolder(){
@@ -268,4 +303,9 @@ public class NewProject extends JFrame implements ActionListener {
             JOptionPane.showMessageDialog(null, "The Selected file did not contain an image");
         }
     }*/
+
+    public static void main(String[] args) {
+        ProjectManager pm = new ProjectManager();
+        new NewProject(pm, pm.getProjectList().peek());
+    }
 }

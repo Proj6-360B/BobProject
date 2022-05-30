@@ -36,7 +36,7 @@ public class AttachedFile implements Serializable {
         setFile(theFile);
         setName(file.getName());
         setType(theType);
-        cloneFileToAppdata(theProjectFolderPath);
+        writeFile(theProjectFolderPath);
     }
 
     public File getFile() {
@@ -59,15 +59,26 @@ public class AttachedFile implements Serializable {
     }
 
     public void rename(String theProjectFolderPath, String name) throws IOException {
-        //check if exist & delete old
+        //check if exist & delete old copy
+        String oldName = getName();
         File oldF = new File(theProjectFolderPath + "/files/" + getName());
         File newF = new File(theProjectFolderPath + "/files/" + name);
         if (oldF.exists()) {
-            FileUtils.copyFile(oldF, newF);
-            oldF.delete();
+//            FileUtils.copyFile(oldF, newF);
+//            oldF.delete();
+            oldF.renameTo(newF);
         }
         setFile(newF);
         setName(name);
+
+        //Delete serialized
+        File oldS = new File(theProjectFolderPath + "/" + oldName);
+        if (oldS.exists()) {
+            oldS.delete();
+        }
+
+        //Save new serialized
+        writeFile(theProjectFolderPath);
     }
 
     public String getType() {
@@ -78,23 +89,25 @@ public class AttachedFile implements Serializable {
         this.type = type;
     }
 
-    public void cloneFileToAppdata(String theProjectFolderPath) throws IOException {
+    private void cloneFileToAppdata(String theProjectFolderPath) throws IOException {
         File f = new File(theProjectFolderPath + "/files/" + getName());
         if (file.getAbsolutePath().equals(f.getAbsolutePath())) return; //skip if already there
 
         FileUtils.copyFile(file, f);
+        System.out.println("Writing: " + f.getAbsolutePath());
         file = f;
     }
 
     public void writeFile(String theProjectFolderPath) throws IOException {
         //itself
         SerializeIO.serializeObjectToHere(this, theProjectFolderPath + '\\' + getName() + ".fser");
+        System.out.println("Writing: " + theProjectFolderPath + '\\' + getName() + ".fser");
         //cloneFileToAppdata
         cloneFileToAppdata(theProjectFolderPath);
     }
 
-    public void delete(String theProjectFolderPath) throws IOException { //TODO test
+    public void delete(String theProjectFolderPath) throws IOException {
         file.delete(); //delete clone
-        new File(theProjectFolderPath + "/files/" + getName()); //delete serialize
+        new File(theProjectFolderPath + '/' + getName() + ".fser").delete(); //delete serialize
     }
 }

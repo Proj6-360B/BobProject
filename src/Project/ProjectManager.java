@@ -39,9 +39,10 @@ public class ProjectManager {
     }
 
     public void deleteProject(Project theProject) {
-        System.out.print("Deleting Project: " + theProject);
+        System.out.println("Deleting Project: " + theProject);
+        theProject.delete();
         myProjects.remove(theProject);
-        System.out.println(" Done.");
+        System.out.println(" Successfully deleted.");
     }
 
 //    public Project getSelectedProject() {
