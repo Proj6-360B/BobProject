@@ -1,14 +1,14 @@
 package Project;
 
 import AppData.SerializeIO;
-import FileChooserHelper.FileChooserHelper;
+import InstaDialogue.InstaDialogue;
 
 import javax.swing.*;
 import java.io.*;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-import static FileChooserHelper.FileChooserHelper.PATH_FILECHOOSER_START;
+import static InstaDialogue.InstaDialogue.PATH_FILECHOOSER_START;
 
 /**
  * Send this "PATH + '/' + getFormattedName()" to AttachedFile because it doesn't know where it is saved in.
@@ -109,7 +109,7 @@ public class Project implements Serializable {
         try {
             attachedFilesList.add(new AttachedFile(PATH + '\\' + getFormattedName(), theFile, theName));
         } catch (IOException e) {
-            FileChooserHelper.showErrorMessage("Couldn't save file.\n" + e.getMessage());
+            InstaDialogue.showErrorMessage("Couldn't save file.\n" + e.getMessage());
         }
     }
 
@@ -129,7 +129,7 @@ public class Project implements Serializable {
             fcReturn = fc.showOpenDialog(null);
         }
 
-        addAttachedFile(fc.getSelectedFile(), FileChooserHelper.showInputDialog("Enter the File's Type (ie Manual, Receipt, etc.)"));
+        addAttachedFile(fc.getSelectedFile(), InstaDialogue.showInputDialog("Enter the File's Type (ie Manual, Receipt, etc.)"));
     }
 
     /**
@@ -211,7 +211,7 @@ public class Project implements Serializable {
             theAF.delete(PATH + '/' + getFormattedName());
             attachedFilesList.remove(theAF);
         } catch (IOException e) {
-            FileChooserHelper.showErrorMessage("Couldn't delete the attached file.\n" + e.getMessage());
+            InstaDialogue.showErrorMessage("Couldn't delete the attached file.\n" + e.getMessage());
         }
 
     }

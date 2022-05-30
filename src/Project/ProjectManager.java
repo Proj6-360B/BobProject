@@ -1,7 +1,7 @@
 package Project;
 
 import AppData.SerializeIO;
-import FileChooserHelper.FileChooserHelper;
+import InstaDialogue.InstaDialogue;
 import Profile.Profile;
 
 import java.awt.*;
@@ -152,7 +152,7 @@ public class ProjectManager {
                 try {
                     Desktop.getDesktop().open(af.getFile());
                 } catch (Exception e) {
-                    FileChooserHelper.showErrorMessage("Couldn't open the file.\n" + e.getMessage());
+                    InstaDialogue.showErrorMessage("Couldn't open the file.\n" + e.getMessage());
                 }
             }
         }

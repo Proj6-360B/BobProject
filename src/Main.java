@@ -1,7 +1,6 @@
-import FileChooserHelper.FileChooserHelper;
+import InstaDialogue.InstaDialogue;
 import Profile.ProfileManager;
 import ViewLogin.ViewLogin;
-import ViewMain.ViewMain;
 
 import java.io.File;
 
@@ -14,7 +13,7 @@ public class Main {
         try {
             initFolderSetup();
         } catch (Exception e) {
-            FileChooserHelper.showErrorMessage("Save data folder can't be written/read in " + System.getProperty("java.class.path") + ".");
+            InstaDialogue.showErrorMessage("Save data folder can't be written/read in " + System.getProperty("java.class.path") + ".");
         }
 
         //Login

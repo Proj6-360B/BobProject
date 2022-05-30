@@ -1,8 +1,8 @@
-package FileChooserHelper;
+package InstaDialogue;
 
 import javax.swing.*;
 
-public class FileChooserHelper {
+public class InstaDialogue {
     /**
      * File Chooser's starting path.
      */
