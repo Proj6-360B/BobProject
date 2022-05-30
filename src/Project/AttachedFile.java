@@ -10,6 +10,10 @@ import java.util.Locale;
 
 public class AttachedFile implements Serializable {
     /**
+     * serialVersionUID so it doesnt auto generate and it farts during deserialize.
+     */
+    private static final long serialVersionUID = 91021L;
+    /**
      * Path to file on disk.
      */
     private File file;

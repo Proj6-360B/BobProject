@@ -1,5 +1,6 @@
 package ViewMain.Components.Tabs;
 
+import Project.ProjectManager;
 import Project.Project;
 import Project.Status;
 
@@ -18,18 +19,20 @@ import java.util.Locale;
  * https://github.com/hrehfeld/QuakeInjector
  */
 public class TableProjectsPanel extends JPanel {
-    JTable myTable;
-    JScrollPane myScrollPane;
-    String[] columnNames = {"Status", "Type", "Name", "Date", "Description"};
-    Object[][] data = { //TODO ProjectManger pass its List, and this will parse it to table.
-            {Status.ACTIVE, "Repair", "Garage Lights", "2021/10/11", "Eat the booty like groceries"},
-    };
+    private ProjectManager myProjectManager;
+    private JTable myTable;
+    private JScrollPane myScrollPane;
+    private final String[] columnNames = {"Status", "Type", "Name", "Date", "Description"};
+//    Object[][] data = { //TODO ProjectManger pass its List, and this will parse it to table.
+//            {Status.ACTIVE, "Repair", "Garage Lights", "2021/10/11", "Eat the booty like groceries"},
+//    };
 
-    public TableProjectsPanel() {
+    public TableProjectsPanel(ProjectManager thePM) {
+        myProjectManager = thePM;
 //        setLayout(new GridBagLayout());
         setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 
-        myTable = new JTable(data, columnNames) {
+        myTable = new JTable(parseProjectList(myProjectManager.getProjectList()), columnNames) {
             public boolean editCellAt(int row, int column, java.util.EventObject e) { //TODO column 1 is tied to Name, cant reorder header
                 return false;
             }
@@ -70,16 +73,22 @@ public class TableProjectsPanel extends JPanel {
                 switch (j) {
                     case 0: //Status
                         result[i][j] = p.getProjectStatus();
+                        break;
                     case 1: //Type
                         result[i][j] = p.getProjectType();
+                        break;
                     case 2: //Name
                         result[i][j] = p.getProjectName();
+                        break;
                     case 3: //Date
                         result[i][j] = p.getProjectDate();
+                        break;
                     case 4: //Description
                         result[i][j] = p.getProjectDescription();
+                        break;
                 }
             }
+            i++;
         }
         return result;
     }
@@ -109,7 +118,7 @@ public class TableProjectsPanel extends JPanel {
 
     public static void main(String[] args) {
         JFrame frame = new JFrame();
-        frame.add(new TableProjectsPanel());
+        frame.add(new TableProjectsPanel(new ProjectManager()));
         frame.setVisible(true);
     }
 

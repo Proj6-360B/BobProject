@@ -3,6 +3,10 @@ package Project;
 import java.io.Serializable;
 
 public class Date implements Serializable  {
+    /**
+     * serialVersionUID so it doesnt auto generate and it farts during deserialize.
+     */
+    private static final long serialVersionUID = 91021L;
     private int year;
     private int month;
     private int date;

@@ -14,6 +14,11 @@ import static InstaDialogue.InstaDialogue.PATH_FILECHOOSER_START;
  * Send this "PATH + '/' + getFormattedName()" to AttachedFile because it doesn't know where it is saved in.
  */
 public class Project implements Serializable {
+    /**
+     * serialVersionUID so it doesnt auto generate and it farts during deserialize.
+     */
+    private static final long serialVersionUID = 91021L;
+
     private static String PATH = "appdata/projects";
     /**
      * Name of the project.

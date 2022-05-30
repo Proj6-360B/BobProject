@@ -70,7 +70,7 @@ public class ProjectManager {
             Iterator it = myProjects.iterator();
             while (it.hasNext()) {
                 if (((Project) it.next()).getProjectName().equals(theName)) {
-                    throw new IllegalArgumentException("Project name already exists.");
+                    throw new IllegalArgumentException("Project name already exists."); //TODO avoid by renaming "- Copy" of something
                 }
             }
         }
@@ -135,17 +135,17 @@ public class ProjectManager {
     public static void main(String[] args) {
         ProjectManager myProjectManager = new ProjectManager();
         //New Proj
-//        myProjectManager.addNewProject("Test Proj",
-//                                       "A project entry to test IO wow.",
-//                                       "Repair",
-//                                       Status.ACTIVE,
-//                                       new Date(2022, 1, 1));
+        myProjectManager.addNewProject("Test Proj",
+                                       "A project entry to test IO wow.",
+                                       "Repair",
+                                       Status.ACTIVE,
+                                       new Date(2022, 1, 1));
         //Add files 3
-//        for (Project p: myProjectManager.getProjectList()) {
-//            p.addAttachedFileByFileChooser();
-//            p.addAttachedFileByFileChooser();
-//            p.addAttachedFileByFileChooser();
-//        }
+        for (Project p: myProjectManager.getProjectList()) {
+            p.addAttachedFileByFileChooser();
+            p.addAttachedFileByFileChooser();
+            p.addAttachedFileByFileChooser();
+        }
         //Open each file
         for (Project p: myProjectManager.getProjectList()) {
             for (AttachedFile af: p.getAttachedFilesList()) {
