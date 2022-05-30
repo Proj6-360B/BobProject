@@ -6,6 +6,7 @@ import Project.Project;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
@@ -32,17 +33,17 @@ public class TableProjectsPanel extends JPanel {
 //        setLayout(new GridBagLayout());
         setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 
-        myTable = new JTable(parseProjectList(myProjectManager.getProjectList()), columnNames) {
+        myTable = new JTable(new DefaultTableModel(parseProjectList(myProjectManager.getProjectList()), columnNames)) {
             public boolean editCellAt(int row, int column, java.util.EventObject e) { //TODO column 1 is tied to Name, cant reorder header
                 return false;
             }
         };
-        myTable.getTableHeader().setReorderingAllowed(false);
+        myTable.getTableHeader().setReorderingAllowed(false); //TODO column 1 is tied to Name, cant reorder header
         myTable.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent me) {
                 if (me.getClickCount() == 2) {     // to detect double click events
                     JTable target = (JTable)me.getSource(); //TODO column 1 is tied to Name, cant reorder header
-                    JOptionPane.showMessageDialog(null, myTable.getValueAt(target.getSelectedRow(), 1)); //TODO Display Project from this event. Search via name (because it gives you String)?
+                    JOptionPane.showMessageDialog(null, myTable.getValueAt(target.getSelectedRow(), 1)); //TODO Display Project from this event.
                 }
             }
         });
@@ -126,8 +127,15 @@ public class TableProjectsPanel extends JPanel {
         ((TableRowSorter) myTable.getRowSorter()).setRowFilter(RowFilter.regexFilter(theName)); //TODO rn, it searches every column. Limit or advance search?
     }
 
-//    @Override
-//    public void stateChanged(ChangeEvent e) {
-//        myProjectManager
-//    }
+    public void updateTable() { //https://stackoverflow.com/questions/3549206/how-to-add-row-in-jtable
+        System.out.println("Updating Table...");
+        DefaultTableModel model = (DefaultTableModel) myTable.getModel();
+        for (int i = 0; i < myTable.getRowCount();) {
+            model.removeRow(i);
+        }
+        for (Project p: myProjectManager.getProjectList()) {
+            model.addRow(new Object[]{p.getProjectStatus(), p.getProjectType(), p.getProjectName(), p.getProjectDate(), p.getProjectDescription()});
+        }
+
+    }
 }

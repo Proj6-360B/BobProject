@@ -135,11 +135,11 @@ public class ProjectManager {
     public static void main(String[] args) {
         ProjectManager myProjectManager = new ProjectManager();
         //New Proj
-        myProjectManager.addNewProject("Test Proj",
-                                       "A project entry to test IO wow.",
-                                       "Repair",
-                                       Status.ACTIVE,
-                                       new Date(2022, 1, 1));
+//        myProjectManager.addNewProject("Test Proj",
+//                                       "A project entry to test IO wow.",
+//                                       "Repair",
+//                                       Status.ACTIVE,
+//                                       new Date(2022, 1, 1));
         //Add files 3
         for (Project p: myProjectManager.getProjectList()) {
             p.addAttachedFileByFileChooser();
