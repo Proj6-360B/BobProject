@@ -34,12 +34,12 @@ public class ProjectManager {
         throw new IllegalArgumentException("There is no Project with the name" + theProjectName + '.');
     }
 
-    public void deleteProjects(String theProjectName) {
-        deleteProjects(getProject(theProjectName));
+    public void deleteProject(String theProjectName) {
+        deleteProject(getProject(theProjectName));
     }
 
-    public void deleteProjects(Project theProject) {
-        System.out.print("Deleting Profile: " + theProject);
+    public void deleteProject(Project theProject) {
+        System.out.print("Deleting Project: " + theProject);
         myProjects.remove(theProject);
         System.out.println(" Done.");
     }

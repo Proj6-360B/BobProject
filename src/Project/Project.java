@@ -15,12 +15,29 @@ import static InstaDialogue.InstaDialogue.PATH_FILECHOOSER_START;
  */
 public class Project implements Serializable {
     private static String PATH = "appdata/projects";
+    /**
+     * Name of the project.
+     */
     private String projectName;
+    /**
+     * Long description text for project, like a notepad.
+     */
     private String projectDescription;
+    /**
+     * ie Repair, Installation,
+     */
     private String projectType;
+    /**
+     * Enum of Status.
+     */
     private Status projectStatus;
-//    private File myWarranty;
+    /**
+     * Project's Date
+     */
     private Date projectDate;
+    /**
+     * List of Attached Files.
+     */
     private LinkedList<AttachedFile> attachedFilesList;
 
     /**
@@ -132,18 +149,6 @@ public class Project implements Serializable {
         addAttachedFile(fc.getSelectedFile(), InstaDialogue.showInputDialog("Enter the File's Type (ie Manual, Receipt, etc.)"));
     }
 
-    /**
-     * Delete File from this attachedFile list.
-     * @param theFile File find and delete.
-     * @return If delete was successful.
-     */
-    public boolean deleteFile(File theFile) {
-        if (theFile == null || !theFile.exists()) {
-            throw new IllegalArgumentException(theFile + " is not a valid file.");
-        }
-        return attachedFilesList.remove(theFile);
-    }
-
     public String toString() {
         StringBuffer sb = new StringBuffer();
         sb.append(projectName);
@@ -190,8 +195,6 @@ public class Project implements Serializable {
         directoryToBeDeleted.delete();
     }
 
-
-
     public AttachedFile getAttachedFile(String theName) throws IllegalArgumentException {
         if (attachedFilesList == null || attachedFilesList.isEmpty()) throw new IllegalArgumentException("There are no Attached Files");
         Iterator it = attachedFilesList.iterator();
@@ -213,7 +216,6 @@ public class Project implements Serializable {
         } catch (IOException e) {
             InstaDialogue.showErrorMessage("Couldn't delete the attached file.\n" + e.getMessage());
         }
-
     }
 
     public void cleanUpLooseAttachedFiles() {
