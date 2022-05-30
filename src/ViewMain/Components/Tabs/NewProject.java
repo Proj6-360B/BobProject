@@ -166,7 +166,7 @@ public class NewProject extends JFrame implements ActionListener {
                     s = Status.COMPLETE;
                 }
 
-                myProjectManager.addNewProject(tname.getText(), "TODO", emailText.getText(), s); //TODO description
+//                myProjectManager.addNewProject(tname.getText(), "TODO", emailText.getText(), s); //TODO description and wth is email?
                 myProjectManager.writeProjects();
 //                addProjectButton(tname.getText());
 

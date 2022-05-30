@@ -8,10 +8,9 @@ import java.io.*;
 import java.util.LinkedList;
 
 import static FileChooserHelper.FileChooserHelper.PATH_FILECHOOSER_START;
-import static FileChooserHelper.FileChooserHelper.showErrorMessage;
 
 public class Project implements Serializable {
-    private static String PATH = "./appdata/projects";
+    private static String PATH = "appdata/projects";
     private String projectName;
     private String projectDescription;
     private String projectType;
@@ -36,7 +35,12 @@ public class Project implements Serializable {
      * Constructor for Project without files. //TODO @params
      */
     public Project(String theProjectName, String theProjectDescription, String theProjectType, Status theStatus, Date theDate) {
-        new Project(theProjectName, theProjectDescription, theProjectType, theStatus, theDate, new LinkedList<AttachedFile>());
+        setProjectName(theProjectName);
+        setProjectDescription(theProjectDescription);
+        setProjectType(theProjectType);
+        setProjectStatus(theStatus);
+        setDate(theDate);
+        setAttachedFilesList(new LinkedList<AttachedFile>());
     }
 
     public String getProjectName() {
@@ -94,11 +98,12 @@ public class Project implements Serializable {
     /**
      * Add File and return reference to this File list.
      * @param theFile File to add.
+     * @param theName The name of the file attached to be displayed.
      * @return Reference to this attachedFile list.
      */
-    public void addFile(File theFile, String theString) throws IllegalArgumentException {
+    private void addAttachedFile(File theFile, String theName) throws IllegalArgumentException {
         try {
-            attachedFilesList.add(new AttachedFile(PATH + '/' + getFormattedName(), theFile, theString));
+            attachedFilesList.add(new AttachedFile(PATH + '\\' + getFormattedName(), theFile, theName));
         } catch (IOException e) {
             FileChooserHelper.showErrorMessage("Couldn't save file.\n" + e.getMessage());
         }
@@ -108,7 +113,8 @@ public class Project implements Serializable {
      * Prompts user, add the File, and return reference to this File list.
      * @return Reference to this attachedFile list.
      */
-    public void addFileByFileChooser() {
+    public void addAttachedFileByFileChooser() {
+        //Get file
         JFileChooser fc = new JFileChooser(PATH_FILECHOOSER_START);
         fc.setDialogTitle("Select any file to attach...");
         fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
@@ -118,6 +124,8 @@ public class Project implements Serializable {
             if (fcReturn == JFileChooser.CANCEL_OPTION) return;
             fcReturn = fc.showOpenDialog(null);
         }
+
+        addAttachedFile(fc.getSelectedFile(), FileChooserHelper.showInputDialog("Enter the File's Type (ie Manual, Receipt, etc.)"));
     }
 
     /**
@@ -143,10 +151,11 @@ public class Project implements Serializable {
 
     public void writeProject() throws IOException {
         //mkdir
-        File projectDir = new File(PATH + '/' + getFormattedName());
+        File projectDir = new File(PATH + '\\' + getFormattedName());
+        System.out.println(projectDir.getAbsolutePath()); //DEBUG out
         if (!projectDir.exists()) projectDir.mkdir();
         //itself serialized
-        SerializeIO.serializeObjectToHere(this, projectDir.getAbsolutePath() + '/' + getFormattedName() + ".pser");
+        SerializeIO.serializeObjectToHere(this, projectDir.getAbsolutePath() + '\\' + getFormattedName() + ".pser");
         //attachedFiles
         for (AttachedFile af: attachedFilesList) {
             af.writeFile(projectDir.getAbsolutePath());
@@ -158,7 +167,7 @@ public class Project implements Serializable {
      * @return folder & serialized file name of this project.
      */
     private String getFormattedName() {
-        return projectName.trim().replaceAll(" ", "_").replaceAll(".", "");
+        return projectName.trim().replaceAll(" ", "_");
     }
 
     /**
@@ -166,7 +175,7 @@ public class Project implements Serializable {
      * https://www.baeldung.com/java-delete-directory
      */
     public void delete() {
-        File directoryToBeDeleted = new File(PATH + '/' + getFormattedName());
+        File directoryToBeDeleted = new File(PATH + '\\' + getFormattedName());
         if (!directoryToBeDeleted.exists()) return; //not exist already
         File[] allContents = directoryToBeDeleted.listFiles();
         if (allContents != null) {
@@ -175,5 +184,13 @@ public class Project implements Serializable {
             }
         }
         directoryToBeDeleted.delete();
+    }
+
+    public void deleteAttachedFile(AttachedFile theAF) {
+        //TODO
+    }
+
+    public void cleanUpLooseAttachedFiles() {
+        //TODO
     }
 }

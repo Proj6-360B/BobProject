@@ -16,8 +16,6 @@ public class Main {
         } catch (Exception e) {
             FileChooserHelper.showErrorMessage("Save data folder can't be written/read in " + System.getProperty("java.class.path") + ".");
         }
-        //Main View
-//        ViewMain gui = new ViewMain(myProfileManager); //TODO This still activates when Login is still happening.
 
         //Login
         ViewLogin login = new ViewLogin(myProfileManager);

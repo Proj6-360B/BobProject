@@ -1,7 +1,7 @@
 package Project;
 
 import AppData.SerializeIO;
-import com.google.common.io.Files;
+import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -9,17 +9,29 @@ import java.io.Serializable;
 import java.util.Locale;
 
 public class AttachedFile implements Serializable {
+    /**
+     * Path to file on disk.
+     */
     private File file;
+    /**
+     * The name of the File on disk.
+     */
     private String name;
+    /**
+     * The type (ie Manual, Receipt, etc.)
+     */
+    private String type;
 
     /**
-     *
+     * Create new attached file (Name will be theFile's name).
      * @param theProjectFolderPath pass in "PATH + '/' + getFormattedName()"
-     * @param file The Attached File original's place.
-     * @param name The name/description of the file.
+     * @param theFile The Attached File original's place.
+     * @param theType The type (ie Manual, Receipt, etc.)
      */
-    public AttachedFile(String theProjectFolderPath, File file, String name) throws IOException {
-        setFile(file);
+    public AttachedFile(String theProjectFolderPath, File theFile, String theType) throws IOException {
+        setFile(theFile);
+        setName(file.getName());
+        setType(theType);
         cloneFileToAppdata(theProjectFolderPath);
     }
 
@@ -47,29 +59,32 @@ public class AttachedFile implements Serializable {
         File oldF = new File(theProjectFolderPath + "/files/" + getName());
         File newF = new File(theProjectFolderPath + "/files/" + name);
         if (oldF.exists()) {
-            Files.copy(oldF, newF);
+            FileUtils.copyFile(oldF, newF);
             oldF.delete();
         }
         setFile(newF);
         setName(name);
     }
 
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
     public void cloneFileToAppdata(String theProjectFolderPath) throws IOException {
-        if (file.getPath().toLowerCase(Locale.ROOT).contains(theProjectFolderPath)) {
-            System.out.println(file.getPath() + " does not need to be cloned.");
-            return;
-        }
-
         File f = new File(theProjectFolderPath + "/files/" + getName());
-        if (f.exists()) f.delete();
+        if (file.getAbsolutePath().equals(f.getAbsolutePath())) return; //skip if already there
 
-        Files.copy(file, f);
+        FileUtils.copyFile(file, f);
         file = f;
     }
 
     public void writeFile(String theProjectFolderPath) throws IOException {
         //itself
-        SerializeIO.serializeObjectToHere(this, theProjectFolderPath + '/' + getName() + ".fser");
+        SerializeIO.serializeObjectToHere(this, theProjectFolderPath + '\\' + getName() + ".fser");
         //cloneFileToAppdata
         cloneFileToAppdata(theProjectFolderPath);
     }

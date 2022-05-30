@@ -21,7 +21,7 @@ public class AppDataIO {
     /**
      * Path where the appdata folder is stored.
      */
-    private static String PATH_APPDATA = "./appdata/";
+    private static String PATH_APPDATA = "appdata";
     /**
      * File name to export as.
      */
@@ -106,8 +106,8 @@ public class AppDataIO {
 
 //    public static void main(String[] args) { //DEBUG
 //        var ad = new AppDataIO();
-////        ad.importAllFromZip("./appdata.zip");
-////        ad.exportAllToZip("./appdata.zip");
+////        ad.importAllFromZip("appdata.zip");
+////        ad.exportAllToZip("appdata.zip");
 //        ad.exportAllToZipByFileChooser();
 //        ad.importAllFromZipByFileChooser();
 //    }

@@ -16,8 +16,22 @@ public class FileChooserHelper {
         }
     }
 
-    public static boolean showErrorMessage(JFrame tempFrame, String theMessage) {
+    private static boolean showErrorMessage(JFrame tempFrame, String theMessage) {
         JOptionPane.showMessageDialog(tempFrame, "Please Retry:\n" + theMessage);
         return true;
+    }
+
+    public static String showInputDialog(String theMessage) {
+        JFrame tempFrame = new JFrame();
+        tempFrame.setVisible(false);
+        String temp = showInputDialog(tempFrame, theMessage);
+        if (temp == null || temp != null) {
+            tempFrame.dispose();
+        }
+        return temp;
+    }
+
+    private static String showInputDialog(JFrame tempFrame, String theMessage) {
+        return JOptionPane.showInputDialog(tempFrame, theMessage);
     }
 }
