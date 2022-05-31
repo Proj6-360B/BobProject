@@ -11,6 +11,7 @@ public class Main {
     private static final ProfileManager myProjectManger = new ProfileManager();
 
     public static void main(String[] args){
+        //Folder Creation //TODO move this to different class?
         try {
             initFolderSetup();
         } catch (Exception e) {
@@ -21,6 +22,7 @@ public class Main {
         ViewLogin login = new ViewLogin(myProfileManager);
         login.setVisible(true);
 
+        //View
         ViewMain viewMain = new ViewMain(myProfileManager);
         viewMain.setVisible(true);
 
