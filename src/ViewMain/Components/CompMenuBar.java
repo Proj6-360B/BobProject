@@ -56,7 +56,7 @@ public class CompMenuBar extends JMenuBar implements ActionListener {
             //open settings menu
              new CompSettingsFrame(myProfileManager);
         } else if (e.getSource() == myLogoutButton) {
-            System.exit(0);
+            System.exit(0); // will try to make it redirect instead
         }
 
     }
