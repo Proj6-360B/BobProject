@@ -47,7 +47,11 @@ public abstract class AbstractTablePanel extends JPanel {
     }
 
     public void search(String theString, int theRowToFilter) {
-        ((TableRowSorter) myTable.getRowSorter()).setRowFilter(RowFilter.regexFilter(theString, theRowToFilter));
+        if (theRowToFilter < 0) {
+            ((TableRowSorter) myTable.getRowSorter()).setRowFilter(RowFilter.regexFilter(theString));
+        } else {
+            ((TableRowSorter) myTable.getRowSorter()).setRowFilter(RowFilter.regexFilter(theString, theRowToFilter));
+        }
     }
 
     public abstract void formatTableColumnsWidth();

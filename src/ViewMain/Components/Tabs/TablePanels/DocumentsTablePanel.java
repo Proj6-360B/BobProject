@@ -4,7 +4,6 @@ import InstaDialogue.InstaDialogue;
 import Project.Project;
 import Project.AttachedFile;
 import Project.ProjectManager;
-import ViewMain.Components.Tabs.TablePanels.AbstractTablePanel;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -16,12 +15,12 @@ import java.util.LinkedList;
 
 public class DocumentsTablePanel extends AbstractTablePanel {
     private ProjectManager myProjectManager;
-    private final static String[] columnNames = {"Project", "Type", "Name"};
+    public final static String[] COLUMN_NAMES = {"Project", "Type", "Name"};
 
     public DocumentsTablePanel(ProjectManager thePM) {
         super();
         myProjectManager = thePM;
-        initPanel(parseProjectList(myProjectManager.getProjectList()), columnNames, new MouseAdapter() {
+        initPanel(parseProjectList(myProjectManager.getProjectList()), COLUMN_NAMES, new MouseAdapter() {
             public void mouseClicked(MouseEvent me) {
                 if (me.getClickCount() == 2) {
                     try {
@@ -44,11 +43,11 @@ public class DocumentsTablePanel extends AbstractTablePanel {
             count += p.getAttachedFilesList().size();
         }
         //parse
-        Object result[][] = new Object[count][columnNames.length];
+        Object result[][] = new Object[count][COLUMN_NAMES.length];
         int i = 0;
         for (Project p: theProjectList) {
             for (AttachedFile af: p.getAttachedFilesList()) {
-                for (int j = 0; j < columnNames.length; j++) {
+                for (int j = 0; j < COLUMN_NAMES.length; j++) {
                     switch (j) {
                         case 0: //Project
                             result[i][j] = p.getProjectName();
@@ -73,7 +72,7 @@ public class DocumentsTablePanel extends AbstractTablePanel {
 
     @Override
     public void formatTableColumnsWidth() {
-        for (int i = 0; i < columnNames.length; i++) {
+        for (int i = 0; i < COLUMN_NAMES.length; i++) {
             TableColumn column = getMyTable().getColumnModel().getColumn(i);
             switch (i) {
                 case 1: //Type

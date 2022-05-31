@@ -3,7 +3,6 @@ package ViewMain.Components.Tabs.TablePanels;
 import Project.ProjectManager;
 import Project.Project;
 import ViewMain.Components.Tabs.ProjectCreateEditDialogue;
-import ViewMain.Components.Tabs.TablePanels.AbstractTablePanel;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -18,12 +17,12 @@ import java.util.LinkedList;
  */
 public class ProjectsTablePanel extends AbstractTablePanel {
     private ProjectManager myProjectManager;
-    private final static String[] columnNames = {"Status", "Type", "Name", "Date", "Description"};
+    public final static String[] COLUMN_NAMES = {"Status", "Type", "Name", "Date", "Description"};
 
     public ProjectsTablePanel(ProjectManager thePM) {
         super();
         myProjectManager = thePM;
-        initPanel(parseProjectList(myProjectManager.getProjectList()), columnNames, new MouseAdapter() {
+        initPanel(parseProjectList(myProjectManager.getProjectList()), COLUMN_NAMES, new MouseAdapter() {
             public void mouseClicked(MouseEvent me) {
                 if (me.getClickCount() == 2) {
                     try {
@@ -41,10 +40,10 @@ public class ProjectsTablePanel extends AbstractTablePanel {
     }
 
     private Object[][] parseProjectList(LinkedList<Project> theProjectList) { //"Status", "Type", "Name", "Date", "Description"
-        Object result[][] = new Object[theProjectList.size()][columnNames.length];
+        Object result[][] = new Object[theProjectList.size()][COLUMN_NAMES.length];
         int i = 0;
         for (Project p: theProjectList) {
-            for (int j = 0; j < columnNames.length; j++) {
+            for (int j = 0; j < COLUMN_NAMES.length; j++) {
                 switch (j) {
                     case 0: //Status
                         result[i][j] = p.getProjectStatus();
@@ -74,7 +73,7 @@ public class ProjectsTablePanel extends AbstractTablePanel {
 
     @Override
     public void formatTableColumnsWidth() {
-        for (int i = 0; i < columnNames.length; i++) {
+        for (int i = 0; i < COLUMN_NAMES.length; i++) {
             TableColumn column = getMyTable().getColumnModel().getColumn(i);
             switch (i) {
                 case 0: //Status

@@ -24,18 +24,30 @@ public class TabDocuments extends JPanel {
         searchPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 20)); //Clamp vertical size
         searchPanel.setLayout(new BoxLayout(searchPanel, BoxLayout.LINE_AXIS));
 
-        JLabel searchLabel = new JLabel("Search: ", SwingConstants.TRAILING);
+        JComboBox searchFilterComboBox = new JComboBox();
+        searchFilterComboBox.addItem("No Filter");
+        for (String filter: table.COLUMN_NAMES) {
+            searchFilterComboBox.addItem(filter);
+        }
 
         JTextField searchText = new JTextField();
         searchText.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
-                table.search("(?i)" + searchText.getText());
+                try {
+                    table.search("(?i)" + searchText.getText(), searchFilterComboBox.getSelectedIndex() - 1);
+                } catch (Exception e1) {
+                    //Suppress
+                }
             }
 
             @Override
             public void removeUpdate(DocumentEvent e) {
-                table.search("(?i)" + searchText.getText());
+                try {
+                    table.search("(?i)" + searchText.getText(), searchFilterComboBox.getSelectedIndex() - 1);
+                } catch (Exception e1) {
+                    //Suppress
+                }
             }
 
             @Override
@@ -50,8 +62,10 @@ public class TabDocuments extends JPanel {
             table.updateTable();
         });
 
-        searchPanel.add(searchLabel);
+        searchPanel.add(new JLabel("Search: ", SwingConstants.TRAILING));
         searchPanel.add(searchText);
+        searchPanel.add(searchFilterComboBox);
+        searchPanel.add(new JLabel("      ", SwingConstants.TRAILING));
         searchPanel.add(refreshButton);
 
         //Add
