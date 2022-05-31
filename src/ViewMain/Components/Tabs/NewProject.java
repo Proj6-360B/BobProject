@@ -13,18 +13,20 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.time.LocalDate;
 
-public class NewProject extends JFrame implements ActionListener {
+public class NewProject extends JDialog implements ActionListener {
     private ProjectManager myProjectManager;
     private Project selectedProject;
     private boolean isCreateNew;
 
     public NewProject(ProjectManager theProjectManager) {
+        super(null, "Create New Project", ModalityType.APPLICATION_MODAL);
         myProjectManager = theProjectManager;
         isCreateNew = true;
         addProject();
     }
 
     public NewProject(ProjectManager theProjectManager, Project theSelectedProject) {
+        super(null, "Edit/View Project", ModalityType.APPLICATION_MODAL);
         myProjectManager = theProjectManager;
         selectedProject = theSelectedProject;
         isCreateNew = false;
@@ -53,28 +55,25 @@ public class NewProject extends JFrame implements ActionListener {
     private JButton cancelButton;
     private JButton deleteButton;
     private JLabel res;
-    private JDialog dialog;
     private JTextArea descTArea;
     private TabDocumentsEditableProjectSpecific filesPanel;
 //    private JFileChooser fileChooser = new JFileChooser();
 
 
     public void addProject() {
-        dialog = new JDialog();
-
         if (isCreateNew) {
-            dialog.setTitle("Create New Project");
-            dialog.setBounds(300, 90, 700, 650);
+            setTitle("Create New Project");
+            setBounds(300, 90, 700, 650);
         } else {
-            dialog.setTitle("Edit Project");
-            dialog.setBounds(300, 90, 1100, 650);
+            setTitle("Edit Project");
+            setBounds(300, 90, 1100, 650);
         }
-        dialog.setLocationRelativeTo(null);
-//        dialog.setAlwaysOnTop(true);//so the user cannot bypass login by clicking off of it
-        dialog.setResizable(false);//so it doesn't look ugly with a resize
-        dialog.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); //Cancels
+        setLocationRelativeTo(null);
+//        setAlwaysOnTop(true);//so the user cannot bypass login by clicking off of it
+        setResizable(false);//so it doesn't look ugly with a resize
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); //Cancels
 
-        c = dialog.getContentPane();
+        c = getContentPane();
         c.setLayout(null);
 
         if (isCreateNew) {
@@ -246,7 +245,7 @@ public class NewProject extends JFrame implements ActionListener {
         res.setLocation(100, 350);
         c.add(res);
 
-        dialog.setVisible(true);
+//        setVisible(true);
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -293,13 +292,13 @@ public class NewProject extends JFrame implements ActionListener {
                 }
             }
             //Success!
-            dialog.dispose();
+            dispose();
         } else if (e.getSource() == cancelButton) {
-            dialog.dispose();
+            dispose();
         } else if (e.getSource() == deleteButton) {
             if (InstaDialogue.showYesNoConfirmation("This will permanently delete the project!") == 1) return; //cancels
             myProjectManager.deleteProject(selectedProject);
-            dialog.dispose();
+            dispose();
         }
     }
 
