@@ -35,11 +35,11 @@ public class CompMenuBar extends JMenuBar implements ActionListener {
         mySettingsButton.addActionListener(this);
         add(mySettingsButton);
 
-        //Settings Button
         myLogoutButton = new JButton("Logout");
         myLogoutButton.setBackground(Color.white);
         myLogoutButton.addActionListener(this);
         add(myLogoutButton);
+
     }
 
     /**
@@ -54,9 +54,14 @@ public class CompMenuBar extends JMenuBar implements ActionListener {
             //open settings menu
              new CompSettingsFrame(myProfileManager);
         } else if (e.getSource() == myLogoutButton) {
+
             myProfileManager.logout();
             ViewLogin login = new ViewLogin(myProfileManager);
             login.setVisible(true);
+
+            System.exit(0); // will try to make it redirect instead
+
         }
+
     }
 }
