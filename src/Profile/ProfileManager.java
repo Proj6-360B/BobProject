@@ -120,6 +120,10 @@ public class ProfileManager { //TODO Remove repeating code
         mySelectedProfile = null;
     }
 
+    public void loginAsGuest() {
+        mySelectedProfile = new Profile();
+    }
+
     ////////////////////
     //    In & Out    //
     ////////////////////

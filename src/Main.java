@@ -1,13 +1,14 @@
 import InstaDialogue.InstaDialogue;
 import Profile.ProfileManager;
 import ViewLogin.ViewLogin;
+import ViewMain.ViewMain;
 
 import java.io.File;
 
 public class Main {
     //Managers
     private static final ProfileManager myProfileManager = new ProfileManager();
-//    private static final ProfileManager myProjectManger = new ProfileManager();
+    private static final ProfileManager myProjectManger = new ProfileManager();
 
     public static void main(String[] args){
         try {
@@ -18,6 +19,10 @@ public class Main {
 
         //Login
         ViewLogin login = new ViewLogin(myProfileManager);
+        login.setVisible(true);
+
+        ViewMain viewMain = new ViewMain(myProfileManager);
+        viewMain.setVisible(true);
 
         //Exit
         myProfileManager.writeProfiles(); //TODO This still activates when GUI is still on.

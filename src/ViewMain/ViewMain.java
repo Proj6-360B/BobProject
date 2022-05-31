@@ -7,10 +7,10 @@ import Profile.*;
 import javax.swing.*;
 import java.awt.*;
 
-public class ViewMain extends JFrame {
+public class ViewMain extends JDialog {
     //Managers
     private final ProfileManager myProfileManager;
-    private ProjectManager myProjectManager;
+    private final ProjectManager myProjectManager;
 
     //Size
     private static final Dimension DIMENSION = new Dimension(960, 800);
@@ -26,13 +26,12 @@ public class ViewMain extends JFrame {
         //Initialize
         initializeFrame();
         initializeFrameComponents();
-        setVisible(true);
     }
 
     private void initializeFrame() {
         //Frame Properties
         setTitle("Project6 MainGUIFrame");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setSize(DIMENSION);
         setLayout(new BorderLayout(10, 10));
         setLocationRelativeTo(null);

@@ -11,11 +11,11 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ViewLogin extends JFrame implements ActionListener {
+public class ViewLogin extends JDialog implements ActionListener {
+
     //ProfileManager
     private ProfileManager myProfileManager;
     Toolkit t = Toolkit.getDefaultToolkit();
-
 
     //Size
     private static final Dimension DIMENSION = new Dimension(220, 140);
@@ -28,14 +28,19 @@ public class ViewLogin extends JFrame implements ActionListener {
 
     //Constructor
     public ViewLogin(ProfileManager theProfileManager) {
+        super(null, "Login", ModalityType.APPLICATION_MODAL);
+
         //ProfileManager
         myProfileManager = theProfileManager;
 
         //Initialize
-        initializeFrame();
-        initializeComponents();
-        setVisible(true);
+        setSize(DIMENSION);
+        setLocationRelativeTo(null);
+        setResizable(false);//so it doesn't look ugly with a resize
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);//so you can't avoid login
 
+        initializeComponents();
+//        setVisible(true);
     }
 
     private void initializeComponents() {
@@ -74,16 +79,6 @@ public class ViewLogin extends JFrame implements ActionListener {
         c.add(myLoginButton);
     }
 
-    private void initializeFrame() {
-        setTitle("Login");
-        setSize(DIMENSION);
-        setLocationRelativeTo(null);
-
-
-        setResizable(false);//so it doesn't look ugly with a resize
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//so you can't avoid login
-    }
-
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == myCreateNewButton) {
@@ -100,7 +95,6 @@ public class ViewLogin extends JFrame implements ActionListener {
             if(Passtech.encrypt(passString).equals(selected.getePassword())) {
                 System.out.println("passwords match");
                 myProfileManager.setSelectedProfile(selected);
-                ViewMain gui = new ViewMain(myProfileManager);
                 dispose();
             }else{
                 System.out.println("passwords dont match");
