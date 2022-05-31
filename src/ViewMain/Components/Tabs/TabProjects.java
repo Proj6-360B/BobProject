@@ -51,9 +51,16 @@ public class TabProjects extends JPanel {
             }
         });
 
+        JButton refreshButton = new JButton("Refresh");
+        refreshButton.addActionListener(e -> {
+            myProjectManager.readProjects();
+            table.updateTable();
+        });
+
         searchPanel.add(createNew);
         searchPanel.add(searchLabel);
         searchPanel.add(searchText);
+        searchPanel.add(refreshButton);
 
         //Add
         add(searchPanel);

@@ -17,7 +17,7 @@ public class TabDocuments extends JPanel {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         //Scroll Pane & Table
-        DocumentsTablePanel tableProj = new DocumentsTablePanel(myProjectManager);
+        DocumentsTablePanel table = new DocumentsTablePanel(myProjectManager);
 
         //Search
         JPanel searchPanel = new JPanel();
@@ -30,12 +30,12 @@ public class TabDocuments extends JPanel {
         searchText.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
-                tableProj.search("(?i)" + searchText.getText());
+                table.search("(?i)" + searchText.getText());
             }
 
             @Override
             public void removeUpdate(DocumentEvent e) {
-                tableProj.search("(?i)" + searchText.getText());
+                table.search("(?i)" + searchText.getText());
             }
 
             @Override
@@ -44,11 +44,18 @@ public class TabDocuments extends JPanel {
             }
         });
 
+        JButton refreshButton = new JButton("Refresh");
+        refreshButton.addActionListener(e -> {
+            myProjectManager.readProjects();
+            table.updateTable();
+        });
+
         searchPanel.add(searchLabel);
         searchPanel.add(searchText);
+        searchPanel.add(refreshButton);
 
         //Add
         add(searchPanel);
-        add(tableProj);
+        add(table);
     }
 }
