@@ -7,7 +7,7 @@ import Profile.*;
 import javax.swing.*;
 import java.awt.*;
 
-public class ViewMain extends JDialog {
+public class ViewMain extends JFrame {
     //Managers
     private final ProfileManager myProfileManager;
     private final ProjectManager myProjectManager;
