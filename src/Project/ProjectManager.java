@@ -1,5 +1,6 @@
 package Project;
 
+import AppData.AppDataIO;
 import AppData.SerializeIO;
 import InstaDialogue.InstaDialogue;
 import Profile.Profile;
@@ -113,6 +114,7 @@ public class ProjectManager {
             for (File project: projectsDir.listFiles()) { //Each individual Project folder
                 System.out.println("\tProject: " + project.getName());
                 LinkedList<AttachedFile> afList = new LinkedList<AttachedFile>();
+                boolean foundProject = false;
                 for (File serF: project.listFiles()) { //Project & Attached Files serialized in each folder
                     System.out.println("\t\tSerialized: " + serF.getName());
                     if (serF.getAbsolutePath().endsWith(".fser")) { //Attached File
@@ -120,10 +122,17 @@ public class ProjectManager {
                         System.out.println("\t\t\t-AttachedFile Read");
                     } else if (serF.getAbsolutePath().endsWith(".pser")) { //Project
                         temp.add((Project) SerializeIO.deserializeObjectFromHere(serF.getAbsolutePath()));
+                        foundProject = true;
                         System.out.println("\t\t\t-Project Read");
                     }
                 }
-                temp.getLast().setAttachedFilesList(afList);
+                if (foundProject) {
+                    temp.getLast().setAttachedFilesList(afList);
+                } else {
+                    System.out.println("Detected broken Project folder, cleaning...");
+                    project.delete();
+                    cleanUpLooseProjects(); //Check for other
+                }
             }
         } catch (Exception e) {
             System.out.println("Error: Unable to read Projects folder!");
@@ -131,6 +140,21 @@ public class ProjectManager {
         }
 
         return temp;
+    }
+
+    public void cleanUpLooseProjects() {
+        File directoryProject = new File(PROJECT_PATH);
+        for (File projectFolder: directoryProject.listFiles()) {
+            boolean foundProject = false;
+            for (File projectFile: projectFolder.listFiles()) {
+                if (projectFile.getName().endsWith("pser")) {
+                    foundProject = true;
+                    break;
+                }
+            }
+            if (!foundProject) new AppDataIO().deleteR(projectFolder);
+        }
+        System.out.println("Cleaned up appdata/projects/");
     }
 
     public static void main(String[] args) {

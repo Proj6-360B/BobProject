@@ -27,8 +27,9 @@ public class ProjectsTablePanel extends AbstractTablePanel {
                     try {
                         JTable target = (JTable)me.getSource();
                         String projectName = (String) getMyTable().getValueAt(target.getSelectedRow(), 2);
-                        new NewProject(myProjectManager, myProjectManager.getProject(projectName));
-                        //TODO update table
+                        JDialog frame = new ProjectCreateEditDialogue(myProjectManager, myProjectManager.getProject(projectName));
+                        frame.setVisible(true);
+                        updateTable();
                     } catch (IndexOutOfBoundsException e) {
                         System.out.println("Double Click Failed. (Probably because it didn't select anything)");
                     } //other catches for opening Project
@@ -66,7 +67,7 @@ public class ProjectsTablePanel extends AbstractTablePanel {
     }
 
     public void search(String theName) {
-        search(theName, 2); //TODO rn, it searches every column. Limit or advance search?
+        search(theName, 2); //TODO rn, it search name only. Advanced search?
     }
 
     @Override
@@ -80,8 +81,8 @@ public class ProjectsTablePanel extends AbstractTablePanel {
                     column.setResizable(false);
                     break;
                 case 1: //Type
-                    column.setMinWidth(50);
-                    column.setMaxWidth(50);
+                    column.setMinWidth(70);
+                    column.setMaxWidth(70);
                     column.setResizable(false);
                     break;
                 case 3: //Date

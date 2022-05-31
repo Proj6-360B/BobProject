@@ -6,9 +6,6 @@ import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import java.awt.*;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.util.concurrent.CountDownLatch;
 
 public class TabProjects extends JPanel {
     private ProjectManager myProjectManager;
@@ -28,7 +25,7 @@ public class TabProjects extends JPanel {
 
         JButton createNew = new JButton("Create New Project");
         createNew.addActionListener(e -> {
-            NewProject frame = new NewProject(myProjectManager);
+            ProjectCreateEditDialogue frame = new ProjectCreateEditDialogue(myProjectManager);
             frame.setVisible(true);
             table.updateTable();
         });

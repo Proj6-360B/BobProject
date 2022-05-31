@@ -13,19 +13,19 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.time.LocalDate;
 
-public class NewProject extends JDialog implements ActionListener {
+public class ProjectCreateEditDialogue extends JDialog implements ActionListener {
     private ProjectManager myProjectManager;
     private Project selectedProject;
     private boolean isCreateNew;
 
-    public NewProject(ProjectManager theProjectManager) {
+    public ProjectCreateEditDialogue(ProjectManager theProjectManager) {
         super(null, "Create New Project", ModalityType.APPLICATION_MODAL);
         myProjectManager = theProjectManager;
         isCreateNew = true;
         addProject();
     }
 
-    public NewProject(ProjectManager theProjectManager, Project theSelectedProject) {
+    public ProjectCreateEditDialogue(ProjectManager theProjectManager, Project theSelectedProject) {
         super(null, "Edit/View Project", ModalityType.APPLICATION_MODAL);
         myProjectManager = theProjectManager;
         selectedProject = theSelectedProject;
@@ -54,11 +54,9 @@ public class NewProject extends JDialog implements ActionListener {
     private JButton saveButton;
     private JButton cancelButton;
     private JButton deleteButton;
-    private JLabel res;
+//    private JLabel res;
     private JTextArea descTArea;
     private TabDocumentsEditableProjectSpecific filesPanel;
-//    private JFileChooser fileChooser = new JFileChooser();
-
 
     public void addProject() {
         if (isCreateNew) {
@@ -128,6 +126,7 @@ public class NewProject extends JDialog implements ActionListener {
         descTArea.setSize(350, 200);
         descTArea.setLocation(250, 300);
         descTArea.setLineWrap(true);
+        descTArea.setWrapStyleWord(true);
         descTArea.setToolTipText("Enter a description or reminders for the project.");
         c.add(descTArea);
 
@@ -232,18 +231,18 @@ public class NewProject extends JDialog implements ActionListener {
             c.add(deleteButton);
         }
 
-        if (!isCreateNew) {
+        if (!isCreateNew) { //Attached File Explorer
             filesPanel = new TabDocumentsEditableProjectSpecific(selectedProject);
-            filesPanel.setSize(400, 300);
-            filesPanel.setLocation(0, 20);
+            filesPanel.setSize(400, 550);
+            filesPanel.setLocation(640, 20);
             add(filesPanel);
         }
 
-        res = new JLabel("");
-        res.setFont(new Font(font, Font.PLAIN, 20));
-        res.setSize(500, 25);
-        res.setLocation(100, 350);
-        c.add(res);
+//        res = new JLabel("");
+//        res.setFont(new Font(font, Font.PLAIN, 20));
+//        res.setSize(500, 25);
+//        res.setLocation(100, 350);
+//        c.add(res);
 
 //        setVisible(true);
     }
@@ -327,6 +326,6 @@ public class NewProject extends JDialog implements ActionListener {
 
     public static void main(String[] args) {
         ProjectManager pm = new ProjectManager();
-        new NewProject(pm, pm.getProjectList().peek());
+        new ProjectCreateEditDialogue(pm, pm.getProjectList().peek());
     }
 }

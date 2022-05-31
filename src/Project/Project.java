@@ -1,5 +1,6 @@
 package Project;
 
+import AppData.AppDataIO;
 import AppData.SerializeIO;
 import InstaDialogue.InstaDialogue;
 
@@ -19,7 +20,7 @@ public class Project implements Serializable {
      */
     private static final long serialVersionUID = 91021L;
 
-    private static String PATH = "appdata/projects";
+    private static String PROJECT_PATH = "appdata/projects";
     /**
      * Name of the project.
      */
@@ -121,13 +122,13 @@ public class Project implements Serializable {
         String oldFName = getFormattedName();
         String newFName = getFormattedName(theName);
         //Rename Serialize
-        File oldDir = new File(PATH + '/' + oldFName + "/" + oldFName + ".pser");
-        File newDir = new File(PATH + '/' + oldFName + "/" + newFName + ".pser");
+        File oldDir = new File(PROJECT_PATH + '/' + oldFName + "/" + oldFName + ".pser");
+        File newDir = new File(PROJECT_PATH + '/' + oldFName + "/" + newFName + ".pser");
         oldDir.renameTo(newDir);
 
         //Rename folder
-        oldDir = new File(PATH + '/' + oldFName);
-        newDir = new File(PATH + '/' + newFName);
+        oldDir = new File(PROJECT_PATH + '/' + oldFName);
+        newDir = new File(PROJECT_PATH + '/' + newFName);
         oldDir.renameTo(newDir);
 
         //Set
@@ -143,7 +144,7 @@ public class Project implements Serializable {
      */
     private void addAttachedFile(File theFile, String theName) throws IllegalArgumentException {
         try {
-            attachedFilesList.add(new AttachedFile(PATH + '\\' + getFormattedName(), theFile, theName));
+            attachedFilesList.add(new AttachedFile(PROJECT_PATH + '\\' + getFormattedName(), theFile, theName));
         } catch (IOException e) {
             InstaDialogue.showErrorMessage("Couldn't save file.\n" + e.getMessage());
         }
@@ -188,7 +189,7 @@ public class Project implements Serializable {
 
         if (JOptionPane.showConfirmDialog(null, panel, "Edit " + theAF.getName(), JOptionPane.OK_CANCEL_OPTION) == 0) {
             theAF.setType(typeText.getText());
-            theAF.rename(PATH + '\\' + getFormattedName(), nameText.getText());
+            theAF.rename(PROJECT_PATH + '\\' + getFormattedName(), nameText.getText());
         }
         return false;
     }
@@ -208,7 +209,7 @@ public class Project implements Serializable {
 
     public void writeProject() throws IOException {
         //mkdir
-        File projectDir = new File(PATH + '\\' + getFormattedName());
+        File projectDir = new File(PROJECT_PATH + '\\' + getFormattedName());
         System.out.println(projectDir.getAbsolutePath()); //DEBUG out
         if (!projectDir.exists()) projectDir.mkdir();
         //itself serialized
@@ -236,14 +237,9 @@ public class Project implements Serializable {
      * https://www.baeldung.com/java-delete-directory
      */
     public void delete() {
-        File directoryToBeDeleted = new File(PATH + '\\' + getFormattedName());
+        File directoryToBeDeleted = new File(PROJECT_PATH + '\\' + getFormattedName());
         if (!directoryToBeDeleted.exists()) return; //not exist already
-        File[] allContents = directoryToBeDeleted.listFiles();
-        if (allContents != null) {
-            for (File file : allContents) {
-                file.delete();
-            }
-        }
+        new AppDataIO().deleteR(directoryToBeDeleted);
         directoryToBeDeleted.delete();
     }
 
@@ -263,7 +259,7 @@ public class Project implements Serializable {
 
     public void deleteAttachedFile(AttachedFile theAF) { //TODO test
         try {
-            theAF.delete(PATH + '/' + getFormattedName());
+            theAF.delete(PROJECT_PATH + '/' + getFormattedName());
             attachedFilesList.remove(theAF);
         } catch (IOException e) {
             InstaDialogue.showErrorMessage("Couldn't delete the attached file.\n" + e.getMessage());

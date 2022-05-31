@@ -103,6 +103,16 @@ public class AppDataIO {
         }
     }
 
+    public void deleteR(File directoryToBeDeleted) {
+        File[] allContents = directoryToBeDeleted.listFiles();
+        if (allContents == null) return;
+        for (File file : allContents) {
+            if (file.isDirectory()) deleteR(file);
+            file.delete();
+        }
+        directoryToBeDeleted.delete();
+    }
+
 //    public static void main(String[] args) { //DEBUG
 //        var ad = new AppDataIO();
 ////        ad.importAllFromZip("appdata.zip");
