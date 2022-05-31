@@ -36,7 +36,7 @@ public class DocumentsTablePanelProjectSpecific extends AbstractTablePanel {
     }
 
     public void search(String theString) {
-        search(theString, 1);
+        search(theString, -1); //Defaults to all
     }
 
     private Object[][] parseFiles(LinkedList<AttachedFile> theAttachedFiles) {

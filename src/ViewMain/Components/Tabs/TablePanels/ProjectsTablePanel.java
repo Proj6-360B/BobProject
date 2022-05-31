@@ -68,7 +68,7 @@ public class ProjectsTablePanel extends AbstractTablePanel {
     }
 
     public void search(String theName) {
-        search(theName, 2); //TODO rn, it search name only. Advanced search?
+        search(theName, 2); //Defaults to name
     }
 
     @Override

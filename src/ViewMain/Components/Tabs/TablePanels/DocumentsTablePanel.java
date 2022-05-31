@@ -67,7 +67,7 @@ public class DocumentsTablePanel extends AbstractTablePanel {
     }
 
     public void search(String theString) {
-        search(theString, 2);
+        search(theString, 2); //Defaults to name
     }
 
     @Override
