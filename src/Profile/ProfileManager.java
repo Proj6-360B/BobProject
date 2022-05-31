@@ -19,7 +19,7 @@ import java.util.Scanner;
  * https://mkyong.com/java/json-simple-example-read-and-write-json/
  */
 public class ProfileManager { //TODO Remove repeating code
-    public final static String PROFILE_PATH = "./appdata/profiles/profiles.txt";
+    public final static String PROFILE_PATH = "appdata/profiles/profiles.txt";
     private ArrayList<Profile> myProfiles;
     private Profile mySelectedProfile;
 
@@ -114,6 +114,14 @@ public class ProfileManager { //TODO Remove repeating code
             }
         }
         throw new IllegalArgumentException("There is no Profile with the name" + theProfile.getUsername() + '.');
+    }
+
+    public void logout() {
+        mySelectedProfile = null;
+    }
+
+    public void loginAsGuest() {
+        mySelectedProfile = new Profile();
     }
 
     ////////////////////

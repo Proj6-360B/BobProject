@@ -1,15 +1,16 @@
 package ViewMain;
 
+import Project.ProjectManager;
 import ViewLogin.ViewLogin;
 import ViewMain.Components.*;
 import Profile.*;
 import javax.swing.*;
 import java.awt.*;
 
-public class ViewMain extends JFrame {
+public class ViewMain extends JDialog {
     //Managers
     private final ProfileManager myProfileManager;
-    //TODO private ProjectManager myProjectManager;
+    private final ProjectManager myProjectManager;
 
     //Size
     private static final Dimension DIMENSION = new Dimension(960, 800);
@@ -17,20 +18,20 @@ public class ViewMain extends JFrame {
     private JMenuBar myMenuBar;
     private JTabbedPane myTabbedPane;
 
-    public ViewMain(ProfileManager thePM) {
+    public ViewMain(ProfileManager theProfileManager, ProjectManager theProjectManager) {
         //Fields Initialize
-        myProfileManager = thePM;
+        myProfileManager = theProfileManager;
+        myProjectManager = theProjectManager;
 
         //Initialize
         initializeFrame();
         initializeFrameComponents();
-        setVisible(true);
     }
 
     private void initializeFrame() {
         //Frame Properties
         setTitle("Project6 MainGUIFrame");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setSize(DIMENSION);
         setLayout(new BorderLayout(10, 10));
         setLocationRelativeTo(null);
@@ -42,7 +43,7 @@ public class ViewMain extends JFrame {
         setJMenuBar(myMenuBar);
 
         //TabbedPane
-        myTabbedPane = new CompTabbedPane();
+        myTabbedPane = new CompTabbedPane(myProjectManager);
         add(myTabbedPane);
     }
 }

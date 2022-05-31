@@ -1,13 +1,14 @@
 package AppData;
 import java.io.File;
+
+import InstaDialogue.InstaDialogue;
 import net.lingala.zip4j.ZipFile;
 import net.lingala.zip4j.exception.ZipException;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import static FileChooserHelper.FileChooserHelper.PATH_FILECHOOSER_START;
-import static FileChooserHelper.FileChooserHelper.showErrorMessageInOptionPane;
+import static InstaDialogue.InstaDialogue.PATH_FILECHOOSER_START;
 
 /**
  * Export/Import a zip file this program appdata folder. <br>
@@ -19,7 +20,7 @@ public class AppDataIO {
     /**
      * Path where the appdata folder is stored.
      */
-    private static String PATH_APPDATA = "./appdata/";
+    private static String PATH_APPDATA = "appdata";
     /**
      * File name to export as.
      */
@@ -76,7 +77,7 @@ public class AppDataIO {
         try {
             importAllFromZip(fc.getSelectedFile().getAbsolutePath());
         } catch (Exception e) {
-            showErrorMessageInOptionPane(e.getMessage());
+            InstaDialogue.showErrorMessage(e.getMessage());
         }
     }
 
@@ -98,14 +99,24 @@ public class AppDataIO {
         try {
             exportAllToZip(fc.getSelectedFile().getAbsolutePath());
         } catch (Exception e) {
-            showErrorMessageInOptionPane(e.getMessage());
+            InstaDialogue.showErrorMessage(e.getMessage());
         }
+    }
+
+    public void deleteR(File directoryToBeDeleted) {
+        File[] allContents = directoryToBeDeleted.listFiles();
+        if (allContents == null) return;
+        for (File file : allContents) {
+            if (file.isDirectory()) deleteR(file);
+            file.delete();
+        }
+        directoryToBeDeleted.delete();
     }
 
 //    public static void main(String[] args) { //DEBUG
 //        var ad = new AppDataIO();
-////        ad.importAllFromZip("./appdata.zip");
-////        ad.exportAllToZip("./appdata.zip");
+////        ad.importAllFromZip("appdata.zip");
+////        ad.exportAllToZip("appdata.zip");
 //        ad.exportAllToZipByFileChooser();
 //        ad.importAllFromZipByFileChooser();
 //    }

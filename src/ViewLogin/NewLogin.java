@@ -1,6 +1,7 @@
 package ViewLogin;
 
 import Authintication.Passtech;
+import InstaDialogue.InstaDialogue;
 import Profile.Privilege;
 import Profile.ProfileManager;
 
@@ -48,13 +49,14 @@ class NewLogin
      */
     public NewLogin(ProfileManager thePM)
     {
+        super(null, "Create New Profile", ModalityType.APPLICATION_MODAL);
         myProjectManager = thePM;
 
-        setTitle("Create New Profile");
         setBounds(300, 90, 450, 450);
-        setAlwaysOnTop(true);//so the user cannot bypass login by clicking off of it
+//        setAlwaysOnTop(true);//so the user cannot bypass login by clicking off of it
         setResizable(false);//so it doesn't look ugly with a resize
-        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);//so you can't avoid login
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);//so you can't avoid login
 
         c = getContentPane();
         c.setLayout(null);
@@ -167,8 +169,6 @@ class NewLogin
         res.setSize(500, 25);
         res.setLocation(100, 350);
         c.add(res);
-
-        setVisible(true);
     }
 
     // method actionPerformed()
@@ -224,11 +224,15 @@ class NewLogin
 
             String passToStore = Passtech.encrypt(pass1String);
             //the passToStore variable has an encrypted version of the password;
-            myProjectManager.addNewProfile(tname.getText(), emailText.getText(), p, passToStore);
-            new ViewLogin(myProjectManager);//reopen login screen
+            try {
+                myProjectManager.addNewProfile(tname.getText(), emailText.getText(), p, passToStore);
+            } catch (Exception e1) {
+                InstaDialogue.showErrorMessage(e1.getMessage());
+                return;
+            }
+
             dispose();
         } else if (e.getSource() == resetButton) {
-            new ViewLogin(myProjectManager);//reopen login screen
             dispose();
         }
     }

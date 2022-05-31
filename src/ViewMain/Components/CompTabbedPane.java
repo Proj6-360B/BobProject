@@ -1,22 +1,22 @@
 package ViewMain.Components;
 
+import Project.*;
 import ViewMain.Components.Tabs.*;
 
 import javax.swing.*;
+import java.util.LinkedList;
 
 public class CompTabbedPane extends JTabbedPane {
     //Tabs
-    private JPanel myActiveProjectsTab;
-    private JPanel myArchivedProjectsTab;
+    private JPanel myProjectsTab;
+    private JPanel myDocumentsTab;
 
-    public CompTabbedPane() {
-        //Active Projects Tab
-        myActiveProjectsTab = new TabActiveProject();
-        add("Active Projects", myActiveProjectsTab);
-        //Archived Projects Tab
-        myArchivedProjectsTab = new TabArchivedProject();
-        add("Archived Projects", myArchivedProjectsTab);
-
-
+    public CompTabbedPane(ProjectManager theProjectManager) {
+        //Project Tab
+        myProjectsTab = new TabProjects(theProjectManager);
+        add("Project", myProjectsTab);
+        //Documents
+        myDocumentsTab = new TabDocuments(theProjectManager);
+        add("Documents", myDocumentsTab);
     }
 }

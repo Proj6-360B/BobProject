@@ -10,12 +10,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
-public class ViewLogin extends JFrame implements ActionListener {
+public class ViewLogin extends JDialog implements ActionListener {
+
     //ProfileManager
     private ProfileManager myProfileManager;
     Toolkit t = Toolkit.getDefaultToolkit();
-
 
     //Size
     private static final Dimension DIMENSION = new Dimension(220, 140);
@@ -28,29 +30,40 @@ public class ViewLogin extends JFrame implements ActionListener {
 
     //Constructor
     public ViewLogin(ProfileManager theProfileManager) {
+        super(null, "Login", ModalityType.APPLICATION_MODAL);
+
         //ProfileManager
         myProfileManager = theProfileManager;
 
         //Initialize
-        initializeFrame();
-        initializeComponents();
-        setVisible(true);
+        setSize(DIMENSION);
+        setLocationRelativeTo(null);
+        setResizable(false);//so it doesn't look ugly with a resize
+        setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);//so you can't avoid login
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowDeactivated(WindowEvent e) {
+                if (myProfileManager.getSelectedProfile() == null) System.exit(0);
+            }
+        });
 
+        initializeComponents();
+//        setVisible(true);
     }
 
     private void initializeComponents() {
 
         c = getContentPane();
         c.setLayout(null);
-        //ProfileComboBox
 
+        //ProfileComboBox
         myProfileComboBox = new ProfileComboBox(myProfileManager.getProfileList());
         myProfileComboBox.setSize(180,30);
         System.out.println(myProfileComboBox.getSize().getHeight());
         myProfileComboBox.setLocation(15,10);
         c.add(myProfileComboBox);
 
-
+        //Password field
         passf = new JPasswordField();
         passf.setSize(180,20);
         passf.setLocation(15,45);
@@ -74,25 +87,20 @@ public class ViewLogin extends JFrame implements ActionListener {
         c.add(myLoginButton);
     }
 
-    private void initializeFrame() {
-        setTitle("Login");
-        setSize(DIMENSION);
-        setLocationRelativeTo(null);
-
-
-        setResizable(false);//so it doesn't look ugly with a resize
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//so you can't avoid login
-    }
-
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == myCreateNewButton) {
             System.out.println("Create New Event"); //DEBUG
+
             NewLogin l = new NewLogin(myProfileManager);
-            //get info from newlogin screen
-            //add info to profile combobox
-            //set new profile as the selected profile
-            dispose();
+            l.setVisible(true);
+
+            c.remove(myProfileComboBox); //TODO there has to be a better way than remaking it.
+            myProfileComboBox = new ProfileComboBox(myProfileManager.getProfileList());
+            myProfileComboBox.setSize(180,30);
+            myProfileComboBox.setLocation(15,10);
+            c.add(myProfileComboBox);
+            this.repaint();
         } else if (e.getSource() == myLoginButton) {
             System.out.println("Login Event"); //DEBUG
             String passString = new String(passf.getPassword());
@@ -100,7 +108,7 @@ public class ViewLogin extends JFrame implements ActionListener {
             if(Passtech.encrypt(passString).equals(selected.getePassword())) {
                 System.out.println("passwords match");
                 myProfileManager.setSelectedProfile(selected);
-                ViewMain gui = new ViewMain(myProfileManager);
+                myProfileManager.writeProfiles();
                 dispose();
             }else{
                 System.out.println("passwords dont match");
@@ -108,8 +116,6 @@ public class ViewLogin extends JFrame implements ActionListener {
                         "Password and Selected Profile Do not match",
                         "Unable To Login",
                         JOptionPane.ERROR_MESSAGE);
-
-
             }
 
         }

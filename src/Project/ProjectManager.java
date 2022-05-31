@@ -1,83 +1,85 @@
 package Project;
 
+import AppData.AppDataIO;
+import AppData.SerializeIO;
+import InstaDialogue.InstaDialogue;
 import Profile.Profile;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 
+import java.awt.*;
 import java.io.File;
-import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.Scanner;
 
 public class ProjectManager {
-    public static String PROJECT_PATH = "./appdata/projects/projects.txt";
-    private ArrayList<Projects> myProjects;
-    private Projects mySelectedProjects;
+    public static String PROJECT_PATH = "appdata/projects";
+    private LinkedList<Project> myProjects;
+//    private Project mySelectedProject;
 
     public ProjectManager() {
         myProjects = readProjects();
     }
 
 
-    public Projects getProjectsByName(String theProjectName) throws IllegalArgumentException {
+    public Project getProject(String theProjectName) throws IllegalArgumentException {
         if (myProjects == null || myProjects.size() == 0) {
-            throw new IllegalArgumentException("There are no Projects to select from.");
+            throw new IllegalArgumentException("There are no Project to select from.");
         }
         Iterator it = myProjects.iterator();
         while (it.hasNext()) {
-            Projects temp = (Projects)it.next();
+            Project temp = (Project)it.next();
             if (temp.getProjectName().equals(theProjectName)) {
                 return temp;
             }
         }
-        throw new IllegalArgumentException("There is no Project with the name" + theProjectName + '.');
+        throw new IllegalArgumentException("There is no Project with the name " + theProjectName + '.');
     }
 
-    public void deleteProjectsByName(String theProjectName) {
-        System.out.println("Deleting Profile: " + theProjectName);
-        myProjects.remove(getProjectsByName(theProjectName));
+    public void deleteProject(String theProjectName) {
+        deleteProject(getProject(theProjectName));
     }
 
-    public Projects getSelectedProject() {
-        return mySelectedProjects;
+    public void deleteProject(Project theProject) {
+        System.out.println("Deleting Project: " + theProject);
+        theProject.delete();
+        myProjects.remove(theProject);
+        System.out.println(" Successfully deleted.");
     }
 
+//    public Project getSelectedProject() {
+//        return mySelectedProject;
+//    }
+//
+//
+//    public void setMySelectedProjects(Project theProject) {
+//        if (myProjects == null || myProjects.size() == 0) {
+//            throw new IllegalArgumentException("There are no Project to select from.");
+//        }
+//        Iterator it = myProjects.iterator();
+//        while (it.hasNext()) {
+//            Project temp = (Project) it.next();
+//            if (temp == theProject) {
+//                System.out.println("Setting Selected user as: " + temp.getProjectName());
+//                mySelectedProject = temp;
+//                return;
+//            }
+//        }
+//        throw new IllegalArgumentException("There is no Project with the name" + theProject.getProjectName() + '.');
+//    }
 
-    public void setMySelectedProjects(Projects theProjects) {
-        if (myProjects == null || myProjects.size() == 0) {
-            throw new IllegalArgumentException("There are no Projects to select from.");
-        }
-        Iterator it = myProjects.iterator();
-        while (it.hasNext()) {
-            Projects temp = (Projects) it.next();
-            if (temp == theProjects) {
-                System.out.println("Setting Selected user as: " + temp.getProjectName());
-                mySelectedProjects = temp;
-                return;
-            }
-        }
-        throw new IllegalArgumentException("There is no Project with the name" + theProjects.getProjectName() + '.');
-    }
-
-    public void addNewProject(String theUsername, String theEmail, Status theStatus) throws IllegalArgumentException {
+    public void addNewProject(String theName, String theDescription, String theType, Status theStatus, Date theDate) throws IllegalArgumentException {
         if (myProjects != null || myProjects.size() != 0) {
             Iterator it = myProjects.iterator();
             while (it.hasNext()) {
-                if (((Profile)it.next()).getUsername().equals(theUsername)) {
-                    throw new IllegalArgumentException("Project name already exists.");
+                if (((Project) it.next()).getProjectName().equals(theName)) {
+                    throw new IllegalArgumentException("Project name already exists."); //TODO avoid by renaming "- Copy" of something
                 }
             }
         }
-        myProjects.add(new Projects(theUsername, theEmail, theStatus));
+        myProjects.add(new Project(theName, theDescription, theType, theStatus, theDate)); //with empty AttachedFiles list. (have user edit list when viewing Project)
     }
 
-    public void addNewProject(String theUsername, String theEmail, Status theStatus, LinkedList<File> theAttachedFiles) throws IllegalArgumentException {
-        //TODO
-    }
-
-    public ArrayList<Projects> getProjectList() {
+    public LinkedList<Project> getProjectList() {
         return myProjects;
     }
 
@@ -94,44 +96,92 @@ public class ProjectManager {
 
     public void writeProjects() {
         try {
-            System.out.println("Writing Projects to " + PROJECT_PATH + ':'); //DEBUG Out
-            FileWriter fw = new FileWriter(PROJECT_PATH);
-            for (Projects p: myProjects) {
-                JSONObject json = new JSONObject();
-                json.put("ProjectName", p.getProjectName());
-                json.put("ProjectStatus", p.getProjectStatus());
-                json.put("ProjectType", p.getProjectType());
-                json.put("AttachedFiles", p.getAttachedFiles()); //TODO Test
-
-                System.out.println("\t" + json.toJSONString());
-                fw.write(json.toJSONString() + "\n");
+            System.out.println("Writing Project to " + PROJECT_PATH + ':'); //DEBUG Out
+            for (Project p: myProjects) {
+                p.writeProject();
             }
-            fw.flush();
-            fw.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public ArrayList<Projects> readProjects() {
-        System.out.println("Reading Projects from " + PROJECT_PATH + ':'); //DEBUG Out
-        ArrayList<Projects> temp = new ArrayList<Projects>();
+    public LinkedList<Project> readProjects() {
+        System.out.println("Reading Project from " + PROJECT_PATH + ':'); //DEBUG Out
+        LinkedList<Project> temp = new LinkedList<Project>();
+
         try {
-            Scanner scanner = new Scanner(new File(PROJECT_PATH));
-            while (scanner.hasNextLine()) {
-                JSONObject projects = (JSONObject) new JSONParser().parse(scanner.nextLine());
-                System.out.println("\t" + projects.toJSONString()); //DEBUG Out
-                temp.add(new Projects(
-                        (String)projects.get("theProjectName"),
-                        (String)projects.get("theProjectType"),
-                        Status.valueOf((String)projects.get("theStatus")),
-                        (LinkedList<File>)projects.get("AttachedFiles") //TODO Test
-                ));
+            File projectsDir = new File(PROJECT_PATH); //Dir
+            for (File project: projectsDir.listFiles()) { //Each individual Project folder
+                System.out.println("\tProject: " + project.getName());
+                LinkedList<AttachedFile> afList = new LinkedList<AttachedFile>();
+                boolean foundProject = false;
+                for (File serF: project.listFiles()) { //Project & Attached Files serialized in each folder
+                    System.out.println("\t\tSerialized: " + serF.getName());
+                    if (serF.getAbsolutePath().endsWith(".fser")) { //Attached File
+                        afList.add((AttachedFile) SerializeIO.deserializeObjectFromHere(serF.getAbsolutePath()));
+                        System.out.println("\t\t\t-AttachedFile Read");
+                    } else if (serF.getAbsolutePath().endsWith(".pser")) { //Project
+                        temp.add((Project) SerializeIO.deserializeObjectFromHere(serF.getAbsolutePath()));
+                        foundProject = true;
+                        System.out.println("\t\t\t-Project Read");
+                    }
+                }
+                if (foundProject) {
+                    temp.getLast().setAttachedFilesList(afList);
+                } else {
+                    System.out.println("Detected broken Project folder, cleaning...");
+                    project.delete();
+                    cleanUpLooseProjects(); //Check for other
+                }
             }
-            scanner.close();
         } catch (Exception e) {
-            return temp;
+            System.out.println("Error: Unable to read Projects folder!");
+            e.printStackTrace();
         }
+
         return temp;
+    }
+
+    public void cleanUpLooseProjects() {
+        File directoryProject = new File(PROJECT_PATH);
+        for (File projectFolder: directoryProject.listFiles()) {
+            boolean foundProject = false;
+            for (File projectFile: projectFolder.listFiles()) {
+                if (projectFile.getName().endsWith("pser")) {
+                    foundProject = true;
+                    break;
+                }
+            }
+            if (!foundProject) new AppDataIO().deleteR(projectFolder);
+        }
+        System.out.println("Cleaned up appdata/projects/");
+    }
+
+    public static void main(String[] args) {
+        ProjectManager myProjectManager = new ProjectManager();
+        //New Proj
+//        myProjectManager.addNewProject("Test Proj",
+//                                       "A project entry to test IO wow.",
+//                                       "Repair",
+//                                       Status.ACTIVE,
+//                                       new Date(2022, 1, 1));
+        //Add files 3
+        for (Project p: myProjectManager.getProjectList()) {
+            p.addAttachedFileByFileChooser();
+            p.addAttachedFileByFileChooser();
+            p.addAttachedFileByFileChooser();
+        }
+        //Open each file
+        for (Project p: myProjectManager.getProjectList()) {
+            for (AttachedFile af: p.getAttachedFilesList()) {
+                try {
+                    Desktop.getDesktop().open(af.getFile());
+                } catch (Exception e) {
+                    InstaDialogue.showErrorMessage("Couldn't open the file.\n" + e.getMessage());
+                }
+            }
+        }
+        //Save
+        myProjectManager.writeProjects();
     }
 }

@@ -40,6 +40,16 @@ public class Profile {
     }
 
     /**
+     * Returns a GUEST Profile.
+     */
+    public Profile() {
+        setUsername("GUEST");
+        setEmail("GUEST");
+        setPrivilege(Privilege.GUEST);
+        setFont("Dialogue");
+    }
+
+    /**
      * Profile object.
      * @param theUsername The Username
      * @param theEmail The Email Address
