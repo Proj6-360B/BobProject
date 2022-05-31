@@ -18,10 +18,10 @@ public class ViewMain extends JDialog {
     private JMenuBar myMenuBar;
     private JTabbedPane myTabbedPane;
 
-    public ViewMain(ProfileManager thePM) {
+    public ViewMain(ProfileManager theProfileManager, ProjectManager theProjectManager) {
         //Fields Initialize
-        myProfileManager = thePM;
-        myProjectManager = new ProjectManager();
+        myProfileManager = theProfileManager;
+        myProjectManager = theProjectManager;
 
         //Initialize
         initializeFrame();

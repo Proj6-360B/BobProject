@@ -1,5 +1,6 @@
 import InstaDialogue.InstaDialogue;
 import Profile.ProfileManager;
+import Project.ProjectManager;
 import ViewLogin.ViewLogin;
 import ViewMain.ViewMain;
 
@@ -8,7 +9,7 @@ import java.io.File;
 public class Main {
     //Managers
     private static final ProfileManager myProfileManager = new ProfileManager();
-    private static final ProfileManager myProjectManger = new ProfileManager();
+    private static final ProjectManager myProjectManager = new ProjectManager();
 
     public static void main(String[] args){
         //Folder Creation //TODO move this to different class?
@@ -23,7 +24,7 @@ public class Main {
         login.setVisible(true);
 
         //View
-        ViewMain viewMain = new ViewMain(myProfileManager);
+        ViewMain viewMain = new ViewMain(myProfileManager, myProjectManager);
         viewMain.setVisible(true);
 
     }
