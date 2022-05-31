@@ -72,7 +72,7 @@ public class AttachedFile implements Serializable {
         setName(name);
 
         //Delete serialized
-        File oldS = new File(theProjectFolderPath + "/" + oldName);
+        File oldS = new File(theProjectFolderPath + "/" + oldName + ".fser");
         if (oldS.exists()) {
             oldS.delete();
         }
