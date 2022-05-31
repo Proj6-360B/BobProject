@@ -95,6 +95,7 @@ public class ViewLogin extends JDialog implements ActionListener {
             if(Passtech.encrypt(passString).equals(selected.getePassword())) {
                 System.out.println("passwords match");
                 myProfileManager.setSelectedProfile(selected);
+                myProfileManager.writeProfiles();
                 dispose();
             }else{
                 System.out.println("passwords dont match");

@@ -1,6 +1,7 @@
 package ViewMain.Components;
 
 import Profile.ProfileManager;
+import ViewLogin.ViewLogin;
 
 import javax.swing.*;
 import java.awt.*;
@@ -54,7 +55,8 @@ public class CompMenuBar extends JMenuBar implements ActionListener {
              new CompSettingsFrame(myProfileManager);
         } else if (e.getSource() == myLogoutButton) {
             myProfileManager.logout();
-            //TODO back to log in screen
+            ViewLogin login = new ViewLogin(myProfileManager);
+            login.setVisible(true);
         }
     }
 }

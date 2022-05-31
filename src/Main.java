@@ -26,8 +26,6 @@ public class Main {
         ViewMain viewMain = new ViewMain(myProfileManager);
         viewMain.setVisible(true);
 
-        //Exit
-        myProfileManager.writeProfiles(); //TODO This still activates when GUI is still on.
     }
 
     private static void initFolderSetup() {
