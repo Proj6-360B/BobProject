@@ -1,6 +1,7 @@
 package ViewMain.Components.Tabs;
 
 import Project.ProjectManager;
+import ViewMain.Components.Tabs.TablePanels.ProjectsTablePanel;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;

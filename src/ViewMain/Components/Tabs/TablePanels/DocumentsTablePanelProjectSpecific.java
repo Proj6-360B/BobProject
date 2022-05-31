@@ -1,12 +1,12 @@
-package ViewMain.Components.Tabs;
+package ViewMain.Components.Tabs.TablePanels;
 
 import InstaDialogue.InstaDialogue;
 import Project.AttachedFile;
 import Project.Project;
+import ViewMain.Components.Tabs.TablePanels.AbstractTablePanel;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;

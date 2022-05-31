@@ -1,7 +1,9 @@
-package ViewMain.Components.Tabs;
+package ViewMain.Components.Tabs.TablePanels;
 
 import Project.ProjectManager;
 import Project.Project;
+import ViewMain.Components.Tabs.ProjectCreateEditDialogue;
+import ViewMain.Components.Tabs.TablePanels.AbstractTablePanel;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;

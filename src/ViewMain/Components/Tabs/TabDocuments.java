@@ -1,13 +1,12 @@
 package ViewMain.Components.Tabs;
 
 import Project.ProjectManager;
+import ViewMain.Components.Tabs.TablePanels.DocumentsTablePanel;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class TabDocuments extends JPanel {
     private ProjectManager myProjectManager;

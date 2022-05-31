@@ -3,6 +3,7 @@ package ViewMain.Components.Tabs;
 import InstaDialogue.InstaDialogue;
 import Project.Project;
 import Project.ProjectManager;
+import ViewMain.Components.Tabs.TablePanels.DocumentsTablePanelProjectSpecific;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;

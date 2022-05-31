@@ -1,9 +1,10 @@
-package ViewMain.Components.Tabs;
+package ViewMain.Components.Tabs.TablePanels;
 
 import InstaDialogue.InstaDialogue;
 import Project.Project;
 import Project.AttachedFile;
 import Project.ProjectManager;
+import ViewMain.Components.Tabs.TablePanels.AbstractTablePanel;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -12,7 +13,6 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.LinkedList;
-import java.util.List;
 
 public class DocumentsTablePanel extends AbstractTablePanel {
     private ProjectManager myProjectManager;

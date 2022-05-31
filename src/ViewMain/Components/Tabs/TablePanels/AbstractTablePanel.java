@@ -1,4 +1,4 @@
-package ViewMain.Components.Tabs;
+package ViewMain.Components.Tabs.TablePanels;
 
 import Project.Project;
 import Project.ProjectManager;
