@@ -9,8 +9,9 @@ import java.awt.event.ActionListener;
 
 public class CompMenuBar extends JMenuBar implements ActionListener {
     //Menus
-    private JButton myAboutButton; //TODO JMenuItem breaks button size & JButton is ugly
+    private JButton myAboutButton;
     private JButton mySettingsButton;
+    private JButton myLogoutButton;
     private ProfileManager myProfileManager;
 
     public CompMenuBar(ProfileManager theProfileManager) {
@@ -33,6 +34,11 @@ public class CompMenuBar extends JMenuBar implements ActionListener {
         mySettingsButton.addActionListener(this);
         add(mySettingsButton);
 
+        //Settings Button
+        myLogoutButton = new JButton("Logout");
+        myLogoutButton.setBackground(Color.white);
+        myLogoutButton.addActionListener(this);
+        add(myLogoutButton);
     }
 
     /**
@@ -46,6 +52,9 @@ public class CompMenuBar extends JMenuBar implements ActionListener {
         } else if (e.getSource() == mySettingsButton) {
             //open settings menu
              new CompSettingsFrame(myProfileManager);
+        } else if (e.getSource() == myLogoutButton) {
+            myProfileManager.logout();
+            //TODO back to log in screen
         }
     }
 }
