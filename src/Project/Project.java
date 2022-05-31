@@ -6,8 +6,7 @@ import InstaDialogue.InstaDialogue;
 
 import javax.swing.*;
 import java.io.*;
-import java.util.Iterator;
-import java.util.LinkedList;
+import java.util.*;
 
 import static InstaDialogue.InstaDialogue.PATH_FILECHOOSER_START;
 
@@ -191,6 +190,8 @@ public class Project implements Serializable {
             theAF.setType(typeText.getText());
             theAF.rename(PROJECT_PATH + '\\' + getFormattedName(), nameText.getText());
         }
+
+        cleanUpLooseAttachedFiles();
         return false;
     }
 
@@ -218,6 +219,7 @@ public class Project implements Serializable {
         for (AttachedFile af: attachedFilesList) {
             af.writeFile(projectDir.getAbsolutePath());
         }
+        cleanUpLooseAttachedFiles();
     }
 
     /**
@@ -267,6 +269,25 @@ public class Project implements Serializable {
     }
 
     public void cleanUpLooseAttachedFiles() {
-        //TODO
+        File projectFolder = new File(PROJECT_PATH + '/' + getFormattedName());
+        //get count
+        int countFser = 0;
+        for (File projectFiles: projectFolder.listFiles()) {
+            if (projectFiles.getName().endsWith(".fser")) {
+                countFser++;
+            }
+        }
+        File projectFilesFolder = new File(PROJECT_PATH + '/' + getFormattedName() + "/files");
+
+        //if mismatch
+        if (countFser != projectFilesFolder.listFiles().length) {
+            for (File clonedFile: projectFilesFolder.listFiles()) {
+                try {
+                    getAttachedFile(clonedFile.getName());
+                } catch (IllegalArgumentException e) {
+                    clonedFile.delete();
+                }
+            }
+        }
     }
 }
