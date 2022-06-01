@@ -1,6 +1,8 @@
 package ViewMain.Components;
 
 import AppData.AppDataIO;
+import Authintication.Passtech;
+import Profile.Profile;
 import Profile.ProfileManager;
 
 import javax.swing.*;
@@ -14,13 +16,16 @@ import java.awt.event.ActionListener;
 public class CompSettingsFrame extends JFrame implements ActionListener {
     private final ProfileManager myProfileManager;
     private final String[] fonts = GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames();
-    private JButton submitButton, cancelButton, defaultButton, exportButton, importButton;
-    private JLabel fontLabel, emailLabel;
+    private JButton submitButton, cancelButton, defaultButton, exportButton, importButton, newPassButton;
+    private JLabel fontLabel, emailLabel, oldPass, newPass;
+    private JPasswordField oldPassField, newPassField;
     JComboBox fontComboBox;
     JTextField emailText;
     private Container c;
     String defaultFont = "Arial";
     String profileFont;
+
+
 
     public CompSettingsFrame(ProfileManager theProfileManager) {
         myProfileManager = theProfileManager;
@@ -29,7 +34,7 @@ public class CompSettingsFrame extends JFrame implements ActionListener {
         //todo setup the look/controls of settings frame
 
 
-
+/*
         fontLabel = new JLabel("Font");
         fontLabel.setFont(new Font(profileFont, Font.PLAIN, 20));
         fontLabel.setSize(100, 20);
@@ -41,19 +46,50 @@ public class CompSettingsFrame extends JFrame implements ActionListener {
         fontComboBox.setSize(190, 20);
         fontComboBox.setLocation(130, 50);
         c.add(fontComboBox);
+        *
+ */
 
 
         emailLabel = new JLabel("Update Email");
         emailLabel.setFont(new Font(profileFont,Font.PLAIN,20));
         emailLabel.setSize(140,20);
-        emailLabel.setLocation(35, 100);
+        emailLabel.setLocation(30, 100);
         c.add(emailLabel);
 
         emailText = new JTextField();
         emailText.setFont(new Font(profileFont, Font.PLAIN, 15));
         emailText.setSize(190, 20);
-        emailText.setLocation(150, 100);
+        emailText.setLocation(170, 100);
         c.add(emailText);
+
+        oldPass = new JLabel("Old Password");
+        oldPass.setFont(new Font(profileFont, Font.PLAIN, 20));
+        oldPass.setLocation(30, 130);
+        oldPass.setSize(140,20);
+        c.add(oldPass);
+
+        oldPassField = new JPasswordField();
+        oldPassField.setFont(new Font(profileFont, Font.PLAIN, 15));
+        oldPassField.setSize(190, 20);
+        oldPassField.setLocation(170, 130);
+        c.add(oldPassField);
+
+        newPass = new JLabel("New Password");
+        newPass.setFont(new Font(profileFont, Font.PLAIN, 20));
+        newPass.setLocation(30, 160);
+        newPass.setSize(140,20);
+        c.add(newPass);
+
+        newPassField = new JPasswordField();
+        newPassField.setFont(new Font(profileFont, Font.PLAIN, 15));
+        newPassField.setSize(190, 20);
+        newPassField.setLocation(170, 160);
+        c.add(newPassField);
+
+
+
+
+
 
         /*
         ideas
@@ -77,6 +113,13 @@ public class CompSettingsFrame extends JFrame implements ActionListener {
         exportButton.setLocation(170, 280);
         exportButton.addActionListener(this);
         c.add(exportButton);
+
+        newPassButton = new JButton("Change Pass");
+        newPassButton.setFont(new Font(profileFont, Font.PLAIN, 15));
+        newPassButton.setSize(100,20);
+        newPassButton.setLocation(290, 280);
+        newPassButton.addActionListener(this);
+        c.add(newPassButton);
 
 
 
@@ -143,6 +186,25 @@ public class CompSettingsFrame extends JFrame implements ActionListener {
             //unsure if anything else needs to be done to make it work
         }else if(e.getSource() == exportButton){
             new AppDataIO().exportAllToZipByFileChooser();
+        } else if(e.getSource() == newPassButton){
+            String oldPassString = new String(oldPassField.getPassword());
+            String newPassString = new String(newPassField.getPassword());
+
+            if(Passtech.encrypt(oldPassString).equals(myProfileManager.getSelectedProfile().getePassword())) {
+                System.out.println("passwords match");
+                myProfileManager.getSelectedProfile().setePassword(Passtech.encrypt(newPassString));
+                myProfileManager.writeProfiles();
+                JOptionPane.showMessageDialog(c,
+                        "Password Has been updated",
+                        "Sucsess",
+                        JOptionPane.INFORMATION_MESSAGE);
+            }else{
+                System.out.println("Old passWord Did Not Match");
+                JOptionPane.showMessageDialog(c,
+                        "Current Password Does Not Match ",
+                        "Unable To Change Password",
+                        JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
 }
