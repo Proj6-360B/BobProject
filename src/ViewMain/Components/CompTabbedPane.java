@@ -1,5 +1,6 @@
 package ViewMain.Components;
 
+import Profile.ProfileManager;
 import Project.*;
 import ViewMain.Components.Tabs.*;
 
@@ -11,9 +12,9 @@ public class CompTabbedPane extends JTabbedPane {
     private JPanel myProjectsTab;
     private JPanel myDocumentsTab;
 
-    public CompTabbedPane(ProjectManager theProjectManager) {
+    public CompTabbedPane(ProjectManager theProjectManager, ProfileManager theProfileManager) {
         //Project Tab
-        myProjectsTab = new TabProjects(theProjectManager);
+        myProjectsTab = new TabProjects(theProjectManager, theProfileManager);
         add("Project", myProjectsTab);
         //Documents
         myDocumentsTab = new TabDocuments(theProjectManager);

@@ -70,6 +70,7 @@ public class TabDocumentsEditableProjectSpecific extends JPanel implements Actio
         //Add
         add(searchPanel);
         add(table);
+
     }
 
     public static void main(String[] args) {

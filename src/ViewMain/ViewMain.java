@@ -46,7 +46,7 @@ public class ViewMain extends JFrame {
         setJMenuBar(myMenuBar);
 
         //TabbedPane
-        myTabbedPane = new CompTabbedPane(myProjectManager);
+        myTabbedPane = new CompTabbedPane(myProjectManager, myProfileManager);
         add(myTabbedPane);
     }
 }
