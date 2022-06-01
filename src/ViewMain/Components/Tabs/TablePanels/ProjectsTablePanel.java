@@ -1,5 +1,6 @@
 package ViewMain.Components.Tabs.TablePanels;
 
+import Profile.ProfileManager;
 import Project.ProjectManager;
 import Project.Project;
 import ViewMain.Components.Tabs.ProjectCreateEditDialogue;
@@ -17,18 +18,20 @@ import java.util.LinkedList;
  */
 public class ProjectsTablePanel extends AbstractTablePanel {
     private ProjectManager myProjectManager;
+    private ProfileManager myProfileManager;
     public final static String[] COLUMN_NAMES = {"Status", "Type", "Name", "Date", "Description"};
 
-    public ProjectsTablePanel(ProjectManager thePM) {
+    public ProjectsTablePanel(ProjectManager theProjectManager, ProfileManager theProfileManager) {
         super();
-        myProjectManager = thePM;
+        myProjectManager = theProjectManager;
+        myProfileManager = theProfileManager;
         initPanel(parseProjectList(myProjectManager.getProjectList()), COLUMN_NAMES, new MouseAdapter() {
             public void mouseClicked(MouseEvent me) {
                 if (me.getClickCount() == 2) {
                     try {
                         JTable target = (JTable)me.getSource();
                         String projectName = (String) getMyTable().getValueAt(target.getSelectedRow(), 2);
-                        JDialog frame = new ProjectCreateEditDialogue(myProjectManager, myProjectManager.getProject(projectName));
+                        JDialog frame = new ProjectCreateEditDialogue(myProjectManager, myProjectManager.getProject(projectName), myProfileManager.getSelectedProfile().getPrivilege());
                         frame.setVisible(true);
                         updateTable();
                     } catch (IndexOutOfBoundsException e) {

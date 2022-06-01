@@ -1,6 +1,8 @@
 package ViewMain.Components.Tabs;
 
 import InstaDialogue.InstaDialogue;
+import Profile.Privilege;
+import Profile.ProfileManager;
 import Project.Project;
 import Project.ProjectManager;
 import ViewMain.Components.Tabs.TablePanels.DocumentsTablePanelProjectSpecific;
@@ -18,10 +20,11 @@ public class TabDocumentsEditableProjectSpecific extends JPanel implements Actio
     private JButton addFileButton;
     private JButton delFileButton;
     private DocumentsTablePanelProjectSpecific table;
+    private Privilege currentPrivilege;
 
-
-    public TabDocumentsEditableProjectSpecific(Project theSelectedProject) {
+    public TabDocumentsEditableProjectSpecific(Project theSelectedProject, Privilege thePrivilege) {
         selectedProject = theSelectedProject;
+        currentPrivilege = thePrivilege;
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         //Scroll Pane & Table
@@ -52,6 +55,7 @@ public class TabDocumentsEditableProjectSpecific extends JPanel implements Actio
             }
         });
 
+        //Buttons
         editFileButton = new JButton("Edit");
         editFileButton.addActionListener(this);
 
@@ -61,6 +65,13 @@ public class TabDocumentsEditableProjectSpecific extends JPanel implements Actio
         delFileButton = new JButton("Del");
         delFileButton.addActionListener(this);
 
+        if (currentPrivilege != Privilege.ADMIN) {
+            editFileButton.setEnabled(false);
+            addFileButton.setEnabled(false);
+            delFileButton.setEnabled(false);
+        }
+
+        //Add Search Panel
         searchPanel.add(searchLabel);
         searchPanel.add(searchText);
         searchPanel.add(editFileButton);
@@ -71,13 +82,6 @@ public class TabDocumentsEditableProjectSpecific extends JPanel implements Actio
         add(searchPanel);
         add(table);
 
-    }
-
-    public static void main(String[] args) {
-        JFrame f = new JFrame();
-        f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        f.add(new TabDocumentsEditableProjectSpecific(new ProjectManager().getProjectList().peek()));
-        f.setVisible(true);
     }
 
     @Override

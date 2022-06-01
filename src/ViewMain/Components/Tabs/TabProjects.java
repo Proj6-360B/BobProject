@@ -28,7 +28,7 @@ public class TabProjects extends JPanel implements ActionListener {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         //Scroll Pane & Table
-        table = new ProjectsTablePanel(myProjectManager);
+        table = new ProjectsTablePanel(myProjectManager, myProfileManager);
 
         //Create New, Separator, Search
         JPanel searchPanel = new JPanel();
