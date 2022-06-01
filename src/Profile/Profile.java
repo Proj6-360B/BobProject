@@ -44,17 +44,6 @@ public class Profile {
     }
 
     /**
-     * Profile object.
-     * @param theUsername The Username
-     * @param theEmail The Email Address
-     * @param thePrivilege The Privilege Enum
-     */
-    public Profile(String theUsername, String theEmail, Privilege thePrivilege, String theFont) {
-        setUsername(theUsername);
-        setEmail(theEmail);
-        setPrivilege(thePrivilege);
-    }
-    /**
      * @author Damien Cruz
      * Profile object.
      * @param theUsername The Username
@@ -62,7 +51,7 @@ public class Profile {
      * @param thePrivilege The Privilege Enum
      * @param ePassword the password that should be encrypted BEFORE being sent to profile
      */
-    public Profile(String theUsername, String theEmail, Privilege thePrivilege,String theFont, String ePassword) {
+    public Profile(String theUsername, String theEmail, Privilege thePrivilege, String ePassword) {
         setUsername(theUsername);
         setEmail(theEmail);
         setPrivilege(thePrivilege);

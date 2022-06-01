@@ -65,7 +65,7 @@ public class ProfileManager { //TODO Remove repeating code
                 }
             }
         }
-        myProfiles.add(new Profile(theUsername, theEmail, thePrivilege, "Dialogue", password));
+        myProfiles.add(new Profile(theUsername, theEmail, thePrivilege, password));
         writeProfiles();
     }
 
