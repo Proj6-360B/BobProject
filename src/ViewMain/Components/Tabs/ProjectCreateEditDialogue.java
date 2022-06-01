@@ -225,8 +225,9 @@ public class ProjectCreateEditDialogue extends JDialog implements ActionListener
         cancelButton.addActionListener(this);
         c.add(cancelButton);
 
+        deleteButton = new JButton("Delete");//to prevent null pointer, won't be visible to user
         if (!isCreateNew) {
-            deleteButton = new JButton("Delete");
+            //deleteButton = new JButton("Delete");
             deleteButton.setFont(new Font(font, Font.PLAIN, 15));
             deleteButton.setSize(100, 20);
             deleteButton.setLocation(100, 550);

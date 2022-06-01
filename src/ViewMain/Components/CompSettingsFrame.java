@@ -107,7 +107,7 @@ public class CompSettingsFrame extends JFrame implements ActionListener {
         exportButton.addActionListener(this);
         c.add(exportButton);
 
-        newPassButton = new JButton("Change Pass");
+        newPassButton = new JButton("Password");
         newPassButton.setFont(new Font(profileFont, Font.PLAIN, 15));
         newPassButton.setSize(100,20);
         newPassButton.setLocation(290, 280);
@@ -116,7 +116,7 @@ public class CompSettingsFrame extends JFrame implements ActionListener {
 
 
 
-        submitButton = new JButton("Apply");
+        submitButton = new JButton("E-Mail");
         submitButton.setFont(new Font(profileFont, Font.PLAIN, 15));
         submitButton.setSize(100, 20);
         submitButton.setLocation(50, 250);
@@ -171,6 +171,10 @@ public class CompSettingsFrame extends JFrame implements ActionListener {
             //unsure if anything else needs to be done to make it work
         }else if(e.getSource() == exportButton){
             new AppDataIO().exportAllToZipByFileChooser();
+        }else if(e.getSource() == defaultButton){
+            emailText.setText("");
+            oldPassField.setText("");
+            newPassField.setText("");
         } else if(e.getSource() == newPassButton){
             String oldPassString = new String(oldPassField.getPassword());
             String newPassString = new String(newPassField.getPassword());

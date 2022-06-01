@@ -99,6 +99,7 @@ public class TabProjects extends JPanel implements ActionListener {
         else if (e.getSource() == refreshButton) {
             myProjectManager.readProjects();
             table.updateTable();
+            createNewButton.setEnabled(myProfileManager.getSelectedProfile().getPrivilege() == Privilege.ADMIN);
         }
     }
 }

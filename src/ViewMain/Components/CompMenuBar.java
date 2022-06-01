@@ -59,7 +59,7 @@ public class CompMenuBar extends JMenuBar implements ActionListener {
             ViewLogin login = new ViewLogin(myProfileManager);
             login.setVisible(true);
 
-            System.exit(0); // will try to make it redirect instead
+          //  System.exit(0); // will try to make it redirect instead
 
         }
 
