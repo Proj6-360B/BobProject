@@ -10,7 +10,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class ViewLogin extends JDialog implements ActionListener, KeyListener {
+public class ViewLogin extends JDialog implements ActionListener{
 
     //ProfileManager
     private ProfileManager myProfileManager;
@@ -40,7 +40,6 @@ public class ViewLogin extends JDialog implements ActionListener, KeyListener {
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);//so you can't avoid login
 
         //Enter key listen
-        addKeyListener(this);
 
         initializeComponents();
 //        setVisible(true);
@@ -85,6 +84,8 @@ public class ViewLogin extends JDialog implements ActionListener, KeyListener {
         myLoginButton.setSize(80, 30);
         myLoginButton.addActionListener(this);
         c.add(myLoginButton);
+
+        getRootPane().setDefaultButton(myLoginButton);//makes it so enter key logs you in
     }
 
     @Override
@@ -99,7 +100,8 @@ public class ViewLogin extends JDialog implements ActionListener, KeyListener {
             myProfileComboBox = new ProfileComboBox(myProfileManager.getProfileList());
             myProfileComboBox.setSize(180, 30);
             myProfileComboBox.setLocation(15, 10);
-            c.add(myProfileComboBox);
+             c.add(myProfileComboBox);
+
             this.repaint();
         } else if (e.getSource() == myLoginButton) {
             loginEvent();
@@ -113,6 +115,7 @@ public class ViewLogin extends JDialog implements ActionListener, KeyListener {
         System.out.println("Login Event"); //DEBUG
         String passString = new String(passf.getPassword());
         Profile selected = (Profile) myProfileComboBox.getSelectedItem();
+        assert selected != null;
         if (Passtech.encrypt(passString).equals(selected.getePassword())) {
             System.out.println("passwords match");
             myProfileManager.setSelectedProfile(selected);
@@ -127,23 +130,7 @@ public class ViewLogin extends JDialog implements ActionListener, KeyListener {
         }
     }
 
-    @Override
-    public void keyTyped(KeyEvent e) {
-        //Nothing
-    }
 
-    @Override
-    public void keyPressed(KeyEvent e) {
-        //Enter
-        if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-            loginEvent();
-        }
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e) {
-        //Nothing
-    }
 }
 
 

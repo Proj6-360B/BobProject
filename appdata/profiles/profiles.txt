@@ -3,3 +3,5 @@
 {"password":"202cb962ac59075b964b07152d234b70","Email":"123@gmail.com","Username":"123","Privilege":"GUEST"}
 {"password":"9f9d51bc70ef21ca5c14f307980a29d8","Email":"dd@gg","Username":"DAMIEN","Privilege":"ADMIN"}
 {"password":"202cb962ac59075b964b07152d234b70","Email":"ayer@tena.sefer","Username":"Abdi","Privilege":"ADMIN"}
+{"password":"49f68a5c8493ec2c0bf489821c21fc3b","Email":"dddd@gmail","Username":"hello","Privilege":"ADMIN"}
+{"password":"633de4b0c14ca52ea2432a3c8a5c4c31","Email":"ff@ff","Username":"ff","Privilege":"ADMIN"}
