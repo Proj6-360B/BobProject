@@ -2,9 +2,7 @@ package ViewMain.Components.Tabs;
 
 import InstaDialogue.InstaDialogue;
 import Profile.Privilege;
-import Profile.ProfileManager;
 import Project.Project;
-import Project.ProjectManager;
 import ViewMain.Components.Tabs.TablePanels.DocumentsTablePanelProjectSpecific;
 
 import javax.swing.*;

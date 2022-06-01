@@ -1,7 +1,6 @@
 package ViewMain;
 
 import Project.ProjectManager;
-import ViewLogin.ViewLogin;
 import ViewMain.Components.*;
 import Profile.*;
 import javax.swing.*;

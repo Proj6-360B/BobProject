@@ -1,7 +1,5 @@
 package AppData;
 
-import Project.Project;
-
 import java.io.*;
 
 public class SerializeIO {

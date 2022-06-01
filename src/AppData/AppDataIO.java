@@ -20,11 +20,11 @@ public class AppDataIO {
     /**
      * Path where the appdata folder is stored.
      */
-    private static String PATH_APPDATA = "appdata";
+    private static final String PATH_APPDATA = "appdata";
     /**
      * File name to export as.
      */
-    private static String FILENAME_APPDATA = "appdata.zip";
+    private static final String FILENAME_APPDATA = "appdata.zip";
 
     /**
      * Call to init, then import/export and let garbage collect.

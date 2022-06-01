@@ -1,16 +1,11 @@
 package ViewMain.Components.Tabs.TablePanels;
 
-import Project.Project;
-import Project.ProjectManager;
-
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.util.List;
 
 public abstract class AbstractTablePanel extends JPanel {
     private JTable myTable;

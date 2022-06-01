@@ -2,7 +2,6 @@ package ViewMain.Components;
 
 import AppData.AppDataIO;
 import Authintication.Passtech;
-import Profile.Profile;
 import Profile.ProfileManager;
 
 import javax.swing.*;
@@ -87,7 +86,7 @@ public class CompSettingsFrame extends JFrame implements ActionListener {
         /*
         ideas
         -text font and color
-        -the deafault way things are sorted
+        -the default way things are sorted
         -
          */
 
@@ -185,7 +184,7 @@ public class CompSettingsFrame extends JFrame implements ActionListener {
                 myProfileManager.writeProfiles();
                 JOptionPane.showMessageDialog(c,
                         "Password Has been updated",
-                        "Sucsess",
+                        "Success",
                         JOptionPane.INFORMATION_MESSAGE);
             }else{
                 System.out.println("Old passWord Did Not Match");

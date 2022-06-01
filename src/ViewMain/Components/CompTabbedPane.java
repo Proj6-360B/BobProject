@@ -5,7 +5,6 @@ import Project.*;
 import ViewMain.Components.Tabs.*;
 
 import javax.swing.*;
-import java.util.LinkedList;
 
 public class CompTabbedPane extends JTabbedPane {
     //Tabs

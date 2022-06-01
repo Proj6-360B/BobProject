@@ -4,7 +4,6 @@ import Authintication.Passtech;
 import Profile.Profile;
 import Profile.ProfileManager;
 import ViewLogin.Components.ProfileComboBox;
-import ViewMain.ViewMain;
 
 import javax.swing.*;
 import java.awt.*;

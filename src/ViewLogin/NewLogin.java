@@ -43,9 +43,9 @@ class NewLogin
     // with default values.
 
     /**
-     * @Damien Cruz
+     * @author Damien Cruz
      * constructor, to initialize the components with default values.
-     * @param thePM
+     * @param thePM the profile manager
      */
     public NewLogin(ProfileManager thePM)
     {
@@ -178,7 +178,7 @@ class NewLogin
     /**
      * @author Damien Cruz
      * 5/10/22
-     * @param e
+     * @param e the Action Event
      */
     public void actionPerformed(ActionEvent e)
     {

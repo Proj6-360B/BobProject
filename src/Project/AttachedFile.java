@@ -6,7 +6,6 @@ import org.apache.commons.io.FileUtils;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.Locale;
 
 public class AttachedFile implements Serializable {
     /**
