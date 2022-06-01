@@ -40,12 +40,6 @@ public class ViewLogin extends JDialog implements ActionListener {
         setLocationRelativeTo(null);
         setResizable(false);//so it doesn't look ugly with a resize
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);//so you can't avoid login
-        addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowDeactivated(WindowEvent e) {
-                if (myProfileManager.getSelectedProfile() == null) System.exit(0);
-            }
-        });
 
         initializeComponents();
 //        setVisible(true);
