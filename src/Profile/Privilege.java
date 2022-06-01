@@ -13,7 +13,7 @@ public enum Privilege {
     /**
      * Normal. TODO
      */
-    NORMAL("NORMAL"),
+//    NORMAL("NORMAL"),
     /**
      * Guest. No editing.
      */
