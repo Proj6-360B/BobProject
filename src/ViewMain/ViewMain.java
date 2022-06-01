@@ -23,6 +23,9 @@ public class ViewMain extends JFrame {
         myProfileManager = theProfileManager;
         myProjectManager = theProjectManager;
 
+        //Quit if no Profile selected
+        if (myProfileManager.getSelectedProfile() == null) System.exit(0);
+
         //Initialize
         initializeFrame();
         initializeFrameComponents();

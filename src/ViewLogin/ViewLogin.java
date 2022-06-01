@@ -111,7 +111,6 @@ public class ViewLogin extends JDialog implements ActionListener {
                         "Unable To Login",
                         JOptionPane.ERROR_MESSAGE);
             }
-
         }
     }
 
