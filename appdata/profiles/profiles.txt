@@ -2,4 +2,4 @@
 {"password":"90ba76cc0471f919fe5018345e5a573b","Email":"dcruz99@uw.edu","Username":"Damien","Privilege":"ADMIN","Font":"Dialogue"}
 {"password":"202cb962ac59075b964b07152d234b70","Email":"123@gmail.com","Username":"123","Privilege":"GUEST","Font":"Dialog"}
 {"password":"9f9d51bc70ef21ca5c14f307980a29d8","Email":"dd@gg","Username":"DAMIEN","Privilege":"ADMIN","Font":"Dialogue"}
-{"password":"202cb962ac59075b964b07152d234b70","Email":"guest@gmail.com","Username":"damien","Privilege":"GUEST","Font":"Dialogue"}
+{"password":"202cb962ac59075b964b07152d234b70","Email":"ayer@tena.sefer","Username":"Abdi","Privilege":"ADMIN","Font":"Calibri"}
