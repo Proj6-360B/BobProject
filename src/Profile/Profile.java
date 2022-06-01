@@ -18,10 +18,6 @@ public class Profile {
      */
     private Privilege myPrivilege;
     /**
-     * The preferred font.
-     */
-    private String myFont;
-    /**
      * the encrypted password
      */
     private String ePassword;
@@ -36,7 +32,6 @@ public class Profile {
         setUsername(theUsername);
         setEmail(theEmail);
         setPrivilege(thePrivilege);
-        setFont("Dialogue");
     }
 
     /**
@@ -46,7 +41,6 @@ public class Profile {
         setUsername("GUEST");
         setEmail("GUEST");
         setPrivilege(Privilege.GUEST);
-        setFont("Dialogue");
     }
 
     /**
@@ -54,13 +48,11 @@ public class Profile {
      * @param theUsername The Username
      * @param theEmail The Email Address
      * @param thePrivilege The Privilege Enum
-     * @param theFont The Preferred Font.
      */
     public Profile(String theUsername, String theEmail, Privilege thePrivilege, String theFont) {
         setUsername(theUsername);
         setEmail(theEmail);
         setPrivilege(thePrivilege);
-        setFont(theFont);
     }
     /**
      * @author Damien Cruz
@@ -68,14 +60,12 @@ public class Profile {
      * @param theUsername The Username
      * @param theEmail The Email Address
      * @param thePrivilege The Privilege Enum
-     * @param theFont The Preferred Font.
      * @param ePassword the password that should be encrypted BEFORE being sent to profile
      */
     public Profile(String theUsername, String theEmail, Privilege thePrivilege,String theFont, String ePassword) {
         setUsername(theUsername);
         setEmail(theEmail);
         setPrivilege(thePrivilege);
-        setFont(theFont);
         setePassword(ePassword);
     }
 
@@ -127,23 +117,6 @@ public class Profile {
      */
     public void setEmail(String myEmail) {
         this.myEmail = myEmail;
-    }
-
-    /**
-     * Get the preferred font. (null returns "Dialogue").
-     * @return myFont.
-     */
-    public String getFont() {
-        if (myFont == null) return "Dialogue";
-        return myFont;
-    }
-
-    /**
-     * Set the preferred font.
-     * @param theFont The font to set.
-     */
-    public void setFont(String theFont) {
-        myFont = theFont;
     }
 
 

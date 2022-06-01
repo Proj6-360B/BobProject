@@ -15,25 +15,19 @@ import java.awt.event.ActionListener;
  */
 public class CompSettingsFrame extends JFrame implements ActionListener {
     private final ProfileManager myProfileManager;
-    private final String[] fonts = GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames();
     private JButton submitButton, cancelButton, defaultButton, exportButton, importButton, newPassButton;
-    private JLabel fontLabel, emailLabel, oldPass, newPass;
+    private JLabel emailLabel, oldPass, newPass;
     private JPasswordField oldPassField, newPassField;
-    JComboBox fontComboBox;
     JTextField emailText;
     private Container c;
-    String defaultFont = "Arial";
     String profileFont;
 
 
 
     public CompSettingsFrame(ProfileManager theProfileManager) {
         myProfileManager = theProfileManager;
-        profileFont = myProfileManager.getSelectedProfile().getFont();
         initializeFrame();
         //todo setup the look/controls of settings frame
-
-
 /*
         fontLabel = new JLabel("Font");
         fontLabel.setFont(new Font(profileFont, Font.PLAIN, 20));
@@ -48,7 +42,6 @@ public class CompSettingsFrame extends JFrame implements ActionListener {
         c.add(fontComboBox);
         *
  */
-
 
         emailLabel = new JLabel("Update Email");
         emailLabel.setFont(new Font(profileFont,Font.PLAIN,20));
@@ -158,15 +151,9 @@ public class CompSettingsFrame extends JFrame implements ActionListener {
         if(!emailText.getText().equals("")){
             myProfileManager.getSelectedProfile().setEmail(emailText.getText());
         }
-        myProfileManager.getSelectedProfile().setFont(fontComboBox.getSelectedItem().toString());
         myProfileManager.writeProfiles();
         dispose();
     }
-    private void defaultSettings(){
-        //setup to set the default values to the current profile
-        myProfileManager.getSelectedProfile().setFont(defaultFont);
-    }
-
 
     /**
      * Invoked when an action occurs.
@@ -179,8 +166,6 @@ public class CompSettingsFrame extends JFrame implements ActionListener {
             confirmSettings();
         }else if(e.getSource() == cancelButton){
             dispose();
-        }else if(e.getSource() ==  defaultButton){
-            defaultSettings();
         }else if (e.getSource() == importButton){
             new AppDataIO().importAllFromZipByFileChooser();
             //unsure if anything else needs to be done to make it work
