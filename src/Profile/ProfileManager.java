@@ -65,7 +65,7 @@ public class ProfileManager { //TODO Remove repeating code
                 }
             }
         }
-        myProfiles.add(new Profile(theUsername, theEmail, thePrivilege, "Dialogue", password));
+        myProfiles.add(new Profile(theUsername, theEmail, thePrivilege, password));
         writeProfiles();
     }
 
@@ -139,7 +139,6 @@ public class ProfileManager { //TODO Remove repeating code
                         (String)profile.get("Username"),
                         (String)profile.get("Email"),
                         Privilege.valueOf((String)profile.get("Privilege")),
-                        (String)profile.get("Font"),
                         (String) profile.get("password")
                 ));
             }
@@ -159,7 +158,6 @@ public class ProfileManager { //TODO Remove repeating code
                 json.put("Username", p.getUsername());
                 json.put("Privilege", p.getPrivilege().getPrivilegeInt());
                 json.put("Email", p.getEmail());
-                json.put("Font", p.getFont());
                 json.put("password", p.getePassword());
 
                 System.out.println("\t" + json.toJSONString());

@@ -1,7 +1,6 @@
 package ViewMain;
 
 import Project.ProjectManager;
-import ViewLogin.ViewLogin;
 import ViewMain.Components.*;
 import Profile.*;
 import javax.swing.*;
@@ -46,7 +45,7 @@ public class ViewMain extends JFrame {
         setJMenuBar(myMenuBar);
 
         //TabbedPane
-        myTabbedPane = new CompTabbedPane(myProjectManager);
+        myTabbedPane = new CompTabbedPane(myProjectManager, myProfileManager);
         add(myTabbedPane);
     }
 }

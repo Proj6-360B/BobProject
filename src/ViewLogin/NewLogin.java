@@ -31,7 +31,7 @@ class NewLogin
     private JTextField emailText;
     private JLabel privilegeLabel;
     private JRadioButton adminButton;//admin
-    private JRadioButton normalButton;//normal
+//    private JRadioButton normalButton;//normal
     private JRadioButton guestButton;//guest
     private ButtonGroup privilegeGroup;
     private JButton submitButton;
@@ -43,9 +43,9 @@ class NewLogin
     // with default values.
 
     /**
-     * @Damien Cruz
+     * @author Damien Cruz
      * constructor, to initialize the components with default values.
-     * @param thePM
+     * @param thePM the profile manager
      */
     public NewLogin(ProfileManager thePM)
     {
@@ -129,24 +129,24 @@ class NewLogin
         adminButton.setLocation(150, 275);
         c.add(adminButton);
 
-        normalButton = new JRadioButton("Normal");
-        normalButton.setFont(new Font(font, Font.PLAIN, 15));
-        normalButton.setSelected(false);
-        normalButton.setSize(80, 20);
-        normalButton.setLocation(225, 275);
-        c.add(normalButton);
+//        normalButton = new JRadioButton("Normal");
+//        normalButton.setFont(new Font(font, Font.PLAIN, 15));
+//        normalButton.setSelected(false);
+//        normalButton.setSize(80, 20);
+//        normalButton.setLocation(225, 275);
+//        c.add(normalButton);
 
-        guestButton = new JRadioButton("Guest");
-        guestButton.setFont(new Font(font, Font.PLAIN, 15));
-        guestButton.setSelected(false);
-        guestButton.setSize(80, 20);
-        guestButton.setLocation(300, 275);
-        c.add(guestButton);
+//        guestButton = new JRadioButton("Guest");
+//        guestButton.setFont(new Font(font, Font.PLAIN, 15));
+//        guestButton.setSelected(false);
+//        guestButton.setSize(80, 20);
+//        guestButton.setLocation(300, 275);
+//        c.add(guestButton);
 
         privilegeGroup = new ButtonGroup();
         privilegeGroup.add(adminButton);
-        privilegeGroup.add(normalButton);
-        privilegeGroup.add(guestButton);
+//        privilegeGroup.add(normalButton);
+//        privilegeGroup.add(guestButton);
 
         submitButton = new JButton("Submit");
         submitButton.setFont(new Font(font, Font.PLAIN, 15));
@@ -178,19 +178,19 @@ class NewLogin
     /**
      * @author Damien Cruz
      * 5/10/22
-     * @param e
+     * @param e the Action Event
      */
     public void actionPerformed(ActionEvent e)
     {
         if (e.getSource() == submitButton) {
-            Privilege p;
-            if(normalButton.isSelected()){
-                p = Privilege.NORMAL;
-            }else if(adminButton.isSelected()){
-                p = Privilege.ADMIN;
-            }else{
-                p = Privilege.GUEST;
-            }
+            Privilege p = Privilege.ADMIN;
+//            if(normalButton.isSelected()){
+//                p = Privilege.NORMAL;
+//            }else if(adminButton.isSelected()){
+//                p = Privilege.ADMIN;
+//            }else{
+//                p = Privilege.GUEST;
+//            }
             if(tname.getText().length() == 0){
                 JOptionPane.showMessageDialog(c,
                         "Please enter your Name",

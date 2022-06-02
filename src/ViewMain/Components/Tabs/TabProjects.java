@@ -1,5 +1,7 @@
 package ViewMain.Components.Tabs;
 
+import Profile.Privilege;
+import Profile.ProfileManager;
 import Project.ProjectManager;
 import ViewMain.Components.Tabs.TablePanels.ProjectsTablePanel;
 
@@ -12,18 +14,21 @@ import java.awt.event.ActionListener;
 
 public class TabProjects extends JPanel implements ActionListener {
     private ProjectManager myProjectManager;
+    private ProfileManager myProfileManager;
     private JButton createNewButton;
     JComboBox searchFilterComboBox;
     private JButton refreshButton;
     private ProjectsTablePanel table;
 
-    public TabProjects(ProjectManager theProjectManager) {
+
+    public TabProjects(ProjectManager theProjectManager, ProfileManager theProfileManager) {
         myProjectManager = theProjectManager;
+        myProfileManager = theProfileManager;
 
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         //Scroll Pane & Table
-        table = new ProjectsTablePanel(myProjectManager);
+        table = new ProjectsTablePanel(myProjectManager, myProfileManager);
 
         //Create New, Separator, Search
         JPanel searchPanel = new JPanel();
@@ -78,6 +83,10 @@ public class TabProjects extends JPanel implements ActionListener {
         //Add
         add(searchPanel);
         add(table);
+
+        if(myProfileManager.getSelectedProfile().getPrivilege() == Privilege.GUEST){
+            createNewButton.setEnabled(false);
+        }
     }
 
     @Override
@@ -90,6 +99,7 @@ public class TabProjects extends JPanel implements ActionListener {
         else if (e.getSource() == refreshButton) {
             myProjectManager.readProjects();
             table.updateTable();
+            createNewButton.setEnabled(myProfileManager.getSelectedProfile().getPrivilege() == Privilege.ADMIN);
         }
     }
 }

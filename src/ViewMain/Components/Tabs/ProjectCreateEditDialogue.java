@@ -1,6 +1,7 @@
 package ViewMain.Components.Tabs;
 
 import InstaDialogue.InstaDialogue;
+import Profile.Privilege;
 import Project.Date;
 import Project.Project;
 import Project.ProjectManager;
@@ -17,6 +18,7 @@ public class ProjectCreateEditDialogue extends JDialog implements ActionListener
     private ProjectManager myProjectManager;
     private Project selectedProject;
     private boolean isCreateNew;
+    private Privilege currentPrivilege;
 
     public ProjectCreateEditDialogue(ProjectManager theProjectManager) {
         super(null, "Create New Project", ModalityType.APPLICATION_MODAL);
@@ -25,11 +27,12 @@ public class ProjectCreateEditDialogue extends JDialog implements ActionListener
         addProject();
     }
 
-    public ProjectCreateEditDialogue(ProjectManager theProjectManager, Project theSelectedProject) {
+    public ProjectCreateEditDialogue(ProjectManager theProjectManager, Project theSelectedProject, Privilege thePrivilege) {
         super(null, "Edit/View Project", ModalityType.APPLICATION_MODAL);
         myProjectManager = theProjectManager;
         selectedProject = theSelectedProject;
         isCreateNew = false;
+        currentPrivilege = thePrivilege;
         addProject();
     }
 
@@ -222,8 +225,9 @@ public class ProjectCreateEditDialogue extends JDialog implements ActionListener
         cancelButton.addActionListener(this);
         c.add(cancelButton);
 
+        deleteButton = new JButton("Delete");//to prevent null pointer, won't be visible to user
         if (!isCreateNew) {
-            deleteButton = new JButton("Delete");
+            //deleteButton = new JButton("Delete");
             deleteButton.setFont(new Font(font, Font.PLAIN, 15));
             deleteButton.setSize(100, 20);
             deleteButton.setLocation(100, 550);
@@ -232,19 +236,18 @@ public class ProjectCreateEditDialogue extends JDialog implements ActionListener
         }
 
         if (!isCreateNew) { //Attached File Explorer
-            filesPanel = new TabDocumentsEditableProjectSpecific(selectedProject);
+            filesPanel = new TabDocumentsEditableProjectSpecific(selectedProject, currentPrivilege);
             filesPanel.setSize(400, 550);
             filesPanel.setLocation(640, 20);
             add(filesPanel);
         }
 
-//        res = new JLabel("");
-//        res.setFont(new Font(font, Font.PLAIN, 20));
-//        res.setSize(500, 25);
-//        res.setLocation(100, 350);
-//        c.add(res);
-
-//        setVisible(true);
+        //Privilege Handling
+        if (currentPrivilege != Privilege.ADMIN) {
+            saveButton.setEnabled(false);
+            deleteButton.setEnabled(false);
+            cancelButton.setText("Close");
+        }
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -321,11 +324,5 @@ public class ProjectCreateEditDialogue extends JDialog implements ActionListener
             case FUTURE -> statusGroup.setSelected(futureButton.getModel(), true);
             case COMPLETE -> statusGroup.setSelected(completeButton.getModel(), true);
         }
-    }
-
-
-    public static void main(String[] args) {
-        ProjectManager pm = new ProjectManager();
-        new ProjectCreateEditDialogue(pm, pm.getProjectList().peek());
     }
 }
