@@ -20,10 +20,11 @@ public class ProjectCreateEditDialogue extends JDialog implements ActionListener
     private boolean isCreateNew;
     private Privilege currentPrivilege;
 
-    public ProjectCreateEditDialogue(ProjectManager theProjectManager) {
+    public ProjectCreateEditDialogue(ProjectManager theProjectManager, Privilege thePrivilege) {
         super(null, "Create New Project", ModalityType.APPLICATION_MODAL);
         myProjectManager = theProjectManager;
         isCreateNew = true;
+        currentPrivilege = thePrivilege;
         addProject();
     }
 

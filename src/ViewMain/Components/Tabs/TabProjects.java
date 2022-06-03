@@ -92,7 +92,7 @@ public class TabProjects extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == createNewButton) {
-            ProjectCreateEditDialogue frame = new ProjectCreateEditDialogue(myProjectManager);
+            ProjectCreateEditDialogue frame = new ProjectCreateEditDialogue(myProjectManager, myProfileManager.getSelectedProfile().getPrivilege());
             frame.setVisible(true);
             table.updateTable();
         }
