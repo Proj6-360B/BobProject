@@ -2,6 +2,10 @@ package Project;
 
 import java.io.Serializable;
 
+/**
+ * Stores Year, Month, & Day ints.
+ * @author David Huynh
+ */
 public class Date implements Serializable  {
     /**
      * serialVersionUID so it doesnt auto generate and it farts during deserialize.

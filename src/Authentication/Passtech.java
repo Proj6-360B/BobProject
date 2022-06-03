@@ -1,9 +1,13 @@
-package Authintication;
+package Authentication;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.MessageDigest;
 
-//TODO Add credit?
+/**
+ * MD5 encryption on String for password.
+ * @author Damien
+ */
+//TODO Add source credit?
 public class Passtech
 {
     public static String encrypt(String password){

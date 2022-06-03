@@ -11,6 +11,12 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 
+/**
+ * Manages an array of Projects. Handles reading in Serialized Project files for to make arrays.
+ * @see Project
+ * @author David Huynh
+ * @author Abdulmen
+ */
 public class ProjectManager {
     public static String PROJECT_PATH = "appdata/projects";
     private LinkedList<Project> myProjects;

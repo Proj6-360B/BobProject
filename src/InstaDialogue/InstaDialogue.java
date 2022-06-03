@@ -2,6 +2,10 @@ package InstaDialogue;
 
 import javax.swing.*;
 
+/**
+ * Helper to create JDialog windows for things like errors.
+ * @author David
+ */
 public class InstaDialogue {
     /**
      * File Chooser's starting path.

@@ -11,7 +11,10 @@ import java.util.*;
 import static InstaDialogue.InstaDialogue.PATH_FILECHOOSER_START;
 
 /**
+ * The Project entities. Stores name, descrption, date, type, status, and a list of AttachedFiles <br>
  * Send this "PATH + '/' + getFormattedName()" to AttachedFile because it doesn't know where it is saved in.
+ * @see AttachedFile
+ * @author David Huynh
  */
 public class Project implements Serializable {
     /**

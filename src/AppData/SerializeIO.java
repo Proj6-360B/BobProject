@@ -2,6 +2,10 @@ package AppData;
 
 import java.io.*;
 
+/**
+ * Static class to write whatever object as serialized.
+ * @author David, Damien
+ */
 public class SerializeIO {
     public static void serializeObjectToHere(Object theObject, String theFilePath) throws IOException {
         FileOutputStream fileOutStream = new FileOutputStream(theFilePath);

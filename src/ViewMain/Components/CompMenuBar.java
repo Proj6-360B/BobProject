@@ -8,6 +8,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ *
+ */
 public class CompMenuBar extends JMenuBar implements ActionListener {
     //Menus
     private JButton myAboutButton;

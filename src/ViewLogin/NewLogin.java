@@ -1,6 +1,6 @@
 package ViewLogin;
 
-import Authintication.Passtech;
+import Authentication.Passtech;
 import InstaDialogue.InstaDialogue;
 import Profile.Privilege;
 import Profile.ProfileManager;
@@ -9,8 +9,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 /**
- * @author Damien Cruz
- * 5/12/22
+ * Create New Profile popup window.
+ * @author Damien Cruz 5/12/22
  */
 class NewLogin
         extends JDialog

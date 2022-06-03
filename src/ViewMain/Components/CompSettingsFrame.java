@@ -1,7 +1,7 @@
 package ViewMain.Components;
 
 import AppData.AppDataIO;
-import Authintication.Passtech;
+import Authentication.Passtech;
 import Profile.ProfileManager;
 
 import javax.swing.*;

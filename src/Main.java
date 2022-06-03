@@ -6,6 +6,10 @@ import ViewMain.ViewMain;
 
 import java.io.File;
 
+/**
+ * Driver
+ * @author David, Damien
+ */
 public class Main {
     //Managers
     private static final ProfileManager myProfileManager = new ProfileManager();

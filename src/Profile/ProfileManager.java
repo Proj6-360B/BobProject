@@ -17,6 +17,8 @@ import java.util.Scanner;
  * Call writeProfiles() before System Exit to save Profiles. <br><br>
  *
  * https://mkyong.com/java/json-simple-example-read-and-write-json/
+ *
+ * @author David, Damien
  */
 public class ProfileManager { //TODO Remove repeating code
     public final static String PROFILE_PATH = "appdata/profiles/profiles.txt";

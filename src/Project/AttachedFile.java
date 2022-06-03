@@ -7,6 +7,9 @@ import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 
+/**
+ * @author David, Damien
+ */
 public class AttachedFile implements Serializable {
     /**
      * serialVersionUID so it doesnt auto generate and it farts during deserialize.

@@ -5,6 +5,11 @@ import Profile.ProfileManager;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * About frame to show credits, and the current logged-in user.
+ * @author David Huynh
+ * @author Damien Cruz
+ */
 public class CompAboutFrame extends JDialog {
     //Size
     private static final Dimension DIMENSION = new Dimension(370, 250);

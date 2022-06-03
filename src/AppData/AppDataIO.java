@@ -14,7 +14,7 @@ import static InstaDialogue.InstaDialogue.PATH_FILECHOOSER_START;
  * Export/Import a zip file this program appdata folder. <br>
  * Best is construct, then import/export, and let garbage collect. <br>
  * https://github.com/srikanth-lingala/zip4j
- * @author David Huynh
+ * @author David, Damien
  */
 public class AppDataIO {
     /**

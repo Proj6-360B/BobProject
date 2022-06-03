@@ -6,6 +6,11 @@ import Profile.*;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Main View that holds the menu bar and tabbed pane.
+ * @author David Huynh
+ * @author Damien Cruz
+ */
 public class ViewMain extends JFrame {
     //Managers
     private final ProfileManager myProfileManager;

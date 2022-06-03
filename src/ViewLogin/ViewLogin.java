@@ -1,14 +1,18 @@
 package ViewLogin;
 
-import Authintication.Passtech;
+import Authentication.Passtech;
 import Profile.Profile;
 import Profile.ProfileManager;
-import ViewLogin.Components.ProfileComboBox;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.List;
 
+/**
+ * Login window.
+ * @author David, Damien
+ */
 public class ViewLogin extends JDialog implements ActionListener{
 
     //ProfileManager
@@ -18,7 +22,7 @@ public class ViewLogin extends JDialog implements ActionListener{
     //Size
     private static final Dimension DIMENSION = new Dimension(320, 140);
     //Components
-    ProfileComboBox myProfileComboBox;
+    JComboBox myProfileComboBox;
     JButton myCreateNewButton;
     JButton myLoginButton;
     JButton myGuestButton;
@@ -49,7 +53,7 @@ public class ViewLogin extends JDialog implements ActionListener{
         c.setLayout(null);
 
         //ProfileComboBox
-        myProfileComboBox = new ProfileComboBox(myProfileManager.getProfileList());
+        myProfileComboBox = new JComboBox(myProfileManager.getProfileList().toArray());
         myProfileComboBox.setSize(280, 30);
         System.out.println(myProfileComboBox.getSize().getHeight());
         myProfileComboBox.setLocation(15, 10);
@@ -96,7 +100,7 @@ public class ViewLogin extends JDialog implements ActionListener{
             l.setVisible(true);
 
             c.remove(myProfileComboBox); //TODO there has to be a better way than remaking it.
-            myProfileComboBox = new ProfileComboBox(myProfileManager.getProfileList());
+            myProfileComboBox = new JComboBox(myProfileManager.getProfileList().toArray());
             myProfileComboBox.setSize(180, 30);
             myProfileComboBox.setLocation(15, 10);
              c.add(myProfileComboBox);
@@ -128,8 +132,6 @@ public class ViewLogin extends JDialog implements ActionListener{
                     JOptionPane.ERROR_MESSAGE);
         }
     }
-
-
 }
 
 
