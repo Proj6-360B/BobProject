@@ -8,7 +8,6 @@
     </option>
   </component>
   <component name="PWA">
-    <option name="enabled" value="true" />
     <option name="wasEnabledAtLeastOnce" value="true" />
   </component>
   <component name="ProjectRootManager" version="2" project-jdk-name="openjdk-17" project-jdk-type="JavaSDK">

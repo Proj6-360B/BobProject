@@ -1,5 +1,5 @@
 <component name="ArtifactManager">
-  <artifact type="jar" name="BobProject:jar">
+  <artifact type="jar" build-on-make="true" name="BobProject:jar">
     <output-path>$PROJECT_DIR$/out/artifacts/BobProject_jar</output-path>
     <root id="archive" name="BobProject.jar">
       <element id="directory" name="META-INF">
@@ -7,9 +7,9 @@
       </element>
       <element id="module-output" name="BobProject" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/net/lingala/zip4j/zip4j/2.10.0/zip4j-2.10.0.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/googlecode/json-simple/json-simple/1.1.1/json-simple-1.1.1.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/junit/junit/4.10/junit-4.10.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/hamcrest/hamcrest-core/1.1/hamcrest-core-1.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/commons-io/commons-io/2.11.0/commons-io-2.11.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/googlecode/json-simple/json-simple/1.1.1/json-simple-1.1.1.jar" path-in-jar="/" />
     </root>
   </artifact>
 </component>
