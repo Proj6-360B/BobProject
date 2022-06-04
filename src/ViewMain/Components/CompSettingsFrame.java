@@ -10,19 +10,31 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
+ * Window for Settings button. <br>
+ * Edits Profile & Import/Export appdata folder.
  * @author Damien Cruz
+ * @author David Huynh
  */
 public class CompSettingsFrame extends JFrame implements ActionListener {
+    /**
+     * ProfileManager from main
+     */
     private final ProfileManager myProfileManager;
+    //Components
     private JButton submitButton, cancelButton, defaultButton, exportButton, importButton, newPassButton;
     private JLabel emailLabel, oldPass, newPass;
     private JPasswordField oldPassField, newPassField;
-    JTextField emailText;
+    private JTextField emailText;
     private Container c;
-    String profileFont;
+    private String profileFont;
 
 
-
+    /**
+     * Constructor.
+     * @author Damien Cruz
+     * @author David Huynh
+     * @param theProfileManager ProfileManager from main
+     */
     public CompSettingsFrame(ProfileManager theProfileManager) {
         myProfileManager = theProfileManager;
         initializeFrame();
@@ -137,6 +149,11 @@ public class CompSettingsFrame extends JFrame implements ActionListener {
         c.add(defaultButton);
         setVisible(true);
     }
+
+    /**
+     * Frame properties
+     * @author Damien Cruz
+     */
     private void initializeFrame() {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setTitle(myProfileManager.getSelectedProfile().getUsername() +"`s" + " Settings"); //custom to user
@@ -145,6 +162,11 @@ public class CompSettingsFrame extends JFrame implements ActionListener {
         setBounds(300, 90, 450, 350);
         setLocationRelativeTo(null);
     }
+
+    /**
+     * Submit/Confirm button functionality
+     * @author Damien Cruz
+     */
     private void confirmSettings(){
         //saving setting selection to the current profile in profile manager
         if(!emailText.getText().equals("")){
@@ -155,8 +177,8 @@ public class CompSettingsFrame extends JFrame implements ActionListener {
     }
 
     /**
-     * Invoked when an action occurs.
-     *
+     * ActionListener for all buttons.
+     * @author Damien Cruz
      * @param e the event to be processed
      */
     @Override

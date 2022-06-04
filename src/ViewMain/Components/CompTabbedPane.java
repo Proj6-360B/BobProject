@@ -6,6 +6,9 @@ import ViewMain.Components.Tabs.*;
 
 import javax.swing.*;
 
+/**
+ *
+ */
 public class CompTabbedPane extends JTabbedPane {
     //Tabs
     private JPanel myProjectsTab;

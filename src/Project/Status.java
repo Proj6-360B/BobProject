@@ -2,7 +2,7 @@ package Project;
 
 /**
  * Status of the Project.
- * @author Abdulmen
+ * @author Abdulmuen Fethi
  */
 public enum Status {
     ACTIVE("ACTIVE"),FUTURE("FUTURE"),COMPLETE("COMPLETE");

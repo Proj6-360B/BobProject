@@ -12,15 +12,35 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Tab that displays all Projects in a table.
+ * @author Abdulmuen Fethi
+ * @author Damien Cruz
+ * @author David Huynh
+ */
 public class TabProjects extends JPanel implements ActionListener {
+    /**
+     * ProjectManager from main
+     */
     private ProjectManager myProjectManager;
+    /**
+     * ProfileManager from main
+     */
     private ProfileManager myProfileManager;
+    //Components
     private JButton createNewButton;
-    JComboBox searchFilterComboBox;
+    private JComboBox searchFilterComboBox;
     private JButton refreshButton;
     private ProjectsTablePanel table;
 
-
+    /**
+     * Constructor
+     * @author Abdulmuen Fethi
+     * @author Damien Cruz
+     * @author David Huynh
+     * @param theProjectManager ProjectManager from main
+     * @param theProfileManager ProfileManager from main
+     */
     public TabProjects(ProjectManager theProjectManager, ProfileManager theProfileManager) {
         myProjectManager = theProjectManager;
         myProfileManager = theProfileManager;
@@ -89,6 +109,13 @@ public class TabProjects extends JPanel implements ActionListener {
         }
     }
 
+    /**
+     * ActionLister for all buttons.
+     * @author Abdulmuen Fethi
+     * @author Damien Cruz
+     * @author David Huynh
+     * @param e
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == createNewButton) {

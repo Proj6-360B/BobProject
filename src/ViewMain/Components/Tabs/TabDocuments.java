@@ -8,9 +8,21 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import java.awt.*;
 
+/**
+ * Tab that displays all AttachedFile from all Projects in a table.
+ * @author David Huynh
+ */
 public class TabDocuments extends JPanel {
+    /**
+     * ProjectManager from main
+     */
     private ProjectManager myProjectManager;
 
+    /**
+     * Constructor.
+     * @author David Huynh
+     * @param theProjectManager ProjectManager from main to read Projects list & get all AttachedFiles
+     */
     public TabDocuments(ProjectManager theProjectManager) {
         myProjectManager = theProjectManager;
 

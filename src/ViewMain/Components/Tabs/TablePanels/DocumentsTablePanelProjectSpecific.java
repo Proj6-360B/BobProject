@@ -12,10 +12,25 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.LinkedList;
 
+/**
+ * Panel that holds table to display AttachedFiles of a specific Project for editing/viewing.
+ * @author David Huynh
+ */
 public class DocumentsTablePanelProjectSpecific extends AbstractTablePanel {
-    private final static String[] columnNames = {"Type", "Name"};
+    /**
+     * Project to view/edit AttachedFile.
+     */
     private Project selectedProject;
+    /**
+     * Column header names.
+     */
+    private final static String[] columnNames = {"Type", "Name"};
 
+    /**
+     * Constructor
+     * @author David Huynh
+     * @param theSelectedProject Project to view/edit AttachedFile.
+     */
     public DocumentsTablePanelProjectSpecific(Project theSelectedProject) {
         super();
         selectedProject = theSelectedProject;
@@ -35,10 +50,21 @@ public class DocumentsTablePanelProjectSpecific extends AbstractTablePanel {
         });
     }
 
+    /**
+     * Default search. Targets file name.
+     * @author David Huynh
+     * @param theString to search for.
+     */
     public void search(String theString) {
         search(theString, -1); //Defaults to all
     }
 
+    /**
+     * Helper to parse AttachedFiles to table entries.
+     * @author David Huynh
+     * @param theAttachedFiles AttachedFile list from selected Project
+     * @return Row entries
+     */
     private Object[][] parseFiles(LinkedList<AttachedFile> theAttachedFiles) {
         Object result[][] = new Object[theAttachedFiles.size()][columnNames.length];
         int i = 0;
@@ -57,6 +83,10 @@ public class DocumentsTablePanelProjectSpecific extends AbstractTablePanel {
         return result;
     }
 
+    /**
+     * Format width of header columns.
+     * @author David Huynh
+     */
     @Override
     public void formatTableColumnsWidth() {
 //        for (int i = 0; i < columnNames.length; i++) {
@@ -71,6 +101,10 @@ public class DocumentsTablePanelProjectSpecific extends AbstractTablePanel {
 //        }
     }
 
+    /**
+     * Call this to update the table entries.
+     * @author David Huynh
+     */
     @Override
     public void updateTable() {
         System.out.println("Updating Table...");

@@ -14,27 +14,59 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.time.LocalDate;
 
+/**
+ * Window for user to Create New or Edit/View Project.
+ * @author Damien Cruz
+ * @author David Huynh
+ */
 public class ProjectCreateEditDialogue extends JDialog implements ActionListener {
+    /**
+     * ProjectManager from main
+     */
     private ProjectManager myProjectManager;
+    /**
+     * Reference to current selected Project (from TabDocument's table)
+     */
     private Project selectedProject;
+    /**
+     * Is this window to Create New or Edit/View?
+     */
     private boolean isCreateNew;
+    /**
+     * Current Privilege of Profile that is viewing
+     */
     private Privilege currentPrivilege;
 
+    /**
+     * Constructor for Creating New (only Privilege.ADMIN, else Save is locked).
+     * @author Damien Cruz
+     * @author David Huynh
+     * @param theProjectManager ProjectManager from main
+     * @param thePrivilege Current Privilege of Profile that is viewing
+     */
     public ProjectCreateEditDialogue(ProjectManager theProjectManager, Privilege thePrivilege) {
         super(null, "Create New Project", ModalityType.APPLICATION_MODAL);
         myProjectManager = theProjectManager;
         isCreateNew = true;
         currentPrivilege = thePrivilege;
-        addProject();
+        initFrame();
     }
 
+    /**
+     * Constructor for Editing (Privilege.ADMIN) or Viewing.
+     * @author Damien Cruz
+     * @author David Huynh
+     * @param theProjectManager ProjectManager from main
+     * @param theSelectedProject Reference to current selected Project (from TabDocument's table)
+     * @param thePrivilege Current Privilege of Profile that is viewing
+     */
     public ProjectCreateEditDialogue(ProjectManager theProjectManager, Project theSelectedProject, Privilege thePrivilege) {
         super(null, "Edit/View Project", ModalityType.APPLICATION_MODAL);
         myProjectManager = theProjectManager;
         selectedProject = theSelectedProject;
         isCreateNew = false;
         currentPrivilege = thePrivilege;
-        addProject();
+        initFrame();
     }
 
     // Components of the Form
@@ -60,9 +92,14 @@ public class ProjectCreateEditDialogue extends JDialog implements ActionListener
     private JButton deleteButton;
 //    private JLabel res;
     private JTextArea descTArea;
-    private TabDocumentsEditableProjectSpecific filesPanel;
+    private PanelDocumentsEditableProjectSpecific filesPanel;
 
-    public void addProject() {
+    /**
+     * Initialize Frame properties and components.
+     * @author Damien Cruz
+     * @author David Huynh
+     */
+    public void initFrame() {
         if (isCreateNew) {
             setTitle("Create New Project");
             setBounds(300, 90, 700, 650);
@@ -237,7 +274,7 @@ public class ProjectCreateEditDialogue extends JDialog implements ActionListener
         }
 
         if (!isCreateNew) { //Attached File Explorer
-            filesPanel = new TabDocumentsEditableProjectSpecific(selectedProject, currentPrivilege);
+            filesPanel = new PanelDocumentsEditableProjectSpecific(selectedProject, currentPrivilege);
             filesPanel.setSize(400, 550);
             filesPanel.setLocation(640, 20);
             add(filesPanel);
@@ -251,6 +288,12 @@ public class ProjectCreateEditDialogue extends JDialog implements ActionListener
         }
     }
 
+    /**
+     * ActionListener for all buttons.
+     * @author Damien Cruz
+     * @author David Huynh
+     * @param e
+     */
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == saveButton) {
             if (nameText.getText().isEmpty()) {
@@ -305,6 +348,10 @@ public class ProjectCreateEditDialogue extends JDialog implements ActionListener
         }
     }
 
+    /**
+     * Called when initializing to get current date and autofill when Creating new Project.
+     * @author David Huynh
+     */
     private void setToCurrentDate() {
         String tempDate = LocalDate.now().toString();
         projectDateYearText.setText(tempDate.substring(0, 4));
@@ -312,6 +359,10 @@ public class ProjectCreateEditDialogue extends JDialog implements ActionListener
         projectDateDayText.setText(tempDate.substring(8, 10));
     }
 
+    /**
+     * Called when initializing to parse Project to autofill when Editing/Viewing Project.
+     * @author David Huynh
+     */
     private void setTextFromProject() {
         nameText.setText(selectedProject.getProjectName());
         typeText.setText(selectedProject.getProjectType());

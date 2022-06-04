@@ -7,14 +7,34 @@ import javax.swing.table.TableRowSorter;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 
+/**
+ * Panel that has a table for tabs.
+ * @author David Huynh
+ */
 public abstract class AbstractTablePanel extends JPanel {
+    /**
+     * Table
+     */
     private JTable myTable;
+    /**
+     * ScrollPane that holds table
+     */
     private JScrollPane myScrollPane;
 
+    /**
+     * Constructor (Call initPanel() right after in implementation!)
+     */
     public AbstractTablePanel() {
-        //Nothing Call initPanel() right after!
+        //Nothing due to how JTables create models. Call initPanel() right after!
     }
 
+    /**
+     * Create a JTable in a ScrollPane from given rows/entries, column header names, mouse adapter for action events.
+     * @author David Huynh
+     * @param theRows rows/entries
+     * @param theColumnNames column header names
+     * @param theMouseAdapter mouse adapter for action events
+     */
     public void initPanel(Object[][] theRows, String[] theColumnNames, MouseAdapter theMouseAdapter) {
         setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 
@@ -41,31 +61,50 @@ public abstract class AbstractTablePanel extends JPanel {
         add(myScrollPane);
     }
 
-    public void search(String theString, int theRowToFilter) {
-        if (theRowToFilter < 0) {
+    /**
+     * Search rows. If theColumnToFilter < 0, searches all columns.
+     * @author David Huynh
+     * @param theString String to search
+     * @param theColumnToFilter If theColumnToFilter < 0, searches all columns.
+     */
+    public void search(String theString, int theColumnToFilter) {
+        if (theColumnToFilter < 0) {
             ((TableRowSorter) myTable.getRowSorter()).setRowFilter(RowFilter.regexFilter(theString));
         } else {
-            ((TableRowSorter) myTable.getRowSorter()).setRowFilter(RowFilter.regexFilter(theString, theRowToFilter));
+            ((TableRowSorter) myTable.getRowSorter()).setRowFilter(RowFilter.regexFilter(theString, theColumnToFilter));
         }
     }
 
+    /**
+     * Formats the table column widths.
+     * @author David Huynh
+     */
     public abstract void formatTableColumnsWidth();
 
+    /**
+     * Update table by rereading list for rows and updates entries
+     * @author David Huynh
+     */
     public abstract void updateTable(); //https://stackoverflow.com/questions/3549206/how-to-add-row-in-jtable
 
+    /**
+     * Get the table.
+     * @author David Huynh
+     * @return the table
+     */
     public JTable getMyTable() {
         return myTable;
     }
 
-    public void setMyTable(JTable myTable) {
-        this.myTable = myTable;
-    }
-
-    public JScrollPane getMyScrollPane() {
-        return myScrollPane;
-    }
-
-    public void setMyScrollPane(JScrollPane myScrollPane) {
-        this.myScrollPane = myScrollPane;
-    }
+//    public void setMyTable(JTable myTable) {
+//        this.myTable = myTable;
+//    }
+//
+//    public JScrollPane getMyScrollPane() {
+//        return myScrollPane;
+//    }
+//
+//    public void setMyScrollPane(JScrollPane myScrollPane) {
+//        this.myScrollPane = myScrollPane;
+//    }
 }

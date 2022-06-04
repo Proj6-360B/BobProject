@@ -1,5 +1,8 @@
 package ViewMain.Components;
 
+/**
+ * Class that stores version.
+ */
 public class VersionHandler {
-    public static final String VERSION = "Iteration3 (v1)";
+    public static final String VERSION = "Iteration3";
 }

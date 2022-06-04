@@ -11,25 +11,32 @@ import java.util.List;
 
 /**
  * Login window.
- * @author David, Damien
+ * @author David Huynh
+ * @author Damien Cruz
  */
 public class ViewLogin extends JDialog implements ActionListener{
-
-    //ProfileManager
+    /**
+     * ProfileManager
+     */
     private ProfileManager myProfileManager;
-    Toolkit t = Toolkit.getDefaultToolkit();
-
-    //Size
+    /**
+     * Size
+     */
     private static final Dimension DIMENSION = new Dimension(320, 140);
     //Components
-    JComboBox myProfileComboBox;
-    JButton myCreateNewButton;
-    JButton myLoginButton;
-    JButton myGuestButton;
-    JPasswordField passf;
+    private JComboBox myProfileComboBox;
+    private JButton myCreateNewButton;
+    private JButton myLoginButton;
+    private JButton myGuestButton;
+    private JPasswordField passf;
     private Container c;
 
-    //Constructor
+    /**
+     * Constructor.
+     * @author Damien Cruz
+     * @author David Huynh
+     * @param theProfileManager ProfileManager
+     */
     public ViewLogin(ProfileManager theProfileManager) {
         super(null, "Login", ModalityType.APPLICATION_MODAL);
 
@@ -42,12 +49,14 @@ public class ViewLogin extends JDialog implements ActionListener{
         setResizable(false);//so it doesn't look ugly with a resize
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);//so you can't avoid login
 
-        //Enter key listen
-
         initializeComponents();
-//        setVisible(true);
     }
 
+    /**
+     * Helper to initialize all components and add.
+     * @author Damien Cruz
+     * @author David Huynh
+     */
     private void initializeComponents() {
         c = getContentPane();
         c.setLayout(null);
@@ -91,6 +100,12 @@ public class ViewLogin extends JDialog implements ActionListener{
         getRootPane().setDefaultButton(myLoginButton);//makes it so enter key logs you in
     }
 
+    /**
+     * ActionListener for all buttons.
+     * @author Damien Cruz
+     * @author David Huynh
+     * @param e
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == myCreateNewButton) {
@@ -114,6 +129,11 @@ public class ViewLogin extends JDialog implements ActionListener{
         }
     }
 
+    /**
+     * Functionally for login button.
+     * @author Damien Cruz
+     * @author David Huynh
+     */
     private void loginEvent() {
         System.out.println("Login Event"); //DEBUG
         String passString = new String(passf.getPassword());

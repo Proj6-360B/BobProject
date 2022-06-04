@@ -11,11 +11,12 @@ import java.awt.event.*;
 /**
  * Create New Profile popup window.
  * @author Damien Cruz 5/12/22
+ * @author David Huynh
  */
-class NewLogin
-        extends JDialog
-        implements ActionListener {
-
+class NewLogin extends JDialog implements ActionListener {
+    /**
+     * Profile Manager for privilege.
+     */
     private ProfileManager myProjectManager;
 
     // Components of the Form
@@ -43,8 +44,9 @@ class NewLogin
     // with default values.
 
     /**
+     * Constructor, to initialize the components with default values.
      * @author Damien Cruz
-     * constructor, to initialize the components with default values.
+     * @author David Huynh
      * @param thePM the profile manager
      */
     public NewLogin(ProfileManager thePM)
@@ -176,8 +178,9 @@ class NewLogin
     // by the user and act accordingly
 
     /**
+     * ActionListener for all buttons.
      * @author Damien Cruz
-     * 5/10/22
+     * @author David Huynh
      * @param e the Action Event
      */
     public void actionPerformed(ActionEvent e)

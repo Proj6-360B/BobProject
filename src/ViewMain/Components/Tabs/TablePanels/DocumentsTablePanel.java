@@ -13,10 +13,25 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.LinkedList;
 
+/**
+ * Panel that holds table to display all AttachedFiles.
+ * @author David Huynh
+ */
 public class DocumentsTablePanel extends AbstractTablePanel {
+    /**
+     * ProjectManager from main.
+     */
     private ProjectManager myProjectManager;
+    /**
+     * Column header names.
+     */
     public final static String[] COLUMN_NAMES = {"Project", "Type", "Name"};
 
+    /**
+     * Constructor.
+     * @author David Huynh
+     * @param thePM ProjectManager from main to get Project list & all AttachedFiles.
+     */
     public DocumentsTablePanel(ProjectManager thePM) {
         super();
         myProjectManager = thePM;
@@ -36,6 +51,12 @@ public class DocumentsTablePanel extends AbstractTablePanel {
         });
     }
 
+    /**
+     * Helper to parse Projects and their AttachedFiles to table entries.
+     * @author David Huynh
+     * @param theProjectList Project list from ProjectManager
+     * @return Row entries
+     */
     private Object[][] parseProjectList(LinkedList<Project> theProjectList) {
         //get count
         int count = 0;
@@ -66,10 +87,19 @@ public class DocumentsTablePanel extends AbstractTablePanel {
         return result;
     }
 
+    /**
+     * Default search. Targets name column.
+     * @author David Huynh
+     * @param theString to search for
+     */
     public void search(String theString) {
         search(theString, 2); //Defaults to name
     }
 
+    /**
+     * Format width of header columns.
+     * @author David Huynh
+     */
     @Override
     public void formatTableColumnsWidth() {
         for (int i = 0; i < COLUMN_NAMES.length; i++) {
@@ -84,6 +114,10 @@ public class DocumentsTablePanel extends AbstractTablePanel {
         }
     }
 
+    /**
+     * Call this to update the table entries.
+     * @author David Huynh
+     */
     @Override
     public void updateTable() {
         System.out.println("Updating Table...");

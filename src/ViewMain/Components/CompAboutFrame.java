@@ -11,13 +11,27 @@ import java.awt.*;
  * @author Damien Cruz
  */
 public class CompAboutFrame extends JDialog {
-    //Size
+    /**
+     * ProfileManager from main
+     */
+    private final ProfileManager myProfileManager;
+    /**
+     * VersionHandler
+     */
+    private final VersionHandler myVersionHandler;
+    /**
+     * Size
+     */
     private static final Dimension DIMENSION = new Dimension(370, 250);
     //Components
     private final JTextArea myAboutText;
-    private final ProfileManager myProfileManager;
-    private final VersionHandler myVersionHandler;
 
+    /**
+     * Constructor
+     * @author David Huynh
+     * @author Damien Cruz
+     * @param theProfileManager ProfileManager from main
+     */
     public CompAboutFrame(ProfileManager theProfileManager) {
         //ProfileManager
         myProfileManager = theProfileManager;
@@ -35,12 +49,21 @@ public class CompAboutFrame extends JDialog {
         setVisible(true);
     }
 
+    /**
+     * Frame properties
+     * @author David Huynh
+     */
     private void initializeFrame() {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(DIMENSION);
         setLocationRelativeTo(null);
     }
 
+    /**
+     * About text
+     * @author David Huynh
+     * @return myAboutText
+     */
     private JTextArea initializeAboutText() {
         StringBuffer sb = new StringBuffer(); //TODO Read from txt instead of ugly appending.
         sb.append("This app is registered to: ");

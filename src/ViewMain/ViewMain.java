@@ -13,15 +13,31 @@ import java.awt.*;
  */
 public class ViewMain extends JFrame {
     //Managers
+    /**
+     * ProfileManager from main
+     */
     private final ProfileManager myProfileManager;
+    /**
+     * ProjectManager from main
+     */
     private final ProjectManager myProjectManager;
 
     //Size
+    /**
+     * Size
+     */
     private static final Dimension DIMENSION = new Dimension(960, 800);
     //GUI Components
     private JMenuBar myMenuBar;
     private JTabbedPane myTabbedPane;
 
+    /**
+     * Constructor.
+     * @author David Huynh
+     * @author Damien Cruz
+     * @param theProfileManager myProfileManager
+     * @param theProjectManager myProjectManager
+     */
     public ViewMain(ProfileManager theProfileManager, ProjectManager theProjectManager) {
         //Fields Initialize
         myProfileManager = theProfileManager;
@@ -35,6 +51,11 @@ public class ViewMain extends JFrame {
         initializeFrameComponents();
     }
 
+    /**
+     * Frame properties
+     * @author David Huynh
+     * @author Damien Cruz
+     */
     private void initializeFrame() {
         //Frame Properties
         setTitle("Project6 MainGUIFrame");
@@ -44,6 +65,11 @@ public class ViewMain extends JFrame {
         setLocationRelativeTo(null);
     }
 
+    /**
+     * Frame components and add.
+     * @author David Huynh
+     * @author Damien Cruz
+     */
     private void initializeFrameComponents() {
         //MenuBar
         myMenuBar = new CompMenuBar(myProfileManager);

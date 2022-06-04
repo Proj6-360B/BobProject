@@ -13,14 +13,31 @@ import java.awt.event.MouseEvent;
 import java.util.LinkedList;
 
 /**
+ * Panel that holds table to display all Projects.
  * https://www.tutorialspoint.com/how-can-we-detect-the-double-click-events-of-a-jtable-row-in-java#:~:text=We%20can%20detect%20the%20double,click%20events%20of%20a%20JTable. <br>
  * https://github.com/hrehfeld/QuakeInjector
+ * @author David Huynh
  */
 public class ProjectsTablePanel extends AbstractTablePanel {
+    /**
+     * ProjectManager from main
+     */
     private ProjectManager myProjectManager;
+    /**
+     * ProfileManager from main
+     */
     private ProfileManager myProfileManager;
+    /**
+     * Column header names.
+     */
     public final static String[] COLUMN_NAMES = {"Status", "Type", "Name", "Date", "Description"};
 
+    /**
+     * Constructor.
+     * @author David Huynh
+     * @param theProjectManager ProjectManager from main
+     * @param theProfileManager ProfileManager from main
+     */
     public ProjectsTablePanel(ProjectManager theProjectManager, ProfileManager theProfileManager) {
         super();
         myProjectManager = theProjectManager;
@@ -42,6 +59,12 @@ public class ProjectsTablePanel extends AbstractTablePanel {
         });
     }
 
+    /**
+     * Helper to parse Projects and their AttachedFiles to table entries.
+     * @author David Huynh
+     * @param theProjectList Project list from ProjectManager
+     * @return Row entries
+     */
     private Object[][] parseProjectList(LinkedList<Project> theProjectList) { //"Status", "Type", "Name", "Date", "Description"
         Object result[][] = new Object[theProjectList.size()][COLUMN_NAMES.length];
         int i = 0;
@@ -70,10 +93,19 @@ public class ProjectsTablePanel extends AbstractTablePanel {
         return result;
     }
 
+    /**
+     * Default search. Targets name column.
+     * @author David Huynh
+     * @param theName to search for
+     */
     public void search(String theName) {
         search(theName, 2); //Defaults to name
     }
 
+    /**
+     * Format width of header columns.
+     * @author David Huynh
+     */
     @Override
     public void formatTableColumnsWidth() {
         for (int i = 0; i < COLUMN_NAMES.length; i++) {
@@ -98,6 +130,10 @@ public class ProjectsTablePanel extends AbstractTablePanel {
         }
     }
 
+    /**
+     * Call this to update the table entries.
+     * @author David Huynh
+     */
     @Override
     public void updateTable() { //https://stackoverflow.com/questions/3549206/how-to-add-row-in-jtable
         System.out.println("Updating Table...");

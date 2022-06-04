@@ -9,15 +9,28 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- *
+ * MenuBar for ViewMain.
+ * @author David Huynh
+ * @author Damien Cruz
+ * @author Andrew Nguyen
  */
 public class CompMenuBar extends JMenuBar implements ActionListener {
-    //Menus
+    /**
+     * ProfileManager from main
+     */
+    private ProfileManager myProfileManager;
+    //Components
     private JButton myAboutButton;
     private JButton mySettingsButton;
     private JButton myLogoutButton;
-    private ProfileManager myProfileManager;
 
+    /**
+     * Constructor.
+     * @author David Huynh
+     * @author Damien Cruz
+     * @author Andrew Nguyen
+     * @param theProfileManager ProfileManager from main
+     */
     public CompMenuBar(ProfileManager theProfileManager) {
         //ProfileManager
         myProfileManager = theProfileManager;
@@ -46,7 +59,10 @@ public class CompMenuBar extends JMenuBar implements ActionListener {
     }
 
     /**
+     * ActionListener for all buttons.
+     * @author David Huynh
      * @author Damien Cruz
+     * @author Andrew Nguyen
      * handles all button pushes for this frame
      */
     public void actionPerformed(ActionEvent e) {
