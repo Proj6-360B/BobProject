@@ -2,7 +2,7 @@ package Profile;
 
 /**
  * Privilege Enums. <br>
- * ADMIN, NORMAL, GUEST
+ * ADMIN or GUEST
  * @author David Huynh
  */
 public enum Privilege {
@@ -11,32 +11,31 @@ public enum Privilege {
      */
     ADMIN("ADMIN"),
     /**
-     * Normal. TODO
-     */
-//    NORMAL("NORMAL"),
-    /**
      * Guest. No editing.
      */
     GUEST("GUEST");
 
     /**
      * Get the string equivalent of the Enum.
+     * @author David Huynh
      */
     private String myPrivilegeString;
 
     /**
-     * The TODO
-     * @param thePrivilegeInt
+     * Enum Constructor from String.
+     * @author David Huynh
+     * @param thePrivilege The Privilege as a String.
      */
-    Privilege (String thePrivilegeInt) {
-        myPrivilegeString = thePrivilegeInt;
+    Privilege (String thePrivilege) {
+        myPrivilegeString = thePrivilege;
     }
 
     /**
-     * TODO
-     * @return
+     * Get Enum's String representation.
+     * @author David Huynh
+     * @return Enum's String representation.
      */
-    public String getPrivilegeInt() {
+    public String getPrivilegeString() {
         return myPrivilegeString;
     }
 }

@@ -8,7 +8,14 @@ import java.io.IOException;
 import java.io.Serializable;
 
 /**
- * @author David, Damien
+ * Stores a file for a Project by cloning it to appdata folder. <br>
+ * AttachedFile saves a .fser in the corresponding Project folder, and clones the file to the /files
+ * folder in the corresponding Project folder. <br>
+ * Saves File location, name of file String, type String. <br>
+ * Most methods require Project to pass in ("PATH + '/' + getFormattedName()") in order to save to
+ * the correct Project folder.
+ * @author David Huynh
+ * @author Damien Cruz
  */
 public class AttachedFile implements Serializable {
     /**
@@ -30,6 +37,7 @@ public class AttachedFile implements Serializable {
 
     /**
      * Create new attached file (Name will be theFile's name).
+     * @author David Huynh
      * @param theProjectFolderPath pass in "PATH + '/' + getFormattedName()"
      * @param theFile The Attached File original's place.
      * @param theType The type (ie Manual, Receipt, etc.)
@@ -41,10 +49,20 @@ public class AttachedFile implements Serializable {
         writeFile(theProjectFolderPath);
     }
 
+    /**
+     * Get the File stored.
+     * @author David Huynh
+     * @return File stored.
+     */
     public File getFile() {
         return file;
     }
 
+    /**
+     * Set a File to store.
+     * @author David Huynh
+     * @param file File to store.
+     */
     public void setFile(File file) {
         if (file == null || !file.exists()) {
             throw new IllegalArgumentException(file + " is not a valid file.");
@@ -52,14 +70,31 @@ public class AttachedFile implements Serializable {
         this.file = file;
     }
 
+    /**
+     * Get the name of the stored File.
+     * @author David Huynh
+     * @return Name of the stored File.
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * (Helper, use rename() instead) Set the stored File's name.
+     * @author David Huynh
+     * @param name stored File's name to set.
+     */
     private void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * Set the stored File's name.
+     * @author David Huynh
+     * @param theProjectFolderPath pass in "PATH + '/' + getFormattedName()"
+     * @param name Rename to this.
+     * @throws IOException Failed to rename.
+     */
     public void rename(String theProjectFolderPath, String name) throws IOException {
         //check if exist & delete old copy
         String oldName = getName();
@@ -83,14 +118,30 @@ public class AttachedFile implements Serializable {
         writeFile(theProjectFolderPath);
     }
 
+    /**
+     * Get the stored File's type.
+     * @author David Huynh
+     * @return stored File's type.
+     */
     public String getType() {
         return type;
     }
 
+    /**
+     * Set the stored File's type.
+     * @author David Huynh
+     * @param type The type to set to.
+     */
     public void setType(String type) {
         this.type = type;
     }
 
+    /**
+     * Helper. Clones given File to appdata folder if it isn't already there.
+     * @author David Huynh
+     * @param theProjectFolderPath pass in "PATH + '/' + getFormattedName()"
+     * @throws IOException File to copy over.
+     */
     private void cloneFileToAppdata(String theProjectFolderPath) throws IOException {
         File f = new File(theProjectFolderPath + "/files/" + getName());
         if (file.getAbsolutePath().equals(f.getAbsolutePath())) return; //skip if already there
@@ -100,6 +151,12 @@ public class AttachedFile implements Serializable {
         file = f;
     }
 
+    /**
+     * Save this AttachFile's .fser and clone the File to appdata for storage.
+     * @author David Huynh
+     * @param theProjectFolderPath
+     * @throws IOException
+     */
     public void writeFile(String theProjectFolderPath) throws IOException {
         //itself
         SerializeIO.serializeObjectToHere(this, theProjectFolderPath + '\\' + getName() + ".fser");
@@ -108,8 +165,15 @@ public class AttachedFile implements Serializable {
         cloneFileToAppdata(theProjectFolderPath);
     }
 
+    /**
+     * Delete this AttachFile, removing .fser and File clone.
+     * @author David Huynh
+     * @param theProjectFolderPath
+     * @throws IOException
+     */
     public void delete(String theProjectFolderPath) throws IOException {
-        file.delete(); //delete clone
+        if (file.getAbsolutePath().contains("/appdata/"))
+            file.delete(); //delete clone
         new File(theProjectFolderPath + '/' + getName() + ".fser").delete(); //delete serialize
     }
 }

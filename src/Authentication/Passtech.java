@@ -5,11 +5,17 @@ import java.security.MessageDigest;
 
 /**
  * MD5 encryption on String for password.
- * @author Damien
+ * @author Damien Cruz
  */
 //TODO Add source credit?
 public class Passtech
 {
+    /**
+     * Encrypt password String.
+     * @author Damien Cruz
+     * @param password to encrypt.
+     * @return encrypted String of password.
+     */
     public static String encrypt(String password){
         String encryptedpassword = null;
         try

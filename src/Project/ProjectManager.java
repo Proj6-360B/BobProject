@@ -15,7 +15,7 @@ import java.util.LinkedList;
  * Manages an array of Projects. Handles reading in Serialized Project files for to make arrays.
  * @see Project
  * @author David Huynh
- * @author Abdulmen
+ * @author Abdulmuen Fethi
  */
 public class ProjectManager {
     public static String PROJECT_PATH = "appdata/projects";
@@ -51,27 +51,6 @@ public class ProjectManager {
         myProjects.remove(theProject);
         System.out.println(" Successfully deleted.");
     }
-
-//    public Project getSelectedProject() {
-//        return mySelectedProject;
-//    }
-//
-//
-//    public void setMySelectedProjects(Project theProject) {
-//        if (myProjects == null || myProjects.size() == 0) {
-//            throw new IllegalArgumentException("There are no Project to select from.");
-//        }
-//        Iterator it = myProjects.iterator();
-//        while (it.hasNext()) {
-//            Project temp = (Project) it.next();
-//            if (temp == theProject) {
-//                System.out.println("Setting Selected user as: " + temp.getProjectName());
-//                mySelectedProject = temp;
-//                return;
-//            }
-//        }
-//        throw new IllegalArgumentException("There is no Project with the name" + theProject.getProjectName() + '.');
-//    }
 
     public void addNewProject(String theName, String theDescription, String theType, Status theStatus, Date theDate) throws IllegalArgumentException {
         if (myProjects != null || myProjects.size() != 0) {

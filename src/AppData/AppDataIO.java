@@ -14,7 +14,8 @@ import static InstaDialogue.InstaDialogue.PATH_FILECHOOSER_START;
  * Export/Import a zip file this program appdata folder. <br>
  * Best is construct, then import/export, and let garbage collect. <br>
  * https://github.com/srikanth-lingala/zip4j
- * @author David, Damien
+ * @author David Huynh
+ * @author Damien Cruz
  */
 public class AppDataIO {
     /**
@@ -36,6 +37,7 @@ public class AppDataIO {
     /**
      * Saves a zip of appdata folder to the given path.
      * @param theExportPath The path to save appdata.zip at.
+     * @author David Huynh
      */
     public void exportAllToZip(String theExportPath) throws ZipException {
         new ZipFile(theExportPath + '\\' + FILENAME_APPDATA).addFolder(new File(PATH_APPDATA));
@@ -45,6 +47,7 @@ public class AppDataIO {
     /**
      * Write all info from given Zip file to appdata folder.
      * @param theZipPath The path of appdata.zip
+     * @author David Huynh
      */
     public void importAllFromZip(String theZipPath) throws ZipException, IllegalArgumentException {
         ZipFile zip = new ZipFile(theZipPath);
@@ -61,6 +64,7 @@ public class AppDataIO {
 
     /**
      * Prompt user to choose where, then write all info from given Zip file to appdata folder.
+     * @author David Huynh
      */
     public void importAllFromZipByFileChooser() {
         JFileChooser fc = new JFileChooser(PATH_FILECHOOSER_START);
@@ -83,6 +87,7 @@ public class AppDataIO {
 
     /**
      * Prompt user to choose where, then saves a zip of appdata folder to the given path.
+     * @author David Huynh
      */
     public void exportAllToZipByFileChooser() {
         JFileChooser fc = new JFileChooser(PATH_FILECHOOSER_START);
@@ -103,6 +108,11 @@ public class AppDataIO {
         }
     }
 
+    /**
+     * Delete recursively starting from given directory.'
+     * @author David Huynh
+     * @param directoryToBeDeleted starting from given directory
+     */
     public void deleteR(File directoryToBeDeleted) {
         File[] allContents = directoryToBeDeleted.listFiles();
         if (allContents == null) return;

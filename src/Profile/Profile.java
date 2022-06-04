@@ -24,6 +24,7 @@ public class Profile {
 
     /**
      * Profile object.
+     * @author David Huynh
      * @param theUsername The Username
      * @param theEmail The Email Address
      * @param thePrivilege The Privilege Enum
@@ -35,17 +36,8 @@ public class Profile {
     }
 
     /**
-     * Returns a GUEST Profile.
-     */
-    public Profile() {
-        setUsername("GUEST");
-        setEmail("GUEST");
-        setPrivilege(Privilege.GUEST);
-    }
-
-    /**
+     * Profile object w/ Password.
      * @author Damien Cruz
-     * Profile object.
      * @param theUsername The Username
      * @param theEmail The Email Address
      * @param thePrivilege The Privilege Enum
@@ -58,10 +50,19 @@ public class Profile {
         setePassword(ePassword);
     }
 
-
+    /**
+     * Create a GUEST Profile.
+     * @author David Huynh
+     */
+    public Profile() {
+        setUsername("GUEST");
+        setEmail("GUEST");
+        setPrivilege(Privilege.GUEST);
+    }
 
     /**
      * Gets the username.
+     * @author David Huynh
      * @return the username
      */
     public String getUsername() {
@@ -69,7 +70,8 @@ public class Profile {
     }
 
     /**
-     * Sets the username
+     * Sets the username.
+     * @author David Huynh
      * @param myUsername the username to set
      */
     public void setUsername(String myUsername) {
@@ -78,6 +80,7 @@ public class Profile {
 
     /**
      * Get the privilege enum.
+     * @author David Huynh
      * @return the privilege enum
      */
     public Privilege getPrivilege() {
@@ -86,6 +89,7 @@ public class Profile {
 
     /**
      * Set the privilege enum.
+     * @author David Huynh
      * @param myPrivilege the privilege enum to set
      */
     public void setPrivilege(Privilege myPrivilege) {
@@ -94,6 +98,7 @@ public class Profile {
 
     /**
      * Get the email address.
+     * @author David Huynh
      * @return the email address
      */
     public String getEmail() {
@@ -102,24 +107,35 @@ public class Profile {
 
     /**
      * Set the email address.
+     * @author David Huynh
      * @param myEmail the email address to set.
      */
     public void setEmail(String myEmail) {
         this.myEmail = myEmail;
     }
 
-
-    public String getePassword() {
-        return ePassword;
-    }
-
+    /**
+     * Set the Encrypted Password.
+     * @author Damien Cruz
+     * @param ePassword the Encrypted Password to set.
+     */
     public void setePassword(String ePassword) {
         this.ePassword = ePassword;
     }
 
     /**
+     * Get the Encrypted Password.
+     * @author Damien Cruz
+     * @return the Encrypted Password.
+     */
+    public String getePassword() {
+        return ePassword;
+    }
+
+    /**
      * toString(). <br>
      * [myUsername] ([thePrivilege])
+     * @author David Huynh
      * @return String representation.
      */
     @Override

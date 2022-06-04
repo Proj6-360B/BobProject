@@ -18,15 +18,26 @@ import java.util.Scanner;
  *
  * https://mkyong.com/java/json-simple-example-read-and-write-json/
  *
- * @author David, Damien
+ * @author David Huynh
+ * @author Damien Cruz
  */
 public class ProfileManager { //TODO Remove repeating code
+    /**
+     * Profile folder path.
+     */
     public final static String PROFILE_PATH = "appdata/profiles/profiles.txt";
+    /**
+     * List of Profiles.
+     */
     private ArrayList<Profile> myProfiles;
+    /**
+     * Current currently selected / logged on Profile
+     */
     private Profile mySelectedProfile;
 
     /**
      * Constructor. Read profiles.txt on creation.
+     * @author David Huynh
      */
     public ProfileManager() {
         myProfiles = readProfiles();
@@ -35,6 +46,14 @@ public class ProfileManager { //TODO Remove repeating code
     ////////////////////
     //   Set & Get    //
     ////////////////////
+
+    /**
+     * Get Profile by Username String.
+     * @author David Huynh
+     * @param theUsername Username String to search for.
+     * @return Profile with same username.
+     * @throws IllegalArgumentException No Profile found.
+     */
     public Profile getProfileByUsername(String theUsername) throws IllegalArgumentException {
         if (myProfiles == null || myProfiles.size() == 0) {
             throw new IllegalArgumentException("There are no Profiles to select from.");
@@ -49,15 +68,35 @@ public class ProfileManager { //TODO Remove repeating code
         throw new IllegalArgumentException("There is no Profile with the name " + theUsername + '.');
     }
 
+    /**
+     * Delete Profile by Username String.
+     * @author David Huynh
+     * @param theUsername Username String to search for.
+     */
     public void deleteProfileByUsername(String theUsername) {
         System.out.println("Deleting Profile: " + theUsername);
         myProfiles.remove(getProfileByUsername(theUsername));
     }
 
+    /**
+     * Get currently selected / logged on Profile
+     * @author David Huynh
+     * @return currently selected / logged on Profile
+     */
     public Profile getSelectedProfile() {
         return mySelectedProfile;
     }
 
+    /**
+     * Add a new Profile
+     * @author David Huynh
+     * @author Damien Cruz
+     * @param theUsername Username.
+     * @param theEmail Email.
+     * @param thePrivilege Privilege enum.
+     * @param password The password that should be encrypted BEFORE being sent to profile.
+     * @throws IllegalArgumentException Already taken username.
+     */
     public void addNewProfile(String theUsername, String theEmail, Privilege thePrivilege, String password) throws IllegalArgumentException {
         if (myProfiles != null || myProfiles.size() != 0) {
             Iterator it = myProfiles.iterator();
@@ -71,6 +110,11 @@ public class ProfileManager { //TODO Remove repeating code
         writeProfiles();
     }
 
+    /**
+     * Get list of all Profiles.
+     * @author David Huynh
+     * @return list of all Profiles.
+     */
     public ArrayList<Profile> getProfileList() {
         return myProfiles;
     }
@@ -86,7 +130,13 @@ public class ProfileManager { //TODO Remove repeating code
         return result;
     }
 
-    public void setSelectedProfile(String theUsername) {
+    /**
+     * Set a new selected / logged on Profile by username String.
+     * @author David Huynh
+     * @param theUsername the username to search for & set.
+     * @throws IllegalArgumentException No Profile matching.
+     */
+    public void setSelectedProfile(String theUsername) throws IllegalArgumentException {
         if (myProfiles == null || myProfiles.size() == 0) {
             throw new IllegalArgumentException("There are no Profiles to select from.");
         }
@@ -102,7 +152,13 @@ public class ProfileManager { //TODO Remove repeating code
         throw new IllegalArgumentException("There is no Profile with the name " + theUsername + '.');
     }
 
-    public void setSelectedProfile(Profile theProfile) {
+    /**
+     * Set selected / logged on Profile.
+     * @author David Huynh
+     * @param theProfile to set.
+     * @throws IllegalArgumentException No Profile matching.
+     */
+    public void setSelectedProfile(Profile theProfile) throws IllegalArgumentException {
         if (myProfiles == null || myProfiles.size() == 0) {
             throw new IllegalArgumentException("There are no Profiles to select from.");
         }
@@ -118,10 +174,18 @@ public class ProfileManager { //TODO Remove repeating code
         throw new IllegalArgumentException("There is no Profile with the name" + theProfile.getUsername() + '.');
     }
 
+    /**
+     * Set selected Profile to null, logout.
+     * @author David Huynh
+     */
     public void logout() {
         mySelectedProfile = null;
     }
 
+    /**
+     * Log in as a GUEST Profile.
+     * @author David Huynh
+     */
     public void loginAsGuest() {
         mySelectedProfile = new Profile();
     }
@@ -129,6 +193,12 @@ public class ProfileManager { //TODO Remove repeating code
     ////////////////////
     //    In & Out    //
     ////////////////////
+
+    /**
+     * Read all Profile from JSON.
+     * @author David Huynh
+     * @return List of all Profiles saved.
+     */
     public ArrayList<Profile> readProfiles() {
         System.out.println("Reading Profiles from " + PROFILE_PATH + ':'); //DEBUG Out
         ArrayList<Profile> temp = new ArrayList<Profile>();
@@ -151,6 +221,10 @@ public class ProfileManager { //TODO Remove repeating code
         return temp;
     }
 
+    /**
+     * Write all Profiles to JSON.
+     * @author David Huynh
+     */
     public void writeProfiles() {
         try {
             System.out.println("Writing Profiles to " + PROFILE_PATH + ':'); //DEBUG Out
@@ -158,7 +232,7 @@ public class ProfileManager { //TODO Remove repeating code
             for (Profile p: myProfiles) {
                 JSONObject json = new JSONObject();
                 json.put("Username", p.getUsername());
-                json.put("Privilege", p.getPrivilege().getPrivilegeInt());
+                json.put("Privilege", p.getPrivilege().getPrivilegeString());
                 json.put("Email", p.getEmail());
                 json.put("password", p.getePassword());
 
