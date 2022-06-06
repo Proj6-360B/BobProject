@@ -9,6 +9,7 @@ import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import static InstaDialogue.InstaDialogue.PATH_FILECHOOSER_START;
+import static InstaDialogue.InstaDialogue.showYesNoConfirmation;
 
 /**
  * Export/Import a zip file this program appdata folder. <br>
@@ -80,6 +81,8 @@ public class AppDataIO {
         //After user chose file
         try {
             importAllFromZip(fc.getSelectedFile().getAbsolutePath());
+            JOptionPane.showMessageDialog(null, "Exiting application...\nPlease restart for changes to take effect.");
+            System.exit(0);
         } catch (Exception e) {
             InstaDialogue.showErrorMessage(e.getMessage());
         }
