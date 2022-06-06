@@ -410,6 +410,9 @@ public class Project implements Serializable {
      * @author David Huynh
      */
     public void cleanUpLooseAttachedFiles() {
+        //return if empty
+        if (attachedFilesList.isEmpty()) return;
+
         File projectFolder = new File(PROJECT_PATH + '/' + getFormattedName());
         //get count
         int countFser = 0;
